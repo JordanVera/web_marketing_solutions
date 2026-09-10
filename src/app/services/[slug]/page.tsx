@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { ServicePage } from "@/components/services/ServicePage";
-import { getServiceBySlug, servicePages, servicePath } from "@/lib/services";
-import { SITE_URL } from "@/lib/utils";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { ServicePage } from '@/components/services/ServicePage';
+import { getServiceBySlug, servicePages, servicePath } from '@/lib/services';
+import { SITE_URL } from '@/lib/utils';
 
 type ServiceRouteProps = {
   params: Promise<{ slug: string }>;
@@ -14,7 +14,9 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export async function generateMetadata({ params }: ServiceRouteProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ServiceRouteProps): Promise<Metadata> {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) return {};
@@ -30,9 +32,10 @@ export async function generateMetadata({ params }: ServiceRouteProps): Promise<M
       title: service.metaTitle,
       description: service.metaDescription,
       url,
-      type: "website",
+      type: 'website',
     },
     twitter: {
+      card: 'summary_large_image',
       title: service.metaTitle,
       description: service.metaDescription,
     },

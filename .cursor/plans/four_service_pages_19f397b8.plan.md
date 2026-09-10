@@ -13,10 +13,10 @@ todos:
     status: completed
   - id: homepage-footer
     content: Homepage 2x2 service cards linking out; FooterLink uses Next Link; root schema/keywords updated
-    status: in_progress
+    status: completed
   - id: verify
     content: Verify dropdown, hub, four pages, internal links, and homepage section in the browser (desktop + mobile)
-    status: pending
+    status: completed
 isProject: false
 ---
 

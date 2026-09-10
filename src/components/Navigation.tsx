@@ -1,41 +1,49 @@
-"use client";
+'use client';
 
-import { useEffect, useId, useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
-import { Logo } from "./Logo";
-import { Button } from "./ui/Button";
-import { company, navLinks } from "@/lib/content";
-import { servicePages, servicePath } from "@/lib/services";
-import { cn } from "@/lib/utils";
+import { useEffect, useId, useRef, useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useMotionValueEvent,
+} from 'framer-motion';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import { Logo } from './Logo';
+import { Button } from './ui/Button';
+import { company, navLinks } from '@/lib/content';
+import { servicePages, servicePath } from '@/lib/services';
+import { cn } from '@/lib/utils';
 
-const HOME_SECTION_IDS = ["services", "houston", "work", "process", "testimonials"] as const;
+const HOME_SECTION_IDS = [
+  'services',
+  'houston',
+  'work',
+  'process',
+  'testimonials',
+] as const;
 
 export function Navigation() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
-  const onServices = pathname.startsWith("/services");
+  const isHome = pathname === '/';
+  const onServices = pathname.startsWith('/services');
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>("");
+  const [activeSection, setActiveSection] = useState<string>('');
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
+  useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 24);
   });
 
   useEffect(() => {
-    if (!isHome) {
-      setActiveSection("");
-      return;
-    }
+    if (!isHome) return;
 
-    const elements = HOME_SECTION_IDS.map((id) => document.getElementById(id)).filter(
-      (el): el is HTMLElement => Boolean(el),
-    );
+    const elements = HOME_SECTION_IDS.map((id) =>
+      document.getElementById(id),
+    ).filter((el): el is HTMLElement => Boolean(el));
     if (elements.length === 0) return;
 
     const observer = new IntersectionObserver(
@@ -45,7 +53,7 @@ export function Navigation() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) setActiveSection(visible.target.id);
       },
-      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] },
+      { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 1] },
     );
 
     elements.forEach((el) => observer.observe(el));
@@ -56,20 +64,21 @@ export function Navigation() {
     if (!menuOpen) return;
 
     const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === 'Escape') setMenuOpen(false);
     };
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener('keydown', onKeyDown);
 
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener('keydown', onKeyDown);
     };
   }, [menuOpen]);
 
-  const servicesActive = onServices || (isHome && activeSection === "services");
+  const currentSection = isHome ? activeSection : '';
+  const servicesActive = onServices || currentSection === 'services';
 
   return (
     <>
@@ -78,39 +87,47 @@ export function Navigation() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+          'fixed inset-x-0 top-0 z-50 transition-all duration-500',
           scrolled
-            ? "border-b border-white/[0.07] bg-void/80 backdrop-blur-xl"
-            : "border-b border-transparent bg-transparent",
+            ? 'border-b border-white/[0.07] bg-void/80 backdrop-blur-xl'
+            : 'border-b border-transparent bg-transparent',
         )}
       >
         <nav
           aria-label="Primary"
           className="container-shell flex h-18 items-center justify-between gap-6"
         >
-          <Link href="/" className="group rounded-lg" aria-label={`${company.name} — home`}>
+          <Link
+            href="/"
+            className="group rounded-lg"
+            aria-label={`${company.name} — home`}
+          >
             <Logo />
           </Link>
 
           <ul className="hidden items-center gap-1 lg:flex">
             <ServicesDropdown active={servicesActive} />
             {navLinks.map((link) => {
-              const section = link.href.split("#")[1];
-              const isActive = isHome && activeSection === section;
+              const section = link.href.split('#')[1];
+              const isActive = currentSection === section;
               return (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     className={cn(
-                      "relative rounded-full px-4 py-2 text-sm transition-colors duration-300",
-                      isActive ? "text-cream" : "text-muted hover:text-cream",
+                      'relative rounded-full px-4 py-2 text-sm transition-colors duration-300',
+                      isActive ? 'text-cream' : 'text-muted hover:text-cream',
                     )}
                   >
                     {isActive && (
                       <motion.span
                         layoutId="nav-active-pill"
                         className="absolute inset-0 -z-10 rounded-full border border-electric/25 bg-electric/10"
-                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        transition={{
+                          type: 'spring',
+                          stiffness: 380,
+                          damping: 32,
+                        }}
                       />
                     )}
                     {link.label}
@@ -131,7 +148,7 @@ export function Navigation() {
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-cream transition-colors hover:border-electric-400/50 hover:bg-white/10 lg:hidden"
           >
             {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -208,14 +225,14 @@ function ServicesDropdown({ active }: { active: boolean }) {
       }
     };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === 'Escape') setOpen(false);
     };
 
-    window.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('keydown', onKeyDown);
     return () => {
-      window.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('keydown', onKeyDown);
     };
   }, [open]);
 
@@ -233,14 +250,14 @@ function ServicesDropdown({ active }: { active: boolean }) {
           <motion.span
             layoutId="nav-active-pill"
             className="absolute inset-0 -z-10 rounded-full border border-electric/25 bg-electric/10"
-            transition={{ type: "spring", stiffness: 380, damping: 32 }}
+            transition={{ type: 'spring', stiffness: 380, damping: 32 }}
           />
         )}
         <Link
           href="/services"
           className={cn(
-            "rounded-full py-2 pr-1 pl-4 text-sm transition-colors duration-300",
-            active ? "text-cream" : "text-muted hover:text-cream",
+            'rounded-full py-2 pr-1 pl-4 text-sm transition-colors duration-300',
+            active ? 'text-cream' : 'text-muted hover:text-cream',
           )}
         >
           Services
@@ -253,12 +270,15 @@ function ServicesDropdown({ active }: { active: boolean }) {
           aria-label="Open services menu"
           onClick={() => setOpen((value) => !value)}
           className={cn(
-            "rounded-full py-2 pr-3 pl-1 text-sm transition-colors duration-300",
-            active ? "text-cream" : "text-muted hover:text-cream",
+            'rounded-full py-2 pr-3 pl-1 text-sm transition-colors duration-300',
+            active ? 'text-cream' : 'text-muted hover:text-cream',
           )}
         >
           <ChevronDown
-            className={cn("size-3.5 transition-transform duration-300", open && "rotate-180")}
+            className={cn(
+              'size-3.5 transition-transform duration-300',
+              open && 'rotate-180',
+            )}
             aria-hidden="true"
           />
         </button>
@@ -287,10 +307,15 @@ function ServicesDropdown({ active }: { active: boolean }) {
                   className="group flex items-start gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-white/[0.05]"
                 >
                   <span className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04]">
-                    <Icon className="size-4 text-electric-300" aria-hidden="true" />
+                    <Icon
+                      className="size-4 text-electric-300"
+                      aria-hidden="true"
+                    />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-sm font-medium text-cream">{service.navLabel}</span>
+                    <span className="block text-sm font-medium text-cream">
+                      {service.navLabel}
+                    </span>
                     <span className="mt-0.5 block text-xs leading-relaxed text-muted">
                       {service.navDescription}
                     </span>
@@ -312,6 +337,7 @@ function MobileNav({
   servicesActive: boolean;
   onNavigate: () => void;
 }) {
+  const pathname = usePathname();
   const [servicesOpen, setServicesOpen] = useState(true);
 
   return (
@@ -328,15 +354,20 @@ function MobileNav({
           className="flex w-full items-baseline justify-between gap-4 border-b border-white/[0.07] py-5 font-display text-3xl font-semibold text-cream"
         >
           <span className="flex items-baseline gap-4">
-            <span className={cn("font-mono text-xs", servicesActive ? "text-electric-300" : "text-muted-dim")}>
+            <span
+              className={cn(
+                'font-mono text-xs',
+                servicesActive ? 'text-electric-300' : 'text-muted-dim',
+              )}
+            >
               01
             </span>
             Services
           </span>
           <ChevronDown
             className={cn(
-              "size-6 text-muted-dim transition-transform duration-300",
-              servicesOpen && "rotate-180",
+              'size-6 text-muted-dim transition-transform duration-300',
+              servicesOpen && 'rotate-180',
             )}
             aria-hidden="true"
           />
@@ -345,7 +376,7 @@ function MobileNav({
           {servicesOpen && (
             <motion.ul
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
+              animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
               className="overflow-hidden"
@@ -354,7 +385,10 @@ function MobileNav({
                 <Link
                   href="/services"
                   onClick={onNavigate}
-                  className="flex border-b border-white/[0.05] py-3.5 pl-12 text-base text-muted transition-colors hover:text-cream"
+                  className={cn(
+                    'flex border-b border-white/[0.05] py-3.5 pl-12 text-base transition-colors hover:text-cream',
+                    pathname === '/services' ? 'text-cream' : 'text-muted',
+                  )}
                 >
                   All services
                 </Link>
@@ -364,7 +398,12 @@ function MobileNav({
                   <Link
                     href={servicePath(service.slug)}
                     onClick={onNavigate}
-                    className="flex border-b border-white/[0.05] py-3.5 pl-12 text-base text-muted transition-colors hover:text-cream"
+                    className={cn(
+                      'flex border-b border-white/[0.05] py-3.5 pl-12 text-base transition-colors hover:text-cream',
+                      pathname === servicePath(service.slug)
+                        ? 'text-cream'
+                        : 'text-muted',
+                    )}
                   >
                     {service.navLabel}
                   </Link>
@@ -380,14 +419,20 @@ function MobileNav({
           key={link.href}
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.14 + index * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{
+            delay: 0.14 + index * 0.06,
+            duration: 0.5,
+            ease: [0.16, 1, 0.3, 1],
+          }}
         >
           <a
             href={link.href}
             onClick={onNavigate}
             className="flex items-baseline gap-4 border-b border-white/[0.07] py-5 font-display text-3xl font-semibold text-cream"
           >
-            <span className="font-mono text-xs text-electric-300">0{index + 2}</span>
+            <span className="font-mono text-xs text-electric-300">
+              0{index + 2}
+            </span>
             {link.label}
           </a>
         </motion.li>
