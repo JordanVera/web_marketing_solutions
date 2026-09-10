@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import {
   animate,
   motion,
+  useInView,
   useMotionValue,
   useMotionValueEvent,
   useReducedMotion,
@@ -13,29 +14,37 @@ import {
 import { cn } from '@/lib/utils';
 
 /**
- * Descent profile: a fast approach that bleeds off into a long, soft
- * touchdown. Tuned so the last ~10% of travel takes roughly the final second.
+ * Descent profile: comes in quick from above the viewport, then bleeds speed
+ * off continuously into a soft touchdown with no visible hover.
  */
-const LANDING_EASE = [0.2, 0.82, 0.24, 1] as const;
-const DESCENT_DURATION = 5.6;
-const DESCENT_DELAY = 0.6;
-const LEGS_DEPLOY_AT = 0.62;
+const LANDING_EASE = [0.22, 0.5, 0.55, 0.92] as const;
+const DESCENT_DURATION = 5.8;
+const DESCENT_DELAY = 0.5;
+/** Start height along the surface normal, in viewport heights. */
+const DESCENT_START_VH = 90;
+const LEGS_DEPLOY_AT = 0.6;
 
-/** Where the rocket's base sits on the moon's limb, in the moon's own box. */
+/**
+ * Where the rocket's base sits on the limb, in the moon's own box. Radius is
+ * fractionally under 50% so the feet bed into the regolith rather than
+ * hovering on the anti-aliased edge of the disc.
+ */
 const LANDING_ANCHOR = {
-  left: 'calc(50% + 50% * sin(var(--tilt)))',
-  top: 'calc(50% - 50% * cos(var(--tilt)))',
+  left: 'calc(50% + 49.55% * sin(var(--tilt)))',
+  top: 'calc(50% - 49.55% * cos(var(--tilt)))',
 } as const;
 
 const DUST = [
-  { dx: -140, dy: -34, size: 3, duration: 1.5, delay: 0 },
-  { dx: -95, dy: -52, size: 2, duration: 1.3, delay: 0.05 },
-  { dx: -58, dy: -22, size: 2.5, duration: 1.1, delay: 0.02 },
-  { dx: 62, dy: -26, size: 2.5, duration: 1.15, delay: 0.03 },
-  { dx: 104, dy: -48, size: 2, duration: 1.35, delay: 0.06 },
-  { dx: 150, dy: -30, size: 3, duration: 1.55, delay: 0.01 },
-  { dx: -180, dy: -14, size: 1.5, duration: 1.7, delay: 0.1 },
-  { dx: 188, dy: -12, size: 1.5, duration: 1.75, delay: 0.08 },
+  { dx: -140, dy: -38, size: 4, duration: 1.5, delay: 0 },
+  { dx: -95, dy: -58, size: 3, duration: 1.3, delay: 0.05 },
+  { dx: -58, dy: -26, size: 3.5, duration: 1.1, delay: 0.02 },
+  { dx: 62, dy: -30, size: 3.5, duration: 1.15, delay: 0.03 },
+  { dx: 104, dy: -54, size: 3, duration: 1.35, delay: 0.06 },
+  { dx: 150, dy: -34, size: 4, duration: 1.55, delay: 0.01 },
+  { dx: -180, dy: -16, size: 2.5, duration: 1.7, delay: 0.1 },
+  { dx: 188, dy: -14, size: 2.5, duration: 1.75, delay: 0.08 },
+  { dx: -30, dy: -70, size: 2, duration: 1.2, delay: 0.04 },
+  { dx: 34, dy: -64, size: 2, duration: 1.25, delay: 0.07 },
 ] as const;
 
 type MoonLandingProps = {
@@ -54,45 +63,48 @@ type MoonLandingProps = {
  */
 export function MoonLanding({ className }: MoonLandingProps) {
   const prefersReducedMotion = useReducedMotion();
+  const padRef = useRef<HTMLDivElement | null>(null);
+  // On small screens the landing site sits below the fold, so hold the
+  // descent until the pad scrolls into view rather than landing unseen.
+  const padInView = useInView(padRef, { once: true, amount: 'some' });
   const progress = useMotionValue(prefersReducedMotion ? 1 : 0);
-  const [landed, setLanded] = useState(Boolean(prefersReducedMotion));
-  const [legsOut, setLegsOut] = useState(Boolean(prefersReducedMotion));
+  const [touchedDown, setTouchedDown] = useState(false);
+  const [legsDeployed, setLegsDeployed] = useState(false);
+  // Reduced motion skips the flight entirely and renders the settled state.  
+  const landed = touchedDown || Boolean(prefersReducedMotion);
+  const legsOut = legsDeployed || landed;
 
   useEffect(() => {
     if (prefersReducedMotion) {
       progress.set(1);
-      setLegsOut(true);
-      setLanded(true);
       return;
     }
+    if (!padInView) return;
     const controls = animate(progress, 1, {
       duration: DESCENT_DURATION,
       delay: DESCENT_DELAY,
       ease: LANDING_EASE,
-      onComplete: () => setLanded(true),
+      onComplete: () => setTouchedDown(true),
     });
     return () => controls.stop();
-  }, [prefersReducedMotion, progress]);
+  }, [padInView, prefersReducedMotion, progress]);
 
   useMotionValueEvent(progress, 'change', (value) => {
-    if (value >= LEGS_DEPLOY_AT) setLegsOut(true);
+    if (value >= LEGS_DEPLOY_AT) setLegsDeployed(true);
   });
 
   // Travel along the rocket's own "up" axis, so the descent follows the
   // surface normal at the landing site rather than screen-vertical.
-  const y = useTransform(progress, (p) => `${(1 - p) * -130}vh`);
+  const y = useTransform(progress, (p) => `${(1 - p) * -DESCENT_START_VH}vh`);
   const x = useTransform(progress, [0, 0.7, 1], [26, 6, 0]);
   const attitude = useTransform(progress, [0, 0.65, 1], [-7, -2.5, 0]);
-  const plumeOpacity = useTransform(
-    progress,
-    [0, 0.9, 0.985, 1],
-    [1, 1, 0.7, 0],
-  );
-  const throttle = useTransform(progress, [0, 0.75, 1], [1.35, 1, 0.5]);
+  // Engine stays lit right through contact, then cuts.
+  const plumeOpacity = useTransform(progress, [0, 0.994, 1], [1, 1, 0]);
+  const throttle = useTransform(progress, [0, 0.75, 1], [1.35, 1, 0.55]);
   const surfaceGlow = useTransform(
     progress,
-    [0.72, 0.94, 0.985, 1],
-    [0, 0.85, 0.7, 0],
+    [0.7, 0.94, 0.994, 1],
+    [0, 0.85, 0.75, 0],
   );
 
   return (
@@ -115,7 +127,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
           preload
           draggable={false}
           sizes="(min-width: 1024px) 1200px, 180vw"
-          className="object-cover select-none"
+          className="scale-[1.012] object-cover select-none"
         />
         {/* Warm key light from the upper left, then the terminator falling
             away toward the lower right. */}
@@ -134,7 +146,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
           transform: 'translate(-50%, -100%) rotate(var(--tilt))',
         }}
       >
-        <div className="relative aspect-80/186 w-full">
+        <div ref={padRef} className="relative aspect-80/186 w-full">
           {/* Exhaust washing over the regolith as the rocket gets close. */}
           <motion.div
             style={{ opacity: surfaceGlow }}

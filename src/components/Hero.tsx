@@ -40,7 +40,7 @@ export function Hero() {
     <section
       id="top"
       ref={sectionRef}
-      className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-28 pb-60 lg:pb-36"
+      className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-28 pb-66 lg:pb-36"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-10%,#12244a_0%,#0a1628_38%,#050b16_78%)]" />
 
@@ -56,12 +56,12 @@ export function Hero() {
           landing at its apex; from lg up it swings to the lower right and the
           rocket lands on the limb at the 11 o'clock mark. */}
       <motion.div style={{ y: parallax(moonY) }} className="absolute inset-0">
-        <MoonLanding className="absolute top-[calc(100%-8rem)] left-1/2 w-[180vw] -translate-x-1/2 lg:top-[112%] lg:left-[82%] lg:w-[min(128svh,110vw)] lg:-translate-y-1/2" />
+        <MoonLanding className="absolute top-[calc(100%-10rem)] left-1/2 w-[180vw] -translate-x-1/2 lg:top-[112%] lg:left-[82%] lg:w-[min(128svh,110vw)] lg:-translate-y-1/2" />
       </motion.div>
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-40 bg-gradient-to-b from-transparent via-void/50 to-void"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-24 bg-gradient-to-b from-transparent via-void/50 to-void lg:h-40"
       />
 
       <motion.div
