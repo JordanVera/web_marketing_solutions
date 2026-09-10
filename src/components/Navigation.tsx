@@ -11,6 +11,7 @@ import {
 } from 'framer-motion';
 import { Menu, Phone, X } from 'lucide-react';
 import { Logo } from './Logo';
+import { scrollToPageTop } from './ScrollToTop';
 import { company, navLinks } from '@/lib/content';
 import { serviceNavLinks, servicePath } from '@/lib/services';
 import { cn } from '@/lib/utils';
@@ -112,6 +113,9 @@ export function Navigation() {
       >
         <Link
           href="/"
+          onClick={() =>
+            scrollToPageTop(pathname === '/' ? 'smooth' : 'instant')
+          }
           className="group shrink-0 rounded-lg pl-1"
           aria-label={`${company.name} — home`}
         >

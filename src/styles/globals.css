@@ -82,13 +82,11 @@
     /* Keeps anchored sections clear of the fixed navigation bar. */
     scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
-  }
-
-  /* `clip` (not `hidden`) stops decorative glows from widening the layout
-     viewport on mobile without turning html/body into scroll containers. */
-  html,
-  body {
+    /* Clip horizontal overflow on the viewport only. Applying overflow-x to
+       both html and body makes overflow-y compute to `auto` on body, which
+       creates a second scroller Next.js cannot reset on navigation. */
     overflow-x: clip;
+    overflow-y: auto;
   }
 
   body {

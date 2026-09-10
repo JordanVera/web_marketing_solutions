@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Space_Grotesk, Space_Mono } from 'next/font/google';
 import { company, homePage } from '@/lib/content';
 import { SITE_URL } from '@/lib/utils';
+import { ScrollToTop } from '@/components/ScrollToTop';
 import '@/styles/globals.css';
 import { Analytics } from '@vercel/analytics/next';
 
@@ -112,6 +113,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="antialiased">
+        <ScrollToTop />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-electric focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-white"
