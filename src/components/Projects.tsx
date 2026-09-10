@@ -140,7 +140,7 @@ function ProjectCard({ project, priority }: { project: Project; priority?: boole
         <div className="relative aspect-4/3 overflow-hidden">
           <Image
             src={project.image}
-              alt={project.imageAlt}
+            alt={project.imageAlt}
             fill
             unoptimized={isVector}
             priority={priority}

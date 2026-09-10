@@ -146,12 +146,12 @@ export function ServicePage({ service }: { service: ServicePageData }) {
 
                 <Reveal direction="up" delay={0.24}>
                   <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                    <Button href="#contact" size="lg">
-                      Start Your Launch
+                    <Button href="/contact" size="lg">
+                      {service.primaryCta}
                       <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                     </Button>
-                    <Button href="/services" variant="secondary" size="lg">
-                      All services
+                    <Button href={service.secondaryHref} variant="secondary" size="lg">
+                      {service.secondaryCta}
                     </Button>
                   </div>
                 </Reveal>
@@ -186,11 +186,13 @@ export function ServicePage({ service }: { service: ServicePageData }) {
           <div className="container-shell">
             <SectionHeading
               align="left"
-              eyebrow="Who it's for"
+              eyebrow={service.sections.audience.eyebrow}
               title={
                 <>
-                  Built for teams who have outgrown the{' '}
-                  <span className="text-gradient">workaround</span>
+                  {service.sections.audience.title}{' '}
+                  <span className="text-gradient">
+                    {service.sections.audience.accent}
+                  </span>
                 </>
               }
             />
@@ -219,11 +221,13 @@ export function ServicePage({ service }: { service: ServicePageData }) {
           <div className="container-shell relative">
             <SectionHeading
               align="left"
-              eyebrow="The problems"
+              eyebrow={service.sections.problems.eyebrow}
               title={
                 <>
-                  What we are usually{' '}
-                  <span className="text-gradient">hired to end</span>
+                  {service.sections.problems.title}{' '}
+                  <span className="text-gradient">
+                    {service.sections.problems.accent}
+                  </span>
                 </>
               }
             />
@@ -251,11 +255,13 @@ export function ServicePage({ service }: { service: ServicePageData }) {
           <div className="container-shell">
             <SectionHeading
               align="left"
-              eyebrow="What's included"
+              eyebrow={service.sections.deliverables.eyebrow}
               title={
                 <>
-                  Deliverables, not a{' '}
-                  <span className="text-gradient">mystery retainer</span>
+                  {service.sections.deliverables.title}{' '}
+                  <span className="text-gradient">
+                    {service.sections.deliverables.accent}
+                  </span>
                 </>
               }
             />
@@ -282,11 +288,13 @@ export function ServicePage({ service }: { service: ServicePageData }) {
           <div className="container-shell">
             <SectionHeading
               align="left"
-              eyebrow="How we deliver"
+              eyebrow={service.sections.delivery.eyebrow}
               title={
                 <>
-                  A flight plan for this{' '}
-                  <span className="text-gradient">service line</span>
+                  {service.sections.delivery.title}{' '}
+                  <span className="text-gradient">
+                    {service.sections.delivery.accent}
+                  </span>
                 </>
               }
             />
@@ -315,15 +323,111 @@ export function ServicePage({ service }: { service: ServicePageData }) {
           </div>
         </section>
 
+        {service.longform.map((section) => (
+          <section key={section.id} className="relative py-20 md:py-28">
+            <div className="container-shell">
+              <SectionHeading
+                align="left"
+                eyebrow={section.eyebrow}
+                title={
+                  <>
+                    {section.title}{' '}
+                    <span className="text-gradient">{section.accent}</span>
+                  </>
+                }
+              />
+              {section.intro ? (
+                <Reveal direction="up" className="mt-10">
+                  <p className="max-w-3xl text-base leading-relaxed text-muted md:text-lg">
+                    {section.intro}
+                  </p>
+                </Reveal>
+              ) : null}
+              {section.blocks && section.blocks.length > 0 ? (
+                <div
+                  className={cn(
+                    'mt-14 grid gap-5',
+                    section.blocks.length >= 3
+                      ? 'md:grid-cols-2 lg:grid-cols-3'
+                      : 'md:grid-cols-2',
+                  )}
+                >
+                  {section.blocks.map((block, index) => (
+                    <Reveal
+                      key={block.title}
+                      direction="up"
+                      delay={index * 0.06}
+                    >
+                      <article className="h-full rounded-2xl border border-white/[0.08] bg-navy/40 p-6 md:p-7">
+                        <h3 className="text-lg font-semibold tracking-tight text-cream">
+                          {block.title}
+                        </h3>
+                        <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">
+                          {block.body}
+                        </p>
+                      </article>
+                    </Reveal>
+                  ))}
+                </div>
+              ) : null}
+              {section.items && section.items.length > 0 ? (
+                <Reveal direction="up" className="mt-10">
+                  <ul className="grid gap-3 sm:grid-cols-2">
+                    {section.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3.5 text-sm text-cream"
+                      >
+                        <Check
+                          className="mt-0.5 size-4 shrink-0 text-electric-300"
+                          aria-hidden="true"
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              ) : null}
+            </div>
+          </section>
+        ))}
+
+        <section className="relative py-8 md:py-12">
+          <div className="container-shell">
+            <Reveal direction="up">
+              <div className="border-gradient flex flex-col items-start justify-between gap-6 rounded-2xl bg-navy/40 p-7 md:flex-row md:items-center md:p-8">
+                <div>
+                  <p className="font-mono text-[0.625rem] tracking-[0.22em] text-electric-300 uppercase">
+                    Next step
+                  </p>
+                  <p className="mt-2 text-xl font-semibold tracking-tight text-cream">
+                    {service.primaryCta}
+                  </p>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+                    Bring the outcome you need. We will reply with scope,
+                    timeline, and price within two business days.
+                  </p>
+                </div>
+                <Button href="/contact" size="lg">
+                  {service.secondaryCta}
+                  <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                </Button>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
         <section className="relative py-20 md:py-28">
           <div className="container-shell">
             <SectionHeading
               align="left"
-              eyebrow="Why this studio"
+              eyebrow={service.sections.whyUs.eyebrow}
               title={
                 <>
-                  How this work is{' '}
-                  <span className="text-gradient">different here</span>
+                  {service.sections.whyUs.title}{' '}
+                  <span className="text-gradient">
+                    {service.sections.whyUs.accent}
+                  </span>
                 </>
               }
             />
@@ -354,11 +458,13 @@ export function ServicePage({ service }: { service: ServicePageData }) {
             <div className="container-shell">
               <SectionHeading
                 align="left"
-                eyebrow="Related work"
+                eyebrow={service.sections.relatedWork.eyebrow}
                 title={
                   <>
-                    Missions in this{' '}
-                    <span className="text-gradient">neighborhood</span>
+                    {service.sections.relatedWork.title}{' '}
+                    <span className="text-gradient">
+                      {service.sections.relatedWork.accent}
+                    </span>
                   </>
                 }
               />
@@ -390,7 +496,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                           <div className="relative aspect-4/3 overflow-hidden">
                             <Image
                               src={project.image}
-                              alt={`${project.title} website`}
+                              alt={project.imageAlt}
                               fill
                               unoptimized={isVector}
                               sizes="(min-width: 1024px) 50vw, 100vw"
@@ -426,11 +532,13 @@ export function ServicePage({ service }: { service: ServicePageData }) {
           <div className="container-shell">
             <SectionHeading
               align="left"
-              eyebrow="FAQ"
+              eyebrow={service.sections.faq.eyebrow}
               title={
                 <>
-                  Questions we hear before{' '}
-                  <span className="text-gradient">kickoff</span>
+                  {service.sections.faq.title}{' '}
+                  <span className="text-gradient">
+                    {service.sections.faq.accent}
+                  </span>
                 </>
               }
             />
@@ -444,11 +552,13 @@ export function ServicePage({ service }: { service: ServicePageData }) {
           <div className="container-shell">
             <SectionHeading
               align="left"
-              eyebrow="Related services"
+              eyebrow={service.sections.related.eyebrow}
               title={
                 <>
-                  Adjacent work, same{' '}
-                  <span className="text-gradient">studio</span>
+                  {service.sections.related.title}{' '}
+                  <span className="text-gradient">
+                    {service.sections.related.accent}
+                  </span>
                 </>
               }
             />

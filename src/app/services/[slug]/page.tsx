@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ServicePage } from '@/components/services/ServicePage';
+import { company } from '@/lib/content';
 import { getServiceBySlug, servicePages, servicePath } from '@/lib/services';
 import { SITE_URL } from '@/lib/utils';
 
@@ -24,7 +25,7 @@ export async function generateMetadata({
   const url = `${SITE_URL}${servicePath(service.slug)}`;
 
   return {
-    title: service.metaTitle,
+    title: { absolute: `${service.metaTitle} | ${company.name}` },
     description: service.metaDescription,
     keywords: service.keywords,
     alternates: { canonical: servicePath(service.slug) },

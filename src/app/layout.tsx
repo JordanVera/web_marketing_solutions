@@ -33,15 +33,7 @@ export const metadata: Metadata = {
     template: `%s | ${company.name}`,
   },
   description,
-  keywords: [
-    'Houston web app development',
-    'Houston native app development',
-    'Houston website development',
-    'Houston SEO campaigns',
-    'Houston SEO agency',
-    'web marketing solutions',
-    'Next.js development agency',
-  ],
+  keywords: [...homePage.keywords],
   authors: [{ name: company.name }],
   creator: company.name,
   alternates: { canonical: '/' },
@@ -50,12 +42,12 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: SITE_URL,
     siteName: company.name,
-    title: `${company.name} | Houston Web App, Website & SEO Agency`,
+    title: homePage.metaTitle,
     description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${company.name} | Houston Web App, Website & SEO`,
+    title: homePage.metaTitle,
     description,
   },
   robots: {
@@ -100,9 +92,10 @@ const structuredData = {
     { '@type': 'State', name: 'Texas' },
   ],
   knowsAbout: [
+    'Houston digital agency',
+    'Website Development',
     'Web Application Development',
     'Native App Development',
-    'Website Development',
     'SEO Campaigns',
   ],
 };

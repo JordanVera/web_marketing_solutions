@@ -87,8 +87,8 @@ export default function ServicesHubPage() {
 
             <Reveal direction="up" delay={0.26}>
               <div className="mt-10">
-                <Button href="#contact" size="lg">
-                  Book a flight check
+                <Button href="/contact" size="lg">
+                  Schedule Your Free Consultation
                   <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </Button>
               </div>
