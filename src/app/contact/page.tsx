@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
-import { CheckCircle2, Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { ContactForm } from '@/components/ContactForm';
-import { Reveal } from '@/components/ui/Reveal';
-import { company, contactPage } from '@/lib/content';
+import { company, contactPage, socials } from '@/lib/content';
 import { SITE_URL } from '@/lib/utils';
 
 export const metadata: Metadata = {
@@ -34,196 +34,149 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
   const submitted = sent === '1';
 
   return (
-    <main id="main">
-      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-0 left-1/2 h-[36rem] w-[56rem] -translate-x-1/2 bg-[radial-gradient(ellipse_50%_40%_at_50%_20%,rgba(0,102,255,0.16),transparent_70%)]"
+    <main id="main" className=" p-6">
+      <div className="relative min-h-[calc(100svh-6.5rem)] overflow-hidden rounded-[1.75rem] md:min-h-[calc(100svh-7rem)] md:rounded-[2rem]">
+        <Image
+          src="/space/pillars-of-creation.webp"
+          alt=""
+          fill
+          priority
+          sizes="(min-width: 768px) 80rem, 100vw"
+          className="object-cover object-center"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-24 right-0 size-[28rem] rounded-full bg-[radial-gradient(circle,rgba(168,85,247,0.12),transparent_65%)] blur-3xl"
+          className="absolute inset-0 bg-linear-to-br from-void/82 via-void/62 to-void/48"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_50%,rgba(244,63,154,0.12),transparent_65%)]"
         />
 
-        <div className="container-shell relative">
-          <Reveal direction="up">
-            <nav aria-label="Breadcrumb" className="text-sm">
-              <ol className="flex flex-wrap items-center gap-2 text-muted-dim">
-                <li>
-                  <Link href="/" className="transition-colors hover:text-cream">
-                    Home
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-cream" aria-current="page">
-                  Contact
-                </li>
-              </ol>
-            </nav>
-          </Reveal>
+        <div className="relative flex min-h-[inherit] flex-col lg:grid lg:grid-cols-[3fr_2fr]">
+          <div className="flex flex-col justify-between px-7 py-10 sm:px-10 md:px-12 md:py-14 lg:px-14 lg:py-16">
+            <div>
+              <p className="font-mono text-[0.6875rem] tracking-[0.24em] text-electric-300 uppercase">
+                Mission control
+              </p>
+              <h1 className="text-heading mt-5 max-w-xl font-semibold text-cream">
+                {contactPage.h1}
+              </h1>
+              <p className="mt-5 max-w-md text-base leading-relaxed text-cream/75 md:text-lg">
+                {contactPage.lede}
+              </p>
 
-          <Reveal direction="up" delay={0.08}>
-            <span className="mt-10 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[0.6875rem] tracking-[0.22em] text-electric-300 uppercase">
-              Mission control
-            </span>
-          </Reveal>
-
-          <Reveal direction="up" delay={0.14}>
-            <h1 className="text-heading mt-6 max-w-3xl font-semibold">
-              {contactPage.h1}
-            </h1>
-          </Reveal>
-
-          <Reveal direction="up" delay={0.2}>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-              {contactPage.lede}
-            </p>
-          </Reveal>
-
-          {submitted && (
-            <Reveal direction="up" delay={0.24}>
-              <div
-                role="status"
-                className="mt-10 flex items-start gap-3 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-5 py-4"
-              >
-                <CheckCircle2
-                  className="mt-0.5 size-5 shrink-0 text-emerald-400"
-                  aria-hidden="true"
-                />
-                <div>
-                  <p className="font-medium text-cream">
-                    Message received — we&apos;re on it.
-                  </p>
-                  <p className="mt-1 text-sm leading-relaxed text-muted">
-                    Expect a reply within two business days. If this is your
-                    first submission, check your inbox for a FormSubmit
-                    confirmation email.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          )}
-
-          <div className="mt-16 grid gap-10 lg:grid-cols-12 lg:gap-12">
-            <Reveal direction="up" delay={0.26} className="lg:col-span-7">
-              <div className="border-gradient rounded-3xl bg-navy/40 p-6 md:p-8">
-                <h2 className="text-xl font-semibold text-cream">
-                  Send a message
-                </h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  Share your goals and we&apos;ll send back scope, timeline, and
-                  price within two business days.
-                </p>
-                <div className="mt-8">
-                  <ContactForm />
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal direction="up" delay={0.32} className="lg:col-span-5">
-              <div className="flex flex-col gap-6">
-                <div className="rounded-3xl border border-white/[0.09] bg-[radial-gradient(ellipse_100%_100%_at_50%_120%,#16294a_0%,#0a1628_45%,#050b16_85%)] p-6 md:p-8">
-                  <h2 className="font-mono text-[0.625rem] tracking-[0.24em] text-electric-300 uppercase">
-                    Direct line
-                  </h2>
-                  <ul className="mt-6 flex flex-col gap-5">
-                    <li>
-                      <a
-                        href={`mailto:${company.email}`}
-                        className="group flex items-start gap-4 text-muted transition-colors hover:text-cream"
-                      >
-                        <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
-                          <Mail
-                            className="size-4 text-electric-300"
-                            aria-hidden="true"
-                          />
-                        </span>
-                        <span>
-                          <span className="block text-xs font-mono tracking-[0.16em] text-muted-dim uppercase">
-                            Email
-                          </span>
-                          <span className="mt-1 block text-sm text-cream group-hover:text-cream">
-                            {company.email}
-                          </span>
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href={PHONE_HREF}
-                        className="group flex items-start gap-4 text-muted transition-colors hover:text-cream"
-                      >
-                        <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
-                          <Phone
-                            className="size-4 text-electric-300"
-                            aria-hidden="true"
-                          />
-                        </span>
-                        <span>
-                          <span className="block text-xs font-mono tracking-[0.16em] text-muted-dim uppercase">
-                            Phone
-                          </span>
-                          <span className="mt-1 block text-sm text-cream">
-                            {company.phone}
-                          </span>
-                        </span>
-                      </a>
-                    </li>
-                    <li className="flex items-start gap-4">
-                      <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
-                        <MapPin
-                          className="size-4 text-electric-300"
-                          aria-hidden="true"
-                        />
-                      </span>
-                      <span>
-                        <span className="block text-xs font-mono tracking-[0.16em] text-muted-dim uppercase">
-                          Studio
-                        </span>
-                        <address className="mt-1 text-sm not-italic leading-relaxed text-cream">
-                          {company.address.street}
-                          <br />
-                          {company.address.locality}, {company.address.region}{' '}
-                          {company.address.postalCode}
-                        </address>
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6">
-                  <div className="flex items-start gap-3">
-                    <Clock
-                      className="mt-0.5 size-4 shrink-0 text-electric-300"
-                      aria-hidden="true"
-                    />
-                    <div>
-                      <p className="text-sm font-medium text-cream">
-                        Response time
-                      </p>
-                      <p className="mt-1 text-sm leading-relaxed text-muted">
-                        We reply to every serious inquiry within two business
-                        days — usually faster.
-                      </p>
-                    </div>
+              {submitted && (
+                <div
+                  role="status"
+                  className="mt-8 flex max-w-md items-start gap-3 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-5 py-4"
+                >
+                  <CheckCircle2
+                    className="mt-0.5 size-5 shrink-0 text-emerald-400"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p className="font-medium text-cream">
+                      Message received — we&apos;re on it.
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-cream/70">
+                      Expect a reply within two business days.
+                    </p>
                   </div>
-                  <ul className="mt-6 flex flex-col gap-2.5 border-t border-white/[0.07] pt-6 font-mono text-[0.625rem] tracking-[0.16em] text-muted-dim uppercase">
-                    {contactPage.trustSignals.map((item) => (
-                      <li key={item} className="flex items-center gap-2">
-                        <span
-                          aria-hidden="true"
-                          className="size-1 rounded-full bg-electric-400"
-                        />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
+              )}
+            </div>
+
+            <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-6">
+              <div>
+                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-cream/50 uppercase">
+                  Location
+                </p>
+                <address className="mt-3 text-sm not-italic leading-relaxed text-cream/85">
+                  {company.name}
+                  <br />
+                  {company.address.street}
+                  <br />
+                  {company.address.locality}, {company.address.region}{' '}
+                  {company.address.postalCode}
+                </address>
+                <p className="mt-3 text-xs leading-relaxed text-cream/60">
+                  Monday – Friday
+                  <br />
+                  9:00 AM – 6:00 PM CT
+                </p>
               </div>
-            </Reveal>
+
+              <div>
+                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-cream/50 uppercase">
+                  Social media
+                </p>
+                <ul className="mt-3 flex flex-col gap-2">
+                  {socials.map((social) => (
+                    <li key={social.label}>
+                      <a
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-cream/85 transition-colors hover:text-cream"
+                      >
+                        {social.label}
+                      </a>
+                    </li>
+                  ))}
+                  <li>
+                    <Link
+                      href="/"
+                      className="text-sm text-cream/85 transition-colors hover:text-cream"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-cream/50 uppercase">
+                  Email
+                </p>
+                <a
+                  href={`mailto:${company.email}`}
+                  className="mt-3 block text-sm text-cream/85 transition-colors hover:text-cream"
+                >
+                  {company.email}
+                </a>
+              </div>
+
+              <div>
+                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-cream/50 uppercase">
+                  Contact
+                </p>
+                <a
+                  href={PHONE_HREF}
+                  className="mt-3 block text-sm text-cream/85 transition-colors hover:text-cream"
+                >
+                  {company.phone}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-stretch px-5 pb-8 sm:px-8 lg:px-8 lg:py-10 lg:pr-10 xl:pr-12">
+            <div className="flex w-full flex-col rounded-3xl bg-cream px-7 py-8 shadow-[0_24px_80px_-20px_rgba(5,11,22,0.55)] sm:px-9 sm:py-10 lg:px-10">
+              <h2 className="text-2xl font-semibold tracking-tight text-void">
+                Tell us what you need
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                Our team is ready to assist you with scope, timeline, and
+                pricing — usually within two business days.
+              </p>
+              <div className="mt-8">
+                <ContactForm />
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

@@ -1,16 +1,22 @@
 'use client';
 
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { ArrowRight, CheckCircle2, CircleAlert } from 'lucide-react';
+import { CheckCircle2, CircleAlert } from 'lucide-react';
 import { company } from '@/lib/content';
 import { servicePages } from '@/lib/services';
 import { SITE_URL, cn } from '@/lib/utils';
 
 const FIELD =
-  'w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-cream placeholder:text-muted-dim transition-colors focus:border-electric-400/60 focus:outline-none';
+  'w-full rounded-xl border border-navy-500/15 bg-white px-4 py-3 text-sm text-void placeholder:text-muted-dim transition-colors focus:border-electric focus:outline-none focus:ring-2 focus:ring-electric/20';
 
 const FORMSUBMIT_ACTION = `https://formsubmit.co/${company.email}`;
 const FORMSUBMIT_AJAX = `https://formsubmit.co/ajax/${company.email}`;
+
+const INQUIRY_OPTIONS = [
+  'General',
+  ...servicePages.map((service) => service.shortTitle),
+  'Other',
+] as const;
 
 type ContactFormProps = {
   className?: string;
@@ -32,6 +38,7 @@ export function ContactForm({ className }: ContactFormProps) {
   const urlInputRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState<Status>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [inquiry, setInquiry] = useState<string>('General');
 
   useEffect(() => {
     const origin = window.location.origin;
@@ -47,6 +54,13 @@ export function ContactForm({ className }: ContactFormProps) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
+
+    const firstName = String(data.get('first_name') ?? '').trim();
+    const lastName = String(data.get('last_name') ?? '').trim();
+    data.set('name', `${firstName} ${lastName}`.trim());
+    data.delete('first_name');
+    data.delete('last_name');
+    data.set('service', inquiry);
     data.set('_url', window.location.href);
     data.delete('_next');
 
@@ -64,6 +78,7 @@ export function ContactForm({ className }: ContactFormProps) {
       if (isFormSubmitSuccess(payload)) {
         setStatus('success');
         form.reset();
+        setInquiry('General');
         return;
       }
 
@@ -89,14 +104,14 @@ export function ContactForm({ className }: ContactFormProps) {
     return (
       <div
         role="status"
-        className="flex items-start gap-3 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-5 py-4"
+        className="flex items-start gap-3 rounded-2xl border border-emerald-500/25 bg-emerald-50 px-5 py-4"
       >
         <CheckCircle2
-          className="mt-0.5 size-5 shrink-0 text-emerald-400"
+          className="mt-0.5 size-5 shrink-0 text-emerald-600"
           aria-hidden="true"
         />
         <div>
-          <p className="font-medium text-cream">Message received — we&apos;re on it.</p>
+          <p className="font-medium text-void">Message received — we&apos;re on it.</p>
           <p className="mt-1 text-sm leading-relaxed text-muted">
             Expect a reply within two business days.
           </p>
@@ -132,68 +147,56 @@ export function ContactForm({ className }: ContactFormProps) {
         defaultValue={`${SITE_URL}/contact?sent=1`}
       />
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="contact-name"
-            className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
-          >
-            Full name <span className="text-rocket">*</span>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="contact-first-name" className="text-sm text-void/80">
+            First name <span className="text-rocket">*</span>
           </label>
           <input
-            id="contact-name"
+            id="contact-first-name"
             type="text"
-            name="name"
+            name="first_name"
             required
-            autoComplete="name"
-            placeholder="Jane Smith"
+            autoComplete="given-name"
+            placeholder="Jane"
             className={FIELD}
           />
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="contact-email"
-            className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
-          >
-            Email <span className="text-rocket">*</span>
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="contact-last-name" className="text-sm text-void/80">
+            Last name <span className="text-rocket">*</span>
           </label>
           <input
-            id="contact-email"
-            type="email"
-            name="email"
+            id="contact-last-name"
+            type="text"
+            name="last_name"
             required
-            autoComplete="email"
-            placeholder="you@company.com"
+            autoComplete="family-name"
+            placeholder="Smith"
             className={FIELD}
           />
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="contact-company"
-            className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
-          >
-            Company
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="contact-country" className="text-sm text-void/80">
+            Country
           </label>
           <input
-            id="contact-company"
+            id="contact-country"
             type="text"
-            name="company"
-            autoComplete="organization"
-            placeholder="Your company"
+            name="country"
+            autoComplete="country-name"
+            placeholder="United States"
             className={FIELD}
           />
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="contact-phone"
-            className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
-          >
-            Phone
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="contact-phone" className="text-sm text-void/80">
+            Phone number
           </label>
           <input
             id="contact-phone"
@@ -206,49 +209,70 @@ export function ContactForm({ className }: ContactFormProps) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <label
-          htmlFor="contact-service"
-          className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
-        >
-          What can we help with?
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="contact-email" className="text-sm text-void/80">
+          Email address <span className="text-rocket">*</span>
         </label>
-        <select
-          id="contact-service"
-          name="service"
-          defaultValue=""
-          className={cn(FIELD, 'cursor-pointer')}
-        >
-          <option value="" disabled>
-            Select a service line
-          </option>
-          {servicePages.map((service) => (
-            <option key={service.slug} value={service.title}>
-              {service.title}
-            </option>
-          ))}
-          <option value="Not sure yet">Not sure yet</option>
-        </select>
+        <input
+          id="contact-email"
+          type="email"
+          name="email"
+          required
+          autoComplete="email"
+          placeholder="you@company.com"
+          className={FIELD}
+        />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <label
-          htmlFor="contact-message"
-          className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
-        >
-          Project details <span className="text-rocket">*</span>
+      <fieldset className="flex flex-col gap-3">
+        <legend className="text-sm text-void/80">Type of inquiry</legend>
+        <div className="flex flex-wrap gap-2">
+          {INQUIRY_OPTIONS.map((option) => {
+            const selected = inquiry === option;
+            return (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setInquiry(option)}
+                aria-pressed={selected}
+                className={cn(
+                  'rounded-full border px-4 py-2 text-sm transition-colors',
+                  selected
+                    ? 'border-void bg-void/5 font-medium text-void'
+                    : 'border-navy-500/20 text-muted hover:border-navy-500/40 hover:text-void',
+                )}
+              >
+                {option}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="contact-message" className="text-sm text-void/80">
+          Message <span className="text-rocket">*</span>
         </label>
         <textarea
           id="contact-message"
           name="message"
           required
           rows={5}
-          placeholder="Tell us where you want to be twelve months from now — goals, timeline, budget range, anything that helps us prepare a real flight plan."
-          className={cn(FIELD, 'resize-y min-h-32')}
+          placeholder="Tell us about your project — goals, timeline, budget range, anything that helps us prepare a real flight plan."
+          className={cn(FIELD, 'min-h-32 resize-y')}
         />
       </div>
 
-      {/* Honeypot — leave empty. Kept off-screen and out of autofill. */}
+      <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-muted">
+        <input
+          type="checkbox"
+          name="updates"
+          value="yes"
+          className="mt-0.5 size-4 shrink-0 rounded border-navy-500/25 accent-electric"
+        />
+        I&apos;d like to receive project updates and insights.
+      </label>
+
       <div aria-hidden="true" className="sr-only">
         <label htmlFor="contact-website">Website</label>
         <input
@@ -263,17 +287,17 @@ export function ContactForm({ className }: ContactFormProps) {
       {status === 'needs-activation' ? (
         <div
           role="status"
-          className="flex items-start gap-3 rounded-2xl border border-amber-400/30 bg-amber-400/10 px-5 py-4"
+          className="flex items-start gap-3 rounded-2xl border border-amber-500/25 bg-amber-50 px-5 py-4"
         >
           <CircleAlert
-            className="mt-0.5 size-5 shrink-0 text-electric"
+            className="mt-0.5 size-5 shrink-0 text-amber-600"
             aria-hidden="true"
           />
           <div>
-            <p className="font-medium text-cream">One-time FormSubmit activation</p>
+            <p className="font-medium text-void">One-time FormSubmit activation</p>
             <p className="mt-1 text-sm leading-relaxed text-muted">
               FormSubmit emailed an activate link to{' '}
-              <span className="text-cream">{company.email}</span>. Click it once,
+              <span className="text-void">{company.email}</span>. Click it once,
               then send this form again — after that, inquiries land in the inbox.
             </p>
           </div>
@@ -283,7 +307,7 @@ export function ContactForm({ className }: ContactFormProps) {
       {status === 'error' && errorMessage ? (
         <div
           role="alert"
-          className="flex items-start gap-3 rounded-2xl border border-rocket/30 bg-rocket/10 px-5 py-4"
+          className="flex items-start gap-3 rounded-2xl border border-rocket/25 bg-red-50 px-5 py-4"
         >
           <CircleAlert
             className="mt-0.5 size-5 shrink-0 text-rocket"
@@ -293,36 +317,25 @@ export function ContactForm({ className }: ContactFormProps) {
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs leading-relaxed text-muted-dim">
-          By submitting, you agree we may use your details to respond to this
-          inquiry. See our{' '}
-          <a
-            href="/privacy"
-            className="text-electric-300 underline underline-offset-4 hover:text-cream"
-          >
-            privacy policy
-          </a>
-          .
-        </p>
+      <button
+        type="submit"
+        disabled={status === 'submitting'}
+        className="mt-1 w-full rounded-full border-2 border-void py-3.5 text-sm font-semibold text-void transition-colors hover:bg-void hover:text-cream disabled:pointer-events-none disabled:opacity-60"
+      >
+        {status === 'submitting' ? 'Sending…' : 'Submit'}
+      </button>
 
-        <button
-          type="submit"
-          disabled={status === 'submitting'}
-          className="group/btn relative inline-flex h-13 shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-electric px-7 text-base font-medium tracking-tight text-void shadow-[0_8px_30px_-8px_rgba(251,146,60,0.7)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-electric-400 hover:shadow-[0_12px_44px_-8px_rgba(251,146,60,0.85)] active:translate-y-0 disabled:pointer-events-none disabled:opacity-60"
+      <p className="text-center text-xs leading-relaxed text-muted-dim">
+        By submitting, you agree we may use your details to respond to this
+        inquiry. See our{' '}
+        <a
+          href="/privacy"
+          className="text-void/70 underline underline-offset-4 hover:text-void"
         >
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-out group-hover/btn:translate-x-full motion-reduce:hidden"
-          />
-          <span className="relative z-10 inline-flex items-center gap-2">
-            {status === 'submitting' ? 'Sending…' : 'Send message'}
-            {status === 'submitting' ? null : (
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-            )}
-          </span>
-        </button>
-      </div>
+          privacy policy
+        </a>
+        .
+      </p>
     </form>
   );
 }

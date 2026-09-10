@@ -186,7 +186,7 @@ export default function AboutPage() {
             </h2>
           </Reveal>
 
-          <Stagger className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {aboutPage.pillars.map((pillar) => (
               <StaggerItem key={pillar.title}>
                 <div className="border-gradient h-full rounded-2xl bg-navy/40 p-7">
@@ -201,7 +201,7 @@ export default function AboutPage() {
             ))}
           </Stagger>
 
-          <Reveal direction="up" delay={0.1} className="mt-16">
+          <Reveal direction="up" delay={0.1} className="mt-5">
             <div className="rounded-3xl border border-white/[0.08] bg-[radial-gradient(ellipse_100%_100%_at_50%_120%,#16294a_0%,#0a1628_45%,#050b16_85%)] p-8 md:p-10">
               <h3 className="font-mono text-[0.625rem] tracking-[0.24em] text-electric-300 uppercase">
                 Our process
