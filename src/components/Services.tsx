@@ -6,7 +6,7 @@ import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { ArrowUpRight, Rocket } from "lucide-react";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Stagger, StaggerItem } from "./ui/Reveal";
-import { services, type Service } from "@/lib/content";
+import { homePage, services, type Service } from "@/lib/content";
 
 export function Services() {
   return (
@@ -18,13 +18,14 @@ export function Services() {
 
       <div className="container-shell relative">
         <SectionHeading
-          eyebrow="01 — Capabilities"
+          eyebrow={homePage.services.eyebrow}
           title={
             <>
-              Four services. No filler <span className="text-gradient">retainers</span>
+              {homePage.services.title}{' '}
+              <span className="text-gradient">{homePage.services.titleAccent}</span>
             </>
           }
-          description="Web apps, native apps, websites, and SEO campaigns. Each engagement is a dedicated practice — not a channel we padded onto a menu."
+          description={homePage.services.description}
         />
 
         <Stagger className="mt-10 grid gap-5 md:grid-cols-2">
@@ -120,7 +121,7 @@ function ServiceCard({ service }: { service: Service }) {
 function FlightCheckPanel() {
   return (
     <a
-      href="#contact"
+      href="/contact"
       className="group border-gradient relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-electric/18 via-nebula/10 to-transparent p-7 transition-transform duration-500 ease-out hover:-translate-y-1.5 md:flex-row md:items-end md:p-8"
     >
       <div
@@ -137,16 +138,15 @@ function FlightCheckPanel() {
           />
         </span>
         <h3 className="mt-7 text-xl font-semibold tracking-tight text-cream">
-          Not sure which service you need?
+          {homePage.services.flightCheckTitle}
         </h3>
         <p className="mt-3.5 text-[0.9375rem] leading-relaxed text-cream/70">
-          Book a 20-minute flight check. We&apos;ll tell you whether you need a website, a web app,
-          a native app, or an SEO campaign — no pitch deck.
+          {homePage.services.flightCheckBody}
         </p>
       </div>
 
       <span className="relative mt-7 inline-flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-cream uppercase md:mt-0">
-        Book a flight check
+        {homePage.services.flightCheckCta}
         <ArrowUpRight
           className="size-4 transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transform-none"
           aria-hidden="true"

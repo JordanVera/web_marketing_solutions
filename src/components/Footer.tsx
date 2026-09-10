@@ -29,8 +29,7 @@ export function Footer() {
                 <Logo />
               </Link>
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted">
-                A Houston studio for web apps, native apps, websites, and SEO campaigns — for
-                brands that would rather build something worth launching than ship another template.
+                {company.blurb}
               </p>
 
               <ul className="mt-7 flex gap-2.5">

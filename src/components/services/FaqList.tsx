@@ -1,7 +1,7 @@
 import { ChevronDown } from 'lucide-react';
-import type { ServiceFaq } from '@/lib/services';
+import type { FaqItem } from '@/lib/content';
 
-export function FaqList({ faqs }: { faqs: ServiceFaq[] }) {
+export function FaqList({ faqs }: { faqs: FaqItem[] }) {
   return (
     <div className="divide-y divide-white/[0.08] rounded-2xl border border-white/[0.08] bg-navy/40">
       {faqs.map((faq) => (

@@ -6,7 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Reveal } from "./ui/Reveal";
-import { isExternalHref, projectCategories, projects, type Project } from "@/lib/content";
+import { homePage, isExternalHref, projectCategories, projects, type Project } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export function Projects() {
@@ -30,13 +30,14 @@ export function Projects() {
 
       <div className="container-shell">
         <SectionHeading
-          eyebrow="03 — Selected work"
+          eyebrow={homePage.results.eyebrow}
           title={
             <>
-              Missions we&apos;ve <span className="text-gradient">flown</span>
+              {homePage.results.title}{' '}
+              <span className="text-gradient">{homePage.results.titleAccent}</span>
             </>
           }
-          description="Live websites we've designed and shipped. Each card opens the real site."
+          description={homePage.results.description}
         />
 
         {projectCategories.length > 2 && (
@@ -104,12 +105,12 @@ export function Projects() {
 
         <Reveal direction="up" className="mt-10 text-center">
           <p className="text-sm text-muted-dim">
-            Building the next one?{" "}
+            {homePage.results.footerPrompt}{" "}
             <a
-              href="#contact"
+              href="/contact"
               className="text-electric-300 underline decoration-electric/40 underline-offset-4 transition-colors hover:text-cream"
             >
-              Tell us about the launch
+              {homePage.results.footerLink}
             </a>
             .
           </p>
@@ -139,7 +140,7 @@ function ProjectCard({ project, priority }: { project: Project; priority?: boole
         <div className="relative aspect-4/3 overflow-hidden">
           <Image
             src={project.image}
-            alt={`${project.title} website`}
+              alt={project.imageAlt}
             fill
             unoptimized={isVector}
             priority={priority}

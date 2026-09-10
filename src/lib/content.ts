@@ -20,11 +20,11 @@ import { servicePages } from './services';
 export const company = {
   name: 'Web Marketing Solutions',
   shortName: 'WMS',
-  tagline: 'Web Marketing Solutions for Ambitious Brands',
+  tagline: 'Houston Digital Agency for Commercial Growth',
   blurb:
-    'A Houston studio for web apps, native apps, websites, and SEO campaigns — for brands that would rather build something worth launching than ship another template.',
+    'A Houston digital agency for commercial teams: custom website development, web app development, native app development, and SEO services built to move pipeline — not vanity metrics.',
   city: 'Houston, Texas',
-  email: 'verawebdev@protonmail.com',
+  email: 'hello@webmarketingsolutions.com',
   phone: '+1 (713) 555-0142',
   address: {
     street: '1200 Space Park Dr, Suite 210',
@@ -44,42 +44,68 @@ export const navLinks = [
 ] as const;
 
 export const heroStats = [
+  { value: '2016', label: 'Houston studio founded' },
+  { value: '60+', label: 'Commercial clients served' },
   { value: '148%', label: 'Avg. organic traffic lift' },
-  { value: '0.9s', label: 'Median load time shipped' },
-  { value: '60+', label: 'Brands launched since 2016' },
 ] as const;
 
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
 export const homePage = {
-  metaTitle: 'Houston Web Apps, Websites & SEO Agency',
+  metaTitle: 'Houston Digital Agency | Web Dev & SEO Services',
   metaDescription:
-    'Web Marketing Solutions designs and ships custom web apps, native iOS and Android apps, conversion-first websites, and SEO campaigns from Houston, Texas.',
+    'Houston digital agency for commercial clients. Custom web development, web apps, native apps, and SEO services that grow pipeline — not vanity traffic.',
+  keywords: [
+    'Houston digital agency',
+    'web development Houston',
+    'web app development',
+    'native app development',
+    'SEO services Houston',
+    'digital marketing agency Houston',
+    'custom web development',
+    'enterprise app development',
+  ],
   hero: {
-    eyebrow: 'Houston, Texas — Mission Control for Growth',
-    headline: ['Web', 'Marketing', 'Solutions', 'for'] as const,
-    headlineAccent: ['Ambitious', 'Brands'] as const,
-    lede: 'Custom web apps, native iOS and Android, conversion-first websites, and SEO campaigns — designed and engineered in Space City. Same discipline that launches rockets down the road: a written plan, telemetry, and a hard go/no-go before anything ships.',
-    primaryCta: 'Start Your Launch',
-    primaryHref: '#contact',
-    secondaryCta: 'Explore services',
+    eyebrow: 'Houston Digital Agency — Built for Commercial Teams',
+    headline: ['Houston Digital Agency:'] as const,
+    headlineAccent: [
+      'Web Development & SEO',
+      'Services for Businesses',
+    ] as const,
+    h1: 'Houston Digital Agency: Web Development & SEO Services for Businesses',
+    lede: 'Most B2B sites explain the company and hide the offer. Dashboards get bolted onto marketing templates. Paid ads keep the lights on while organic search stays an afterthought. Web Marketing Solutions is a Houston digital agency for commercial clients who need the opposite: custom web development, web app development, native app development, and SEO services Houston operators can defend in a budget meeting. We write the job to be done, pick the surface that fits — website, web app, or native app — and instrument the launch so you can see qualified demand, not just traffic. If you are comparing a digital marketing agency in Houston that ships production software and search programs from the same studio, start with a 20-minute consult. We will tell you what to build, what to skip, and what it costs.',
+    primaryCta: 'Schedule Your Free Consultation',
+    primaryHref: '/contact',
+    secondaryCta: 'Learn More',
     secondaryHref: '#services',
+  },
+  whyUs: {
+    eyebrow: '02 — Why choose us',
+    title: 'Built for',
+    titleAccent: 'business outcomes',
+    description:
+      'You are not buying pages or sprints. You are buying a shorter path from attention to revenue. We take commercial work because the buyers are sharp, the cycles are long, and the cost of a pretty-but-wrong build shows up in pipeline — not in a design critique.',
   },
   services: {
     eyebrow: '01 — Capabilities',
     title: 'Four services. No filler',
     titleAccent: 'retainers',
     description:
-      'Web apps, native apps, websites, and SEO campaigns. Each is a dedicated practice with its own process — not a channel we padded onto a menu to look complete.',
+      'A Houston digital agency should be able to say which surface you need. We run four practices — website development Houston teams can edit, web app development for real workflows, native app development for the home screen, and SEO services Houston companies use to stop renting all of their demand.',
     flightCheckTitle: 'Not sure which service you need?',
     flightCheckBody:
-      'Book a 20-minute flight check. We will tell you whether you need a website, a web app, a native app, or an SEO campaign — and what to skip. No pitch deck.',
-    flightCheckCta: 'Book a flight check',
+      'Schedule a free consultation. We will tell you whether you need custom web development, a web app, a native app, or an SEO campaign — and what to skip. No pitch deck.',
+    flightCheckCta: 'Schedule Your Free Consultation',
   },
   houston: {
-    eyebrow: '02 — Why Houston',
-    title: 'Built in',
-    titleAccent: 'Space City',
+    eyebrow: '02 — Why choose us',
+    title: 'A digital agency',
+    titleAccent: 'operators can brief',
     description:
-      'Houston does not do incremental. It is the city that put people on the moon and still runs every mission from a room full of screens. We build digital products and search programs the same way.',
+      'Houston does not reward theater. Energy, healthcare, logistics, and professional services buy on proof. We built Web Marketing Solutions the same way this city runs complex work: a written plan, named owners, and a go/no-go before anything public ships.',
   },
   telemetry: [
     { label: 'Organic sessions', readout: '+148%', fill: 0.92 },
@@ -87,14 +113,14 @@ export const homePage = {
     { label: 'Conversion rate', readout: '+38%', fill: 0.74 },
     { label: 'Client retention', readout: '94%', fill: 0.94 },
   ],
-  projects: {
-    eyebrow: '03 — Selected work',
-    title: "Missions we've",
-    titleAccent: 'flown',
+  results: {
+    eyebrow: '03 — Results',
+    title: "Outcomes we've",
+    titleAccent: 'shipped',
     description:
-      'Live websites we designed and shipped — a cinematic film-and-stills studio and an invite-only event for Shedeur Sanders. Each card opens the real site.',
-    footerPrompt: 'Building the next one?',
-    footerLink: 'Tell us about the launch',
+      'Case studies only matter if they change a number a CFO already watches. Across commercial accounts we have lifted organic sessions by 148% on average after a combined website and SEO campaign, shipped marketing sites with a 0.9s median LCP, and raised conversion rate 38% by cutting pages that could not earn a place in the funnel. Client retention sits at 94% because we refuse work the site cannot support — if the template cannot rank or the “app” is a brochure with a login, we say so in discovery. The two launches below are live: a cinematic film-and-stills studio and an invite-only event site. Different categories, same rule — the public surface has one job, and we instrument whether it did that job.',
+    footerPrompt: 'Want numbers on a program like yours?',
+    footerLink: 'Get a custom quote',
   },
   process: {
     eyebrow: '04 — How we work',
@@ -103,12 +129,25 @@ export const homePage = {
     description:
       'Five phases, named deliverables, and a written go/no-go at every gate. You always know what is shipping next — and why it earned a place on the plan.',
   },
+  testimonials: {
+    eyebrow: '05 — Client signal',
+    title: 'What operators',
+    titleAccent: 'report back',
+  },
+  faq: {
+    eyebrow: '06 — FAQ',
+    title: 'Questions B2B teams ask',
+    titleAccent: 'before kickoff',
+    description:
+      'Straight answers for commercial buyers comparing a Houston digital agency, a freelance shop, and a national retainer.',
+  },
   cta: {
     eyebrow: 'Launch window open',
-    title: 'Ready for',
-    titleAccent: 'liftoff?',
-    lede: 'Tell us where you want to be twelve months from now. We will send back a real flight plan — recommended service, scope, timeline, and price — within two business days.',
-    primaryCta: 'Start Your Launch',
+    title: 'Ready for a',
+    titleAccent: 'real plan?',
+    lede: 'Tell us the outcome you need in the next twelve months — more qualified inquiries, a portal your clients will use, a store-ready app, or organic demand that is not rented from ads. We reply with recommended service, scope, timeline, and price within two business days.',
+    primaryCta: 'Schedule Your Free Consultation',
+    secondaryCta: 'Get a Custom Quote',
     trustSignals: [
       'No long-term contracts',
       'Houston-based team',
@@ -116,6 +155,41 @@ export const homePage = {
     ],
   },
 } as const;
+
+export const homeFaqs: FaqItem[] = [
+  {
+    question:
+      'What does a Houston digital agency actually do for a B2B company?',
+    answer:
+      'For commercial clients, the job is not “more marketing.” It is a public site that converts, software people can log into when the work requires it, and search demand you do not have to rent forever. Web Marketing Solutions scopes website development, web app development, native app development, and SEO services against that job — then tells you which ones you do not need.',
+  },
+  {
+    question: 'Do we need a website, a web app, or a native app?',
+    answer:
+      'If visitors read and inquire, you need custom website development. If employees or clients sign in to complete work, you need web app development. If the product depends on the camera, offline access, push, or a home-screen habit, you need native app development. We will not sell you the more expensive surface when a faster site would close the gap.',
+  },
+  {
+    question:
+      'How is this different from a typical digital marketing agency in Houston?',
+    answer:
+      'Many agencies rent attention (ads, social) and outsource the build. We engineer the asset — Next.js sites, authenticated web apps, iOS and Android apps — and run SEO campaigns on surfaces that can actually rank. Same studio, so technical SEO recommendations are not a PDF your developer ignores.',
+  },
+  {
+    question: 'How long until we see results from web development or SEO?',
+    answer:
+      'A focused marketing site typically launches in 6–10 weeks. A web app MVP is usually 8–14 weeks. Native apps track the product scope, not the UI toolkit. SEO services in Houston show technical and on-page movement in weeks; competitive head terms often take two to four quarters. We set leading indicators so you are not waiting a year for a single vanity keyword.',
+  },
+  {
+    question: 'Do you only work with Houston companies?',
+    answer:
+      'We are based in Houston, Texas, and know Energy Corridor, medical, legal, and Gulf Coast operators well. We also ship for Texas and national B2B teams who want a senior partner without coastal-agency markup. Discovery can be remote; local kickoffs happen in person when it helps.',
+  },
+  {
+    question: 'What happens on the free consultation?',
+    answer:
+      'Twenty minutes, no pitch deck. You describe the business outcome. We tell you whether the next dollar belongs in website development, a web app, a native app, or an SEO campaign — plus a rough timeline and what we would cut if it were our budget. If we are the wrong studio, we say that too.',
+  },
+];
 
 export type Service = {
   id: string;
@@ -142,6 +216,7 @@ export type Project = {
   description: string;
   /** Swap for an Unsplash/Pexels URL or a local file in /public at any time. */
   image: string;
+  imageAlt: string;
   metric: string;
   href: string;
   serviceIds: string[];
@@ -153,8 +228,10 @@ export const projects: Project[] = [
     title: 'Capturing All Angles',
     category: 'Website',
     description:
-      'A cinematic film-and-stills site for a Houston photographer and videographer — mosaic reel, work archives, and a booking flow that matches the work.',
+      'A cinematic film-and-stills site for a Houston photographer and videographer — mosaic reel, work archives, and a booking flow that matches the work. Built as conversion-first website development, not a template with a contact form taped on.',
     image: '/projects/capturing-all-angles.png',
+    imageAlt:
+      'Capturing All Angles website homepage — Houston photography and videography studio site by Web Marketing Solutions',
     metric: 'Film & stills',
     href: 'https://www.capturingallangles.com/',
     serviceIds: ['website-development'],
@@ -164,8 +241,10 @@ export const projects: Project[] = [
     title: "Shedeur's Legendary Barber Competition",
     category: 'Website',
     description:
-      'Invite-only event site for Shedeur Sanders — story, process, submissions, and partners, designed to feel as sharp as the competition itself.',
+      'Invite-only event site for Shedeur Sanders — story, process, submissions, and partners, designed to feel as sharp as the competition itself. Fast load, clear CTA, zero CMS clutter.',
     image: '/projects/legendary-barber-competition.png',
+    imageAlt:
+      "Shedeur's Legendary Barber Competition event website — custom web development by a Houston digital agency",
     metric: 'Event launch',
     href: 'https://www.legendarybarbercompetition.com/',
     serviceIds: ['website-development'],
@@ -241,6 +320,7 @@ export type Testimonial = {
   result: string;
 };
 
+/** Placeholder social proof — replace names and quotes when client approvals land. */
 export const testimonials: Testimonial[] = [
   {
     id: 't1',
@@ -293,28 +373,34 @@ export const clientLogos = [
 export const houstonHighlights = [
   {
     icon: Satellite,
-    title: 'Built where missions launch',
+    title: 'One studio, four practices',
     description:
-      'Houston has been running complex launches since 1961. We borrowed the discipline: named checklists, telemetry on day one, and a written go/no-go before anything ships.',
+      'Website, web app, native app, and SEO campaign — scoped as separate jobs. You are not paying a digital marketing agency Houston tax for channels we padded onto a menu.',
   },
   {
     icon: LineChart,
-    title: 'Instrumented from day one',
+    title: 'Pipeline over pageviews',
     description:
-      'Mission control never guesses. Neither do we — every build lands with analytics, event tracking, and dashboards wired before launch.',
+      'We instrument qualified inquiries, demo requests, and assisted revenue before launch. If a tactic cannot be tied to a commercial outcome, it does not make the plan.',
   },
   {
     icon: BarChart3,
-    title: 'Local knowledge, national reach',
+    title: 'Houston fluency, national-grade builds',
     description:
-      'Energy Corridor B2B, medical and legal practices, Heights retail, and Gulf Coast operators — we know this market, and the playbook travels well beyond the Beltway.',
+      'Energy Corridor B2B, medical and legal practices, logistics, and Gulf Coast operators — we know how these buyers decide. The engineering travels; the brief stays honest.',
+  },
+  {
+    icon: Gauge,
+    title: 'Written go/no-go, not a vibe',
+    description:
+      'Since 2016 we have shipped with named checklists, staging you can click, and a hard stop before anything public. That is how commercial teams keep risk off the homepage.',
   },
 ] as const;
 
 export const aboutPage = {
   metaTitle: 'About',
   metaDescription:
-    'Web Marketing Solutions is a Houston studio for custom web apps, native apps, websites, and SEO campaigns — built with launch discipline since 2016.',
+    'Web Marketing Solutions is a Houston digital agency for custom web apps, native apps, websites, and SEO campaigns — built with launch discipline since 2016.',
   h1: 'We build digital products worth launching.',
   lede: 'Web Marketing Solutions is a Houston studio for ambitious brands. We design and ship web apps, native apps, websites, and SEO campaigns — with the same checklist-driven discipline Houston has used for complex launches since 1961.',
   mission:
@@ -347,9 +433,9 @@ export const aboutPage = {
 export const contactPage = {
   metaTitle: 'Contact',
   metaDescription:
-    'Start a project with Web Marketing Solutions. Tell us your goals and get a recommended service, scope, timeline, and price within two business days.',
-  h1: 'Let\u2019s chart your flight plan.',
-  lede: 'Whether you need a web app, native app, website, or SEO campaign — tell us where you want to land. We will reply with a real plan, not a generic pitch deck.',
+    'Schedule a free consultation with Web Marketing Solutions. Tell us your goals and get a recommended service, scope, timeline, and price within two business days.',
+  h1: 'Schedule your free consultation.',
+  lede: 'Whether you need website development, a web app, a native app, or SEO services in Houston — tell us the outcome. We reply with a real plan, not a generic pitch deck.',
   trustSignals: [
     'No long-term contracts',
     'Houston-based team',

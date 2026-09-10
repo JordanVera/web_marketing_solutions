@@ -1,12 +1,17 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
-import { SectionHeading } from "./ui/SectionHeading";
-import { Reveal } from "./ui/Reveal";
-import { clientLogos, testimonials } from "@/lib/content";
-import { cn } from "@/lib/utils";
+import { useCallback, useEffect, useState } from 'react';
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  type Variants,
+} from 'framer-motion';
+import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
+import { SectionHeading } from './ui/SectionHeading';
+import { Reveal } from './ui/Reveal';
+import { clientLogos, homePage, testimonials } from '@/lib/content';
+import { cn } from '@/lib/utils';
 
 const AUTOPLAY_MS = 7500;
 
@@ -41,19 +46,22 @@ export function Testimonials() {
 
   const active = testimonials[index];
   const initials = active.name
-    .split(" ")
+    .split(' ')
     .map((part) => part[0])
     .slice(0, 2)
-    .join("");
+    .join('');
 
   return (
     <section id="testimonials" className="relative scroll-mt-24 py-16 md:py-24">
       <div className="container-shell">
         <SectionHeading
-          eyebrow="05 — Client signal"
+          eyebrow={homePage.testimonials.eyebrow}
           title={
             <>
-              What the crew <span className="text-gradient">reports back</span>
+              {homePage.testimonials.title}{' '}
+              <span className="text-gradient">
+                {homePage.testimonials.titleAccent}
+              </span>
             </>
           }
         />
@@ -65,8 +73,8 @@ export function Testimonials() {
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={() => setPaused(false)}
           onKeyDown={(event) => {
-            if (event.key === "ArrowRight") paginate(1);
-            if (event.key === "ArrowLeft") paginate(-1);
+            if (event.key === 'ArrowRight') paginate(1);
+            if (event.key === 'ArrowLeft') paginate(-1);
           }}
           role="group"
           aria-roledescription="carousel"
@@ -128,7 +136,11 @@ export function Testimonials() {
 
           {/* Controls */}
           <div className="mt-8 flex items-center justify-between gap-6">
-            <div className="flex gap-2.5" role="tablist" aria-label="Choose a testimonial">
+            <div
+              className="flex gap-2.5"
+              role="tablist"
+              aria-label="Choose a testimonial"
+            >
               {testimonials.map((testimonial, dotIndex) => {
                 const isActive = dotIndex === index;
                 return (
@@ -140,8 +152,10 @@ export function Testimonials() {
                     aria-label={`Testimonial from ${testimonial.name}`}
                     onClick={() => goTo(dotIndex)}
                     className={cn(
-                      "h-1.5 rounded-full transition-all duration-500",
-                      isActive ? "w-10 bg-electric" : "w-4 bg-white/15 hover:bg-white/30",
+                      'h-1.5 rounded-full transition-all duration-500',
+                      isActive
+                        ? 'w-10 bg-electric'
+                        : 'w-4 bg-white/15 hover:bg-white/30',
                     )}
                   />
                 );
@@ -149,10 +163,16 @@ export function Testimonials() {
             </div>
 
             <div className="flex gap-2.5">
-              <CarouselButton label="Previous testimonial" onClick={() => paginate(-1)}>
+              <CarouselButton
+                label="Previous testimonial"
+                onClick={() => paginate(-1)}
+              >
                 <ChevronLeft className="size-5" aria-hidden="true" />
               </CarouselButton>
-              <CarouselButton label="Next testimonial" onClick={() => paginate(1)}>
+              <CarouselButton
+                label="Next testimonial"
+                onClick={() => paginate(1)}
+              >
                 <ChevronRight className="size-5" aria-hidden="true" />
               </CarouselButton>
             </div>

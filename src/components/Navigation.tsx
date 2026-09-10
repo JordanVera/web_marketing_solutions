@@ -147,7 +147,7 @@ export function Navigation() {
             href="/contact"
             className="hidden items-center rounded-full border border-white px-3.5 py-1.5 text-[10px] tracking-[0.2em] text-white uppercase transition-all duration-200 hover:bg-white hover:text-navy sm:inline-flex"
           >
-            Start Your Launch
+            Free Consultation
           </Link>
           <button
             type="button"
@@ -207,7 +207,7 @@ export function Navigation() {
                 onClick={closeMenu}
                 className="rounded-xl bg-white px-4 py-3 text-center text-sm font-semibold tracking-[0.15em] text-navy uppercase"
               >
-                Start Your Launch
+                Schedule Your Free Consultation
               </Link>
               <a
                 href={PHONE_HREF}

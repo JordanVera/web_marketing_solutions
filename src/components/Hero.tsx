@@ -11,10 +11,7 @@ import { ArrowRight, MapPin, Play } from 'lucide-react';
 import { Starfield } from './ui/Starfield';
 import { Button } from './ui/Button';
 import { RocketMark } from './Logo';
-import { heroStats } from '@/lib/content';
-
-const HEADLINE = ['Web', 'Marketing', 'Solutions', 'for'];
-const HEADLINE_ACCENT = ['Ambitious', 'Brands'];
+import { heroStats, homePage } from '@/lib/content';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -95,19 +92,17 @@ export function Hero() {
             >
               <MapPin className="size-3.5 text-rocket" aria-hidden="true" />
               <span className="font-mono text-[0.6875rem] tracking-[0.2em] text-cream/90 uppercase">
-                Houston, Texas — Mission Control for Growth
+                {homePage.hero.eyebrow}
               </span>
             </motion.div>
 
             <h1 className="text-display mt-8 font-semibold">
-              <span className="sr-only">
-                Web Marketing Solutions for Ambitious Brands
-              </span>
+              <span className="sr-only">{homePage.hero.h1}</span>
               <span
                 aria-hidden="true"
                 className="flex flex-wrap gap-x-[0.28em] gap-y-1"
               >
-                {HEADLINE.map((word, index) => (
+                {homePage.hero.headline.map((word, index) => (
                   <motion.span
                     key={word}
                     initial={{ opacity: 0, y: 34 }}
@@ -122,14 +117,16 @@ export function Hero() {
                     {word}
                   </motion.span>
                 ))}
-                {HEADLINE_ACCENT.map((word, index) => (
+                {homePage.hero.headlineAccent.map((word, index) => (
                   <motion.span
                     key={word}
                     initial={{ opacity: 0, y: 34 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                       duration: 0.85,
-                      delay: 0.12 + (HEADLINE.length + index) * 0.075,
+                      delay:
+                        0.12 +
+                        (homePage.hero.headline.length + index) * 0.075,
                       ease: [0.16, 1, 0.3, 1],
                     }}
                     className="text-gradient-hero inline-block"
@@ -148,11 +145,9 @@ export function Hero() {
                 delay: 0.55,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="mt-7 max-w-xl text-lg leading-relaxed text-muted"
+              className="mt-7 max-w-2xl text-base leading-relaxed text-muted md:text-lg"
             >
-              We design and engineer websites and search programs from Space
-              City. Same discipline that launches rockets down the road —
-              checklists, telemetry, and a hard go/no-go before anything ships.
+              {homePage.hero.lede}
             </motion.p>
 
             <motion.div
@@ -165,13 +160,13 @@ export function Hero() {
               }}
               className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <Button href="#contact" size="lg">
-                Start Your Launch
+              <Button href={homePage.hero.primaryHref} size="lg">
+                {homePage.hero.primaryCta}
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
               </Button>
-              <Button href="#services" variant="secondary" size="lg">
+              <Button href={homePage.hero.secondaryHref} variant="secondary" size="lg">
                 <Play className="size-3.5 fill-current" />
-                Learn More
+                {homePage.hero.secondaryCta}
               </Button>
             </motion.div>
 

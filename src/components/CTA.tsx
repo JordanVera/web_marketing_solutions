@@ -5,7 +5,7 @@ import { ArrowRight, Mail } from 'lucide-react';
 import { Starfield } from './ui/Starfield';
 import { Button } from './ui/Button';
 import { Reveal } from './ui/Reveal';
-import { company } from '@/lib/content';
+import { company, homePage } from '@/lib/content';
 
 export function CTA() {
   const prefersReducedMotion = useReducedMotion();
@@ -57,28 +57,27 @@ export function CTA() {
             <Reveal direction="up">
               <span className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 font-mono text-[0.625rem] tracking-[0.24em] text-electric-300 uppercase backdrop-blur-sm">
                 <span className="size-1.5 animate-pulse rounded-full bg-emerald-400" />
-                Launch window open
+                {homePage.cta.eyebrow}
               </span>
             </Reveal>
 
             <Reveal direction="up" delay={0.08}>
               <h2 className="text-display mt-8 font-semibold">
-                Ready for <span className="text-gradient">liftoff?</span>
+                {homePage.cta.title}{' '}
+                <span className="text-gradient">{homePage.cta.titleAccent}</span>
               </h2>
             </Reveal>
 
             <Reveal direction="up" delay={0.16}>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted">
-                Tell us where you want to be twelve months from now. We&apos;ll
-                send back a real flight plan — scope, timeline, and price —
-                within two business days.
+                {homePage.cta.lede}
               </p>
             </Reveal>
 
             <Reveal direction="up" delay={0.24}>
               <div className="mt-11 flex flex-col items-center gap-3 sm:flex-row">
                 <Button href="/contact" size="lg">
-                  Start Your Launch
+                  {homePage.cta.primaryCta}
                   <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </Button>
                 <Button
@@ -94,11 +93,7 @@ export function CTA() {
 
             <Reveal direction="up" delay={0.32}>
               <ul className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-[0.625rem] tracking-[0.16em] text-muted-dim uppercase">
-                {[
-                  'No long-term contracts',
-                  'Houston-based team',
-                  'Reply in 2 business days',
-                ].map((item) => (
+                {homePage.cta.trustSignals.map((item) => (
                   <li key={item} className="flex items-center gap-2">
                     <span
                       aria-hidden="true"

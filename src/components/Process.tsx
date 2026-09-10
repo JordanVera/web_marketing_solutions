@@ -11,7 +11,7 @@ import {
 } from "framer-motion";
 import { SectionHeading } from "./ui/SectionHeading";
 import { RocketMark } from "./Logo";
-import { processSteps, type ProcessStep } from "@/lib/content";
+import { homePage, processSteps, type ProcessStep } from "@/lib/content";
 
 export function Process() {
   const railRef = useRef<HTMLDivElement | null>(null);
@@ -35,13 +35,14 @@ export function Process() {
 
       <div className="container-shell relative">
         <SectionHeading
-          eyebrow="04 — How we work"
+          eyebrow={homePage.process.eyebrow}
           title={
             <>
-              A flight plan, not a <span className="text-gradient">guessing game</span>
+              {homePage.process.title}{' '}
+              <span className="text-gradient">{homePage.process.titleAccent}</span>
             </>
           }
-          description="Five phases, fixed deliverables, and a written go/no-go at every gate. You always know what's shipping next and why."
+          description={homePage.process.description}
         />
 
         <div ref={railRef} className="relative mt-12">

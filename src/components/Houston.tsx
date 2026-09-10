@@ -6,15 +6,10 @@ import { Radio } from "lucide-react";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Reveal, Stagger, StaggerItem } from "./ui/Reveal";
 import { Starfield } from "./ui/Starfield";
-import { company, houstonHighlights } from "@/lib/content";
+import { company, homePage, houstonHighlights } from "@/lib/content";
 import { seededRandom } from "@/lib/utils";
 
-const TELEMETRY = [
-  { label: "Organic sessions", readout: "+148%", fill: 0.92 },
-  { label: "Core Web Vitals", readout: "98/100", fill: 0.98 },
-  { label: "Conversion rate", readout: "+38%", fill: 0.74 },
-  { label: "Client retention", readout: "94%", fill: 0.94 },
-];
+const TELEMETRY = homePage.telemetry;
 
 export function Houston() {
   return (
@@ -30,13 +25,14 @@ export function Houston() {
           <div>
             <SectionHeading
               align="left"
-              eyebrow="02 — Why Houston"
+              eyebrow={homePage.houston.eyebrow}
               title={
                 <>
-                  Built in <span className="text-gradient">Space City</span>
+                  {homePage.houston.title}{' '}
+                  <span className="text-gradient">{homePage.houston.titleAccent}</span>
                 </>
               }
-              description="Houston doesn't do incremental. It's the city that put people on the moon and still runs every mission from a room full of screens. We build marketing the same way."
+              description={homePage.houston.description}
             />
 
             <Stagger className="mt-8 flex flex-col gap-8">
