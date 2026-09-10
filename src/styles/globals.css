@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Tailwind v4 turns every custom property declared inside
+   @theme into a utility class (e.g. --color-nebula -> bg-nebula / text-nebula).
+   --------------------------------------------------------------------------- */
+@theme {
+  /* Core palette */
+  --color-void: #050b16;
+  --color-navy: #0a1628;
+  --color-navy-600: #0f2038;
+  --color-navy-500: #16294a;
+
+  --color-electric: #0066ff;
+  --color-electric-400: #3b8cff;
+  --color-electric-300: #7cb2ff;
+
+  --color-rocket: #ff3333;
+  --color-rocket-400: #ff6b5c;
+
+  --color-nebula: #7c3aed;
+  --color-nebula-400: #a855f7;
+
+  --color-cream: #f4f7fb;
+  --color-muted: #93a4bf;
+  --color-muted-dim: #5d6f8c;
+
+  /* Typography */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+
+  /* Fluid display sizes used by the hero + section headings */
+  --text-display: clamp(2.75rem, 7vw, 6rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-heading: clamp(2rem, 4.4vw, 3.5rem);
+  --text-heading--line-height: 1.05;
+  --text-heading--letter-spacing: -0.028em;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-drift: drift 26s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+  --animate-scan: scan 3.6s linear infinite;
+
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(3%, -4%, 0) scale(1.08);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes scan {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(400%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchored sections clear of the fixed navigation bar. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-electric) 45%, transparent);
+    color: #fff;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users only. */
+  :focus-visible {
+    outline: 2px solid var(--color-electric-400);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-void);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-navy-500);
+    border-radius: 999px;
+    border: 2px solid var(--color-void);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-electric);
+  }
+}
+
+@layer utilities {
+  /* Consistent page gutter + max width across every section. */
+  .container-shell {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-cream) 0%,
+      var(--color-electric-300) 45%,
+      var(--color-nebula-400) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* 1px gradient hairline used on cards and panels. */
+  .border-gradient {
+    position: relative;
+  }
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      160deg,
+      color-mix(in oklab, var(--color-electric) 55%, transparent),
+      color-mix(in oklab, var(--color-nebula) 30%, transparent) 45%,
+      transparent 70%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Faint technical grid, faded out toward the edges. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(124, 158, 214, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(124, 158, 214, 0.07) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 25%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 25%, transparent 75%);
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  }
+}
+
+/* Respect the OS-level "reduce motion" preference everywhere, including the
+   CSS keyframes above. Framer Motion is handled per-component with
+   useReducedMotion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
