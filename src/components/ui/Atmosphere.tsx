@@ -1,6 +1,11 @@
 import { cn } from '@/lib/utils';
 
-type AtmosphereVariant = 'hero' | 'cyan' | 'aurora' | 'amber' | 'horizon';
+export type AtmosphereVariant =
+  | 'hero'
+  | 'cyan'
+  | 'aurora'
+  | 'amber'
+  | 'horizon';
 
 type AtmosphereProps = {
   variant?: AtmosphereVariant;

@@ -56,7 +56,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
         <div className="relative flex min-h-[inherit] flex-col lg:grid lg:grid-cols-[3fr_2fr]">
           <div className="flex flex-col justify-between px-7 py-10 sm:px-10 md:px-12 md:py-14 lg:px-14 lg:py-16">
             <div>
-              <p className="font-mono text-[0.6875rem] tracking-[0.24em] text-electric-300 uppercase">
+              <p className="font-mono text-[0.6875rem] tracking-[0.24em] text-electric uppercase">
                 Mission control
               </p>
               <h1 className="text-heading mt-5 max-w-xl font-semibold text-cream">
@@ -89,7 +89,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
             <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-6">
               <div>
-                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-cream/50 uppercase">
+                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-electric uppercase">
                   Location
                 </p>
                 <address className="mt-3 text-sm not-italic leading-relaxed text-cream/85">
@@ -108,7 +108,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               </div>
 
               <div>
-                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-cream/50 uppercase">
+                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-electric uppercase">
                   Social media
                 </p>
                 <ul className="mt-3 flex flex-col gap-2">
@@ -136,7 +136,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               </div>
 
               <div>
-                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-cream/50 uppercase">
+                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-electric uppercase">
                   Email
                 </p>
                 <a
@@ -148,7 +148,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               </div>
 
               <div>
-                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-cream/50 uppercase">
+                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-electric uppercase">
                   Contact
                 </p>
                 <a

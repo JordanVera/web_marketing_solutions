@@ -16,6 +16,7 @@ import { scrollToPageTop } from './ScrollToTop';
 import { company, navLinks } from '@/lib/content';
 import { serviceNavLinks, servicePath } from '@/lib/services';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 const PHONE_HREF = `tel:${company.phone.replace(/[^\d+]/g, '')}`;
 
@@ -123,7 +124,13 @@ export function Navigation() {
           className="group shrink-0 rounded-lg pl-1"
           aria-label={`${company.name} — home`}
         >
-          <Logo />
+          <Image
+            src="/logo.PNG"
+            alt={company.name}
+            height={120}
+            width={120}
+            className="h-12 w-auto"
+          />
         </Link>
 
         <ul className="hidden items-center gap-0.5 lg:flex">
@@ -153,7 +160,7 @@ export function Navigation() {
         <div className="flex items-center gap-1.5">
           <Link
             href="/contact"
-            className="hidden items-center rounded-full border border-white px-3.5 py-1.5 text-[10px] tracking-[0.2em] text-white uppercase transition-all duration-200 hover:bg-white hover:text-navy sm:inline-flex"
+            className="hidden items-center rounded-full border border-electric px-3.5 py-1.5 text-[10px] tracking-[0.2em] text-electric uppercase transition-all duration-200 hover:bg-electric hover:text-white sm:inline-flex"
           >
             Free Consultation
           </Link>

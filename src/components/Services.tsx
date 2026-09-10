@@ -9,34 +9,9 @@ import { SectionHeading } from './ui/SectionHeading';
 import { Atmosphere } from './ui/Atmosphere';
 import { Stagger, StaggerItem, Reveal } from './ui/Reveal';
 import { homePage, services, type Service } from '@/lib/content';
+import type { ServiceSlug } from '@/lib/services';
+import { SERVICE_THEME } from '@/components/services/theme';
 import { cn } from '@/lib/utils';
-
-const SERVICE_ART: Record<
-  string,
-  { src: string; imageClass: string; overlayClass: string }
-> = {
-  'website-development': {
-    src: '/space/amber-nebula.webp',
-    imageClass: 'object-center',
-    overlayClass:
-      'bg-linear-to-r from-void/88 via-void/70 to-void/40 md:via-void/55 md:to-void/25',
-  },
-  'web-app-development': {
-    src: '/space/carina-nebula.webp',
-    imageClass: 'object-center',
-    overlayClass: 'bg-linear-to-t from-void via-void/70 to-navy/45',
-  },
-  'native-app-development': {
-    src: '/space/amber-nebula.webp',
-    imageClass: 'object-center',
-    overlayClass: 'bg-linear-to-t from-void via-void/70 to-navy/45',
-  },
-  'seo-campaigns': {
-    src: '/space/pillars-of-creation.webp',
-    imageClass: 'object-[40%_center]',
-    overlayClass: 'bg-linear-to-t from-void via-void/70 to-navy/45',
-  },
-};
 
 export function Services() {
   const [featured, ...rest] = services;
@@ -112,7 +87,7 @@ function ServiceCard({
     mouseY.set(-400);
   };
 
-  const art = SERVICE_ART[service.id];
+  const art = SERVICE_THEME[service.id as ServiceSlug];
 
   return (
     <Link
@@ -128,7 +103,7 @@ function ServiceCard({
         <CardBackdrop
           src={art.src}
           imageClass={art.imageClass}
-          overlayClass={art.overlayClass}
+          overlayClass={art.cardOverlay}
           sizes={
             featured
               ? '(min-width: 768px) 80rem, 100vw'

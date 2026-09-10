@@ -3,5 +3,5 @@ export default function ServicesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main id="main">{children}</main>;
+  return <>{children}</>;
 }
