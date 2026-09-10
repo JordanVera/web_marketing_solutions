@@ -72,11 +72,11 @@ export function Hero() {
         className="container-shell relative z-10"
       >
         <div className="relative max-w-3xl lg:max-w-[38rem] xl:max-w-3xl">
-          <motion.p
+          {/* <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="inline-flex items-center gap-3"
+            className="items-center gap-3 hidden lg:inline-flex"
           >
             <span
               aria-hidden="true"
@@ -85,9 +85,9 @@ export function Hero() {
             <span className="font-mono text-[0.6875rem] tracking-[0.22em] text-muted uppercase">
               {homePage.hero.eyebrow}
             </span>
-          </motion.p>
+          </motion.p> */}
 
-          <h1 className="text-display mt-8 font-semibold">
+          <h1 className="text-display mt-2 lg:mt-8 font-semibold">
             <span className="sr-only">{homePage.hero.h1}</span>
             <span aria-hidden="true" className="flex flex-col gap-1">
               {homePage.hero.headline.map((phrase, index) => (

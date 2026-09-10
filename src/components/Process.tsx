@@ -97,7 +97,7 @@ function StepItem({ step, index }: { step: ProcessStep; index: number }) {
       <div className="relative z-10 shrink-0">
         <motion.span
           aria-hidden="true"
-          className="absolute inset-0 rounded-full bg-electric/35 blur-lg"
+          className="absolute inset-0 rounded-full  blur-lg"
           animate={{ opacity: inView ? 1 : 0 }}
           transition={{ duration: 0.8, delay: index * 0.06 }}
         />

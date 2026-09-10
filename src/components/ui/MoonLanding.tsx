@@ -20,8 +20,17 @@ import { cn } from '@/lib/utils';
 const LANDING_EASE = [0.22, 0.5, 0.55, 0.92] as const;
 const DESCENT_DURATION = 5.8;
 const DESCENT_DELAY = 0.5;
-/** Start height along the surface normal, in viewport heights. */
-const DESCENT_START_VH = 90;
+/**
+ * Minimum flight distance along the surface normal, in viewport heights. On
+ * small screens the pad sits below the fold, so the real start is pushed
+ * further up until the rocket and its plume clear the top of the page;
+ * otherwise it would sit parked mid-viewport behind the hero copy.
+ */
+const DESCENT_MIN_VH = 90;
+/** Pre-measurement fallback: far enough up to be offscreen on any device. */
+const DESCENT_START_FALLBACK_VH = 300;
+/** How far the full-throttle plume hangs below the rocket, in rocket heights. */
+const PLUME_OVERHANG = 1.75;
 const LEGS_DEPLOY_AT = 0.6;
 
 /**
@@ -68,11 +77,31 @@ export function MoonLanding({ className }: MoonLandingProps) {
   // descent until the pad scrolls into view rather than landing unseen.
   const padInView = useInView(padRef, { once: true, amount: 'some' });
   const progress = useMotionValue(prefersReducedMotion ? 1 : 0);
+  // Flight distance in px; 0 until the pad has been measured.
+  const descentStart = useMotionValue(0);
   const [touchedDown, setTouchedDown] = useState(false);
   const [legsDeployed, setLegsDeployed] = useState(false);
-  // Reduced motion skips the flight entirely and renders the settled state.  
+  // Reduced motion skips the flight entirely and renders the settled state.
   const landed = touchedDown || Boolean(prefersReducedMotion);
   const legsOut = legsDeployed || landed;
+
+  // Measure where the pad sits on the page so the parked rocket (and plume)
+  // always start above the document, however tall the hero ends up.
+  useEffect(() => {
+    const pad = padRef.current;
+    if (!pad) return;
+    const measure = () => {
+      const rect = pad.getBoundingClientRect();
+      const padBottom = rect.bottom + window.scrollY;
+      const clearance = padBottom + rect.height * PLUME_OVERHANG;
+      descentStart.set(
+        Math.max(window.innerHeight * (DESCENT_MIN_VH / 100), clearance),
+      );
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [descentStart]);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -95,7 +124,11 @@ export function MoonLanding({ className }: MoonLandingProps) {
 
   // Travel along the rocket's own "up" axis, so the descent follows the
   // surface normal at the landing site rather than screen-vertical.
-  const y = useTransform(progress, (p) => `${(1 - p) * -DESCENT_START_VH}vh`);
+  const y = useTransform([progress, descentStart], ([p, start]) =>
+    (start as number) > 0
+      ? `${(1 - (p as number)) * -(start as number)}px`
+      : `${(1 - (p as number)) * -DESCENT_START_FALLBACK_VH}vh`,
+  );
   const x = useTransform(progress, [0, 0.7, 1], [26, 6, 0]);
   const attitude = useTransform(progress, [0, 0.65, 1], [-7, -2.5, 0]);
   // Engine stays lit right through contact, then cuts.
