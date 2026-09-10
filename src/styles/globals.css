@@ -179,10 +179,10 @@
 
   .text-gradient {
     background: linear-gradient(
-      100deg,
-      var(--color-electric-400) 0%,
+      96deg,
+      /* var(--color-electric-400) 0%, */
       var(--color-electric) 38%,
-      var(--color-aurora-300) 72%,
+      var(--color-aurora-500) 72%,
       var(--color-aurora-500) 100%
     );
     -webkit-background-clip: text;
@@ -195,7 +195,7 @@
   .text-gradient-hero {
     background: linear-gradient(
       96deg,
-      var(--color-electric-400) 0%,
+      /* var(--color-electric-400) 0%, */
       var(--color-electric) 36%,
       var(--color-aurora) 72%,
       var(--color-aurora-500) 100%
