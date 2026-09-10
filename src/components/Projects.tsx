@@ -6,7 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Reveal } from "./ui/Reveal";
-import { projectCategories, projects, type Project } from "@/lib/content";
+import { isExternalHref, projectCategories, projects, type Project } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export function Projects() {
@@ -36,46 +36,50 @@ export function Projects() {
               Missions we&apos;ve <span className="text-gradient">flown</span>
             </>
           }
-          description="A cross-section of recent launches. Every engagement below shipped with measurable outcomes attached to it."
+          description="Live websites we've designed and shipped. Each card opens the real site."
         />
 
-        {/* Category filter */}
-        <Reveal direction="up" delay={0.1} className="mt-12 flex justify-center">
-          <div
-            role="group"
-            aria-label="Filter projects by category"
-            className="flex flex-wrap justify-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] p-1.5 backdrop-blur-sm"
-          >
-            {projectCategories.map((category) => {
-              const isActive = activeCategory === category;
-              return (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => setActiveCategory(category)}
-                  aria-pressed={isActive}
-                  className={cn(
-                    "relative rounded-full px-4 py-2 text-sm transition-colors duration-300",
-                    isActive ? "text-white" : "text-muted hover:text-cream",
-                  )}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="project-filter-pill"
-                      className="absolute inset-0 -z-10 rounded-full bg-electric"
-                      transition={{ type: "spring", stiffness: 400, damping: 34 }}
-                    />
-                  )}
-                  {category}
-                </button>
-              );
-            })}
-          </div>
-        </Reveal>
+        {projectCategories.length > 2 && (
+          <Reveal direction="up" delay={0.1} className="mt-12 flex justify-center">
+            <div
+              role="group"
+              aria-label="Filter projects by category"
+              className="flex flex-wrap justify-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] p-1.5 backdrop-blur-sm"
+            >
+              {projectCategories.map((category) => {
+                const isActive = activeCategory === category;
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => setActiveCategory(category)}
+                    aria-pressed={isActive}
+                    className={cn(
+                      "relative rounded-full px-4 py-2 text-sm transition-colors duration-300",
+                      isActive ? "text-white" : "text-muted hover:text-cream",
+                    )}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="project-filter-pill"
+                        className="absolute inset-0 -z-10 rounded-full bg-electric"
+                        transition={{ type: "spring", stiffness: 400, damping: 34 }}
+                      />
+                    )}
+                    {category}
+                  </button>
+                );
+              })}
+            </div>
+          </Reveal>
+        )}
 
         <motion.div
           layout={!prefersReducedMotion}
-          className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className={cn(
+            "mt-12 grid gap-6 md:grid-cols-2",
+            projects.length > 2 ? "lg:grid-cols-3" : "mx-auto max-w-5xl",
+          )}
         >
           <AnimatePresence mode="popLayout">
             {visibleProjects.map((project, index) => (
@@ -100,12 +104,12 @@ export function Projects() {
 
         <Reveal direction="up" className="mt-14 text-center">
           <p className="text-sm text-muted-dim">
-            Six of {projects.length}+ launches shown.{" "}
+            Building the next one?{" "}
             <a
               href="#contact"
               className="text-electric-300 underline decoration-electric/40 underline-offset-4 transition-colors hover:text-cream"
             >
-              Ask for the full deck
+              Tell us about the launch
             </a>
             .
           </p>
@@ -116,14 +120,16 @@ export function Projects() {
 }
 
 function ProjectCard({ project, priority }: { project: Project; priority?: boolean }) {
-  // Local placeholders are SVG, which the image optimizer intentionally skips.
-  // Dropping in a real photo re-enables optimization automatically.
   const isVector = project.image.endsWith(".svg");
+  const isExternal = isExternalHref(project.href);
 
   return (
     <article className="group h-full">
       <a
         href={project.href}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+        aria-label={isExternal ? `${project.title} (opens in a new tab)` : undefined}
         className={cn(
           "relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-navy/40",
           "transition-all duration-500 ease-out hover:-translate-y-2 hover:border-electric/35",
@@ -133,12 +139,12 @@ function ProjectCard({ project, priority }: { project: Project; priority?: boole
         <div className="relative aspect-4/3 overflow-hidden">
           <Image
             src={project.image}
-            alt={`${project.title} — ${project.category} case study`}
+            alt={`${project.title} website`}
             fill
             unoptimized={isVector}
             priority={priority}
-            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07] motion-reduce:transform-none"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.07] motion-reduce:transform-none"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent" />
 
@@ -158,7 +164,7 @@ function ProjectCard({ project, priority }: { project: Project; priority?: boole
           <p className="mt-2.5 text-sm leading-relaxed text-muted">{project.description}</p>
 
           <span className="mt-6 inline-flex items-center gap-1.5 font-mono text-[0.6875rem] tracking-[0.16em] text-muted uppercase transition-colors duration-300 group-hover:text-cream">
-            View case study
+            {isExternal ? "Visit site" : "View case study"}
             <ArrowUpRight
               className="size-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transform-none"
               aria-hidden="true"

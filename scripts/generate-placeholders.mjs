@@ -1,8 +1,8 @@
 /**
- * Generates the abstract SVG artwork used as portfolio placeholders in
- * /public/projects. Run `node scripts/generate-placeholders.mjs` after editing
- * the PROJECTS list below. Replace an entry's `image` in src/lib/content.ts
- * with a real photo whenever the case study is ready.
+ * Optional abstract SVG fallbacks for /public/projects.
+ * Live case studies now use JPG/PNG photos in that folder — only run this
+ * if you need a placeholder before photography is ready.
+ * `node scripts/generate-placeholders.mjs`
  */
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -10,12 +10,8 @@ import path from "node:path";
 const OUT_DIR = path.join(process.cwd(), "public", "projects");
 
 const PROJECTS = [
-  { slug: "orbital-energy", label: "Orbital Energy", hueA: "#0066ff", hueB: "#7c3aed", seed: 11 },
-  { slug: "bayou-dental", label: "Bayou Dental", hueA: "#0ea5e9", hueB: "#0066ff", seed: 23 },
-  { slug: "apex-outfitters", label: "Apex Outfitters", hueA: "#ff3333", hueB: "#7c3aed", seed: 37 },
-  { slug: "meridian-labs", label: "Meridian Labs", hueA: "#a855f7", hueB: "#0066ff", seed: 51 },
-  { slug: "gulf-coast-legal", label: "Gulf Coast Legal", hueA: "#3b8cff", hueB: "#0f2038", seed: 67 },
-  { slug: "nova-fitness", label: "Nova Fitness", hueA: "#ff6b5c", hueB: "#0066ff", seed: 83 },
+  { slug: "capturing-all-angles", label: "Capturing All Angles", hueA: "#e8e4dc", hueB: "#0066ff", seed: 11 },
+  { slug: "legendary-barber", label: "Legendary Barber", hueA: "#C9A227", hueB: "#080808", seed: 23 },
 ];
 
 const W = 1200;

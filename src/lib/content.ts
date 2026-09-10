@@ -86,7 +86,7 @@ export const projects: Project[] = [
     category: 'Website',
     description:
       'A cinematic film-and-stills site for a photographer and videographer — mosaic reel, work archives, and a booking flow.',
-    image: '/projects/capturing-all-angles.jpg',
+    image: '/projects/capturing-all-angles.png',
     metric: 'Film & stills',
     href: 'https://www.capturingallangles.com/',
     serviceIds: ['website-development'],
@@ -97,7 +97,7 @@ export const projects: Project[] = [
     category: 'Website',
     description:
       'Invite-only event site for Shedeur Sanders — story, process, submissions, and partners, launched for Cleveland 2026.',
-    image: '/projects/legendary-barber.png',
+    image: '/projects/legendary-barber-competition.png',
     metric: 'Event launch',
     href: 'https://www.legendarybarbercompetition.com/',
     serviceIds: ['website-development'],

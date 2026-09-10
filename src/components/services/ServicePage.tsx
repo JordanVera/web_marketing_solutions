@@ -1,49 +1,51 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
-import { JsonLd } from "@/components/JsonLd";
-import { CTA } from "@/components/CTA";
-import { Button } from "@/components/ui/Button";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { FaqList } from "@/components/services/FaqList";
-import { company, projects } from "@/lib/content";
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
+import { JsonLd } from '@/components/JsonLd';
+import { CTA } from '@/components/CTA';
+import { Button } from '@/components/ui/Button';
+import { Reveal, Stagger, StaggerItem } from '@/components/ui/Reveal';
+import { SectionHeading } from '@/components/ui/SectionHeading';
+import { FaqList } from '@/components/services/FaqList';
+import { company, isExternalHref, projects } from '@/lib/content';
 import {
   getRelatedServices,
   servicePath,
   type ServicePage as ServicePageData,
-} from "@/lib/services";
-import { SITE_URL, cn } from "@/lib/utils";
+} from '@/lib/services';
+import { SITE_URL, cn } from '@/lib/utils';
 
 export function ServicePage({ service }: { service: ServicePageData }) {
   const Icon = service.icon;
   const related = getRelatedServices(service);
   const relatedWork = service.relatedProjectIds
     .map((id) => projects.find((project) => project.id === id))
-    .filter((project): project is (typeof projects)[number] => Boolean(project));
+    .filter((project): project is (typeof projects)[number] =>
+      Boolean(project),
+    );
 
   const canonical = `${SITE_URL}${servicePath(service.slug)}`;
 
   const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
+    '@context': 'https://schema.org',
+    '@graph': [
       {
-        "@type": "Service",
+        '@type': 'Service',
         name: service.title,
         serviceType: service.title,
         description: service.metaDescription,
         url: canonical,
         areaServed: [
-          { "@type": "City", name: "Houston" },
-          { "@type": "State", name: "Texas" },
+          { '@type': 'City', name: 'Houston' },
+          { '@type': 'State', name: 'Texas' },
         ],
         provider: {
-          "@type": "ProfessionalService",
+          '@type': 'ProfessionalService',
           name: company.name,
           url: SITE_URL,
           telephone: company.phone,
           address: {
-            "@type": "PostalAddress",
+            '@type': 'PostalAddress',
             streetAddress: company.address.street,
             addressLocality: company.address.locality,
             addressRegion: company.address.region,
@@ -53,19 +55,29 @@ export function ServicePage({ service }: { service: ServicePageData }) {
         },
       },
       {
-        "@type": "BreadcrumbList",
+        '@type': 'BreadcrumbList',
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
-          { "@type": "ListItem", position: 3, name: service.shortTitle, item: canonical },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Services',
+            item: `${SITE_URL}/services`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: service.shortTitle,
+            item: canonical,
+          },
         ],
       },
       {
-        "@type": "FAQPage",
+        '@type': 'FAQPage',
         mainEntity: service.faqs.map((faq) => ({
-          "@type": "Question",
+          '@type': 'Question',
           name: faq.question,
-          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
         })),
       },
     ],
@@ -87,13 +99,19 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               <nav aria-label="Breadcrumb" className="text-sm">
                 <ol className="flex flex-wrap items-center gap-2 text-muted-dim">
                   <li>
-                    <Link href="/" className="transition-colors hover:text-cream">
+                    <Link
+                      href="/"
+                      className="transition-colors hover:text-cream"
+                    >
                       Home
                     </Link>
                   </li>
                   <li aria-hidden="true">/</li>
                   <li>
-                    <Link href="/services" className="transition-colors hover:text-cream">
+                    <Link
+                      href="/services"
+                      className="transition-colors hover:text-cream"
+                    >
                       Services
                     </Link>
                   </li>
@@ -115,11 +133,15 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                 </Reveal>
 
                 <Reveal direction="up" delay={0.12}>
-                  <h1 className="text-heading mt-6 font-semibold">{service.h1}</h1>
+                  <h1 className="text-heading mt-6 font-semibold">
+                    {service.h1}
+                  </h1>
                 </Reveal>
 
                 <Reveal direction="up" delay={0.18}>
-                  <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{service.lede}</p>
+                  <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+                    {service.lede}
+                  </p>
                 </Reveal>
 
                 <Reveal direction="up" delay={0.24}>
@@ -142,8 +164,14 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                   </p>
                   <ul className="mt-5 flex flex-col gap-3">
                     {service.capabilities.map((item) => (
-                      <li key={item} className="flex items-center gap-3 text-sm text-cream">
-                        <Check className="size-4 shrink-0 text-electric-300" aria-hidden="true" />
+                      <li
+                        key={item}
+                        className="flex items-center gap-3 text-sm text-cream"
+                      >
+                        <Check
+                          className="size-4 shrink-0 text-electric-300"
+                          aria-hidden="true"
+                        />
                         {item}
                       </li>
                     ))}
@@ -161,7 +189,8 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               eyebrow="Who it's for"
               title={
                 <>
-                  Built for teams who have outgrown the <span className="text-gradient">workaround</span>
+                  Built for teams who have outgrown the{' '}
+                  <span className="text-gradient">workaround</span>
                 </>
               }
             />
@@ -169,8 +198,12 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               {service.whoItsFor.map((block) => (
                 <StaggerItem key={block.title}>
                   <article className="h-full rounded-2xl border border-white/[0.08] bg-navy/40 p-6 md:p-7">
-                    <h3 className="text-lg font-semibold tracking-tight text-cream">{block.title}</h3>
-                    <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">{block.body}</p>
+                    <h3 className="text-lg font-semibold tracking-tight text-cream">
+                      {block.title}
+                    </h3>
+                    <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">
+                      {block.body}
+                    </p>
                   </article>
                 </StaggerItem>
               ))}
@@ -189,7 +222,8 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               eyebrow="The problems"
               title={
                 <>
-                  What we are usually <span className="text-gradient">hired to end</span>
+                  What we are usually{' '}
+                  <span className="text-gradient">hired to end</span>
                 </>
               }
             />
@@ -203,7 +237,9 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                     <h3 className="mt-4 text-xl font-semibold tracking-tight text-cream">
                       {block.title}
                     </h3>
-                    <p className="mt-3 leading-relaxed text-muted">{block.body}</p>
+                    <p className="mt-3 leading-relaxed text-muted">
+                      {block.body}
+                    </p>
                   </article>
                 </Reveal>
               ))}
@@ -218,7 +254,8 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               eyebrow="What's included"
               title={
                 <>
-                  Deliverables, not a <span className="text-gradient">mystery retainer</span>
+                  Deliverables, not a{' '}
+                  <span className="text-gradient">mystery retainer</span>
                 </>
               }
             />
@@ -229,7 +266,10 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                     key={item}
                     className="flex items-start gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3.5 text-sm text-cream"
                   >
-                    <Check className="mt-0.5 size-4 shrink-0 text-electric-300" aria-hidden="true" />
+                    <Check
+                      className="mt-0.5 size-4 shrink-0 text-electric-300"
+                      aria-hidden="true"
+                    />
                     {item}
                   </li>
                 ))}
@@ -245,13 +285,19 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               eyebrow="How we deliver"
               title={
                 <>
-                  A flight plan for this <span className="text-gradient">service line</span>
+                  A flight plan for this{' '}
+                  <span className="text-gradient">service line</span>
                 </>
               }
             />
             <ol className="mt-14 grid gap-5 md:grid-cols-2">
               {service.process.map((step, index) => (
-                <Reveal key={step.title} direction="up" delay={index * 0.06} as="li">
+                <Reveal
+                  key={step.title}
+                  direction="up"
+                  delay={index * 0.06}
+                  as="li"
+                >
                   <article className="h-full rounded-2xl border border-white/[0.08] bg-navy/40 p-6 md:p-8">
                     <span className="font-mono text-[0.625rem] tracking-[0.22em] text-electric-300 uppercase">
                       Step 0{index + 1}
@@ -259,7 +305,9 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                     <h3 className="mt-3 text-xl font-semibold tracking-tight text-cream">
                       {step.title}
                     </h3>
-                    <p className="mt-3 leading-relaxed text-muted">{step.body}</p>
+                    <p className="mt-3 leading-relaxed text-muted">
+                      {step.body}
+                    </p>
                   </article>
                 </Reveal>
               ))}
@@ -274,7 +322,8 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               eyebrow="Why this studio"
               title={
                 <>
-                  How this work is <span className="text-gradient">different here</span>
+                  How this work is{' '}
+                  <span className="text-gradient">different here</span>
                 </>
               }
             />
@@ -282,14 +331,20 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               {service.differentiators.map((block, index) => (
                 <Reveal key={block.title} direction="up" delay={index * 0.08}>
                   <article className="border-gradient h-full rounded-2xl bg-navy/40 p-6 md:p-7">
-                    <h3 className="text-lg font-semibold tracking-tight text-cream">{block.title}</h3>
-                    <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">{block.body}</p>
+                    <h3 className="text-lg font-semibold tracking-tight text-cream">
+                      {block.title}
+                    </h3>
+                    <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">
+                      {block.body}
+                    </p>
                   </article>
                 </Reveal>
               ))}
             </div>
             <Reveal direction="up" className="mt-10">
-              <p className="max-w-3xl text-sm leading-relaxed text-muted-dim">{service.geo}</p>
+              <p className="max-w-3xl text-sm leading-relaxed text-muted-dim">
+                {service.geo}
+              </p>
             </Reveal>
           </div>
         </section>
@@ -302,33 +357,44 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                 eyebrow="Related work"
                 title={
                   <>
-                    Missions in this <span className="text-gradient">neighborhood</span>
+                    Missions in this{' '}
+                    <span className="text-gradient">neighborhood</span>
                   </>
                 }
               />
               <div
                 className={cn(
-                  "mt-14 grid gap-6",
-                  relatedWork.length > 1 ? "md:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-2",
+                  'mt-14 grid gap-6',
+                  relatedWork.length >= 3
+                    ? 'md:grid-cols-2 lg:grid-cols-3'
+                    : 'mx-auto max-w-5xl md:grid-cols-2',
                 )}
               >
                 {relatedWork.map((project) => {
-                  const isVector = project.image.endsWith(".svg");
+                  const isVector = project.image.endsWith('.svg');
+                  const isExternal = isExternalHref(project.href);
                   return (
                     <Reveal key={project.id} direction="up">
                       <article className="group h-full">
                         <Link
                           href={project.href}
+                          target={isExternal ? '_blank' : undefined}
+                          rel={isExternal ? 'noopener noreferrer' : undefined}
+                          aria-label={
+                            isExternal
+                              ? `${project.title} (opens in a new tab)`
+                              : undefined
+                          }
                           className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-navy/40 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-electric/35"
                         >
                           <div className="relative aspect-4/3 overflow-hidden">
                             <Image
                               src={project.image}
-                              alt={`${project.title} — ${project.category} case study`}
+                              alt={`${project.title} website`}
                               fill
                               unoptimized={isVector}
-                              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07] motion-reduce:transform-none"
+                              sizes="(min-width: 1024px) 50vw, 100vw"
+                              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.07] motion-reduce:transform-none"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent" />
                             <span className="absolute top-4 left-4 rounded-full border border-white/15 bg-void/70 px-3 py-1.5 font-mono text-[0.625rem] tracking-[0.16em] text-cream uppercase backdrop-blur-sm">
@@ -363,7 +429,8 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               eyebrow="FAQ"
               title={
                 <>
-                  Questions we hear before <span className="text-gradient">kickoff</span>
+                  Questions we hear before{' '}
+                  <span className="text-gradient">kickoff</span>
                 </>
               }
             />
@@ -380,7 +447,8 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               eyebrow="Related services"
               title={
                 <>
-                  Adjacent work, same <span className="text-gradient">studio</span>
+                  Adjacent work, same{' '}
+                  <span className="text-gradient">studio</span>
                 </>
               }
             />
@@ -394,7 +462,10 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                       className="group border-gradient flex h-full flex-col rounded-2xl bg-navy/40 p-7 transition-transform duration-500 ease-out hover:-translate-y-1.5"
                     >
                       <span className="inline-flex size-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06]">
-                        <RelatedIcon className="size-5 text-electric-300" aria-hidden="true" />
+                        <RelatedIcon
+                          className="size-5 text-electric-300"
+                          aria-hidden="true"
+                        />
                       </span>
                       <h3 className="mt-6 text-xl font-semibold tracking-tight text-cream">
                         {item.title}

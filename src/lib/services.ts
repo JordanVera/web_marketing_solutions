@@ -331,7 +331,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     relatedSlugs: ["web-app-development", "website-development"],
-    relatedProjectIds: ["nova-fitness"],
+    relatedProjectIds: [],
   },
   {
     slug: "website-development",
@@ -466,7 +466,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     relatedSlugs: ["seo-campaigns", "web-app-development"],
-    relatedProjectIds: ["orbital-energy", "meridian-labs", "apex-outfitters"],
+    relatedProjectIds: ["capturing-all-angles", "legendary-barber-competition"],
   },
   {
     slug: "seo-campaigns",
@@ -587,7 +587,7 @@ export const servicePages: ServicePage[] = [
       {
         question: "Do you do local SEO for Houston businesses?",
         answer:
-          "Yes — Google Business Profile, location pages, review operations, and the on-site architecture multi-location brands need. Bayou Dental-style programs (several clinics, one system) are a known pattern for us.",
+          "Yes — Google Business Profile, location pages, review operations, and the on-site architecture multi-location brands need. Several locations, one system is a known pattern for us.",
       },
       {
         question: "What do you need from our team?",
@@ -601,7 +601,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     relatedSlugs: ["website-development", "web-app-development"],
-    relatedProjectIds: ["bayou-dental", "gulf-coast-legal"],
+    relatedProjectIds: [],
   },
 ];
 
