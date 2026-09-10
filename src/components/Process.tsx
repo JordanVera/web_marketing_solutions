@@ -9,6 +9,7 @@ import {
   useReducedMotion,
   useScroll,
   useSpring,
+  useTransform,
 } from 'framer-motion';
 import { SectionHeading } from './ui/SectionHeading';
 import { Atmosphere } from './ui/Atmosphere';
@@ -17,9 +18,45 @@ import { cn } from '@/lib/utils';
 
 /** Gravity-turn trajectory: top (T-4) to bottom (T+1), left-biased so cards sit to the right. */
 const TRAJECTORY =
-  'M 56 48 C 56 200, 176 280, 72 430 S 186 620, 64 790 S 150 900, 88 940';
+  'M 56 48 C 56 200, 176 280, 72 400 S 200 600, 56 700 S 190 850, 80 960';
 const VIEW_W = 640;
 const VIEW_H = 980;
+
+function pointsAtEvenY(path: SVGPathElement, count: number) {
+  const length = path.getTotalLength();
+  const start = path.getPointAtLength(0);
+  const end = path.getPointAtLength(length);
+  const span = end.y - start.y;
+
+  return Array.from({ length: count }, (_, i) => {
+    const targetY = start.y + (i / (count - 1)) * span;
+    let lo = 0;
+    let hi = length;
+    for (let step = 0; step < 24; step++) {
+      const mid = (lo + hi) / 2;
+      if (path.getPointAtLength(mid).y < targetY) lo = mid;
+      else hi = mid;
+    }
+    const point = path.getPointAtLength((lo + hi) / 2);
+    return { x: point.x, y: point.y };
+  });
+}
+
+function ProcessHeading() {
+  return (
+    <SectionHeading
+      align="left"
+      eyebrow={homePage.process.eyebrow}
+      title={
+        <>
+          {homePage.process.title}{' '}
+          <span className="text-electric">{homePage.process.titleAccent}</span>
+        </>
+      }
+      description={homePage.process.description}
+    />
+  );
+}
 
 export function Process() {
   const railRef = useRef<HTMLDivElement | null>(null);
@@ -34,6 +71,7 @@ export function Process() {
     damping: 26,
     restDelta: 0.001,
   });
+  const headingY = useTransform(progress, [0, 1], [0, 580]);
 
   return (
     <section
@@ -45,26 +83,25 @@ export function Process() {
       <div className="container-shell relative">
         <div className="lg:grid lg:grid-cols-12 lg:items-start lg:gap-16">
           <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-32">
-              <SectionHeading
-                align="left"
-                eyebrow={homePage.process.eyebrow}
-                title={
-                  <>
-                    {homePage.process.title}{' '}
-                    <span className="text-electric">
-                      {homePage.process.titleAccent}
-                    </span>
-                  </>
-                }
-                description={homePage.process.description}
-              />
+            <div className="lg:hidden">
+              <ProcessHeading />
+            </div>
+            <div className="hidden lg:block lg:min-h-[64rem]">
+              <motion.div
+                style={{ y: prefersReducedMotion ? 0 : headingY }}
+                className="will-change-transform"
+              >
+                <ProcessHeading />
+              </motion.div>
             </div>
           </div>
 
           <div ref={railRef} className="relative mt-12 lg:col-span-8 lg:mt-0">
             <div className="lg:hidden">
-              <MobileRail progress={progress} reduced={Boolean(prefersReducedMotion)} />
+              <MobileRail
+                progress={progress}
+                reduced={Boolean(prefersReducedMotion)}
+              />
             </div>
             <div className="hidden lg:block">
               <TrajectoryCanvas
@@ -123,13 +160,7 @@ function TrajectoryCanvas({
     const path = pathRef.current;
     if (!path) return;
     const length = path.getTotalLength();
-    const n = processSteps.length;
-    setPoints(
-      Array.from({ length: n }, (_, i) => {
-        const p = path.getPointAtLength((i / (n - 1)) * length);
-        return { x: p.x, y: p.y };
-      }),
-    );
+    setPoints(pointsAtEvenY(path, processSteps.length));
     const start = path.getPointAtLength(reduced ? length : 0);
     markerX.set(start.x);
     markerY.set(start.y);
@@ -146,7 +177,7 @@ function TrajectoryCanvas({
   });
 
   return (
-    <div className="relative min-h-[58rem]">
+    <div className="relative min-h-[64rem]">
       <svg
         viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
         className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
@@ -269,7 +300,7 @@ function StepCard({ step, active }: { step: ProcessStep; active: boolean }) {
       )}
     >
       <p className="flex items-center gap-3 font-mono text-[0.625rem] tracking-[0.22em] text-aurora-300 uppercase">
-        <span>{step.clock}</span>
+        {/* <span>{step.clock}</span> */}
         <span className="text-muted-dim">{step.phase}</span>
       </p>
       <h3 className="mt-2 flex items-center gap-2 text-xl font-semibold tracking-tight text-cream">
