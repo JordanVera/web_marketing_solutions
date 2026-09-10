@@ -150,7 +150,11 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                       {service.primaryCta}
                       <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                     </Button>
-                    <Button href={service.secondaryHref} variant="secondary" size="lg">
+                    <Button
+                      href={service.secondaryHref}
+                      variant="secondary"
+                      size="lg"
+                    >
                       {service.secondaryCta}
                     </Button>
                   </div>

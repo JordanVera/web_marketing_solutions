@@ -91,9 +91,7 @@ function ServiceCard({
       onMouseLeave={handleMouseLeave}
       className={cn(
         'group border-gradient glass-panel relative flex h-full overflow-hidden rounded-2xl p-7 transition-transform duration-500 ease-out hover:-translate-y-1.5 active:scale-[0.98] md:p-8 motion-reduce:transform-none',
-        featured
-          ? 'flex-col md:flex-row md:items-end md:gap-12'
-          : 'flex-col',
+        featured ? 'flex-col md:flex-row md:items-end md:gap-12' : 'flex-col',
       )}
     >
       <motion.div
