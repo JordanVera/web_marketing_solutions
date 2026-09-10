@@ -29,7 +29,7 @@ export function HomeFaq() {
           }
           description={homePage.faq.description}
         />
-        <Reveal direction="up" className="mx-auto mt-14 max-w-4xl">
+        <Reveal direction="up" className="mx-auto mt-14 max-w-3xl">
           <FaqList faqs={homeFaqs} />
         </Reveal>
       </div>

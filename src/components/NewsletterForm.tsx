@@ -47,7 +47,7 @@ export function NewsletterForm() {
           type="submit"
           disabled={status !== "idle"}
           aria-label="Subscribe to the newsletter"
-          className="absolute top-1.5 right-1.5 grid size-9 place-items-center rounded-full bg-electric text-white transition-all duration-300 hover:bg-electric-400 disabled:opacity-60"
+          className="absolute top-1.5 right-1.5 grid size-9 place-items-center rounded-full bg-electric text-void transition-all duration-300 hover:bg-electric-400 disabled:opacity-60"
         >
           <AnimatePresence mode="wait" initial={false}>
             {status === "success" ? (

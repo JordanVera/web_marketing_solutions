@@ -11,15 +11,18 @@
   --color-navy-600: #0f2038;
   --color-navy-500: #16294a;
 
-  --color-electric: #0066ff;
-  --color-electric-400: #3b8cff;
-  --color-electric-300: #7cb2ff;
+  --color-electric: #1ad4ee;
+  --color-electric-400: #5ee4f5;
+  --color-electric-300: #9aedf8;
 
   --color-rocket: #ff3333;
   --color-rocket-400: #ff6b5c;
 
   --color-nebula: #7c3aed;
   --color-nebula-400: #a855f7;
+
+  --color-amber: #ff5c00;
+  --color-amber-400: #ff8533;
 
   --color-cream: #f4f7fb;
   --color-muted: #93a4bf;
@@ -31,19 +34,19 @@
   --font-mono: var(--font-space-mono), ui-monospace, monospace;
 
   /* Fluid display sizes used by the hero + section headings */
-  --text-display: clamp(2.5rem, 5.1vw, 4.75rem);
-  --text-display--line-height: 0.98;
-  --text-display--letter-spacing: -0.035em;
+  --text-display: clamp(2.75rem, 6.2vw, 5.25rem);
+  --text-display--line-height: 0.96;
+  --text-display--letter-spacing: -0.04em;
 
-  --text-heading: clamp(2rem, 4.4vw, 3.5rem);
-  --text-heading--line-height: 1.05;
-  --text-heading--letter-spacing: -0.028em;
+  --text-heading: clamp(2.1rem, 4.6vw, 3.75rem);
+  --text-heading--line-height: 1.04;
+  --text-heading--letter-spacing: -0.03em;
 
   /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --animate-drift: drift 26s ease-in-out infinite;
-  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+  --animate-drift: drift 32s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 5s ease-in-out infinite;
   --animate-scan: scan 3.6s linear infinite;
 
   @keyframes drift {
@@ -110,7 +113,7 @@
   }
 
   ::selection {
-    background-color: color-mix(in oklab, var(--color-electric) 45%, transparent);
+    background-color: color-mix(in oklab, var(--color-electric) 40%, transparent);
     color: #fff;
   }
 
@@ -155,19 +158,24 @@
   .text-gradient {
     background: linear-gradient(
       100deg,
-      var(--color-cream) 0%,
-      var(--color-electric-300) 45%,
-      var(--color-nebula-400) 100%
+      var(--color-nebula-400) 0%,
+      var(--color-nebula) 45%,
+      var(--color-amber) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* Saturated variant for the hero headline, where each word carries its own
+  /* Saturated variant for the hero headline, where each phrase carries its own
      gradient and needs to read as deliberate rather than washed out. */
   .text-gradient-hero {
-    background: linear-gradient(96deg, #9ecbff 0%, #5b8dff 48%, #a855f7 100%);
+    background: linear-gradient(
+      96deg,
+      #c4b5fd 0%,
+      #a855f7 42%,
+      #ff5c00 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -185,9 +193,10 @@
     padding: 1px;
     background: linear-gradient(
       160deg,
-      color-mix(in oklab, var(--color-electric) 55%, transparent),
-      color-mix(in oklab, var(--color-nebula) 30%, transparent) 45%,
-      transparent 70%
+      color-mix(in oklab, var(--color-electric) 50%, transparent),
+      color-mix(in oklab, var(--color-nebula) 28%, transparent) 42%,
+      color-mix(in oklab, var(--color-amber) 18%, transparent) 72%,
+      transparent 88%
     );
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
@@ -195,6 +204,25 @@
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
+  }
+
+  .glass-panel {
+    background: color-mix(in oklab, var(--color-navy) 62%, transparent);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .glow-cyan {
+    background: radial-gradient(circle, rgba(26, 212, 238, 0.22), transparent 65%);
+  }
+
+  .glow-violet {
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.22), transparent 65%);
+  }
+
+  .glow-amber {
+    background: radial-gradient(circle, rgba(255, 92, 0, 0.22), transparent 65%);
   }
 
   /* Faint technical grid, faded out toward the edges. */

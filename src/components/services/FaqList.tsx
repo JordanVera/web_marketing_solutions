@@ -3,9 +3,9 @@ import type { FaqItem } from '@/lib/content';
 
 export function FaqList({ faqs }: { faqs: FaqItem[] }) {
   return (
-    <div className="divide-y divide-white/[0.08] rounded-2xl border border-white/[0.08] bg-navy/40">
+    <div className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
       {faqs.map((faq) => (
-        <details key={faq.question} className="group px-6 py-1 md:px-8">
+        <details key={faq.question} className="group py-1">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-base font-semibold tracking-tight text-cream marker:content-none [&::-webkit-details-marker]:hidden">
             <span>{faq.question}</span>
             <ChevronDown
@@ -13,7 +13,7 @@ export function FaqList({ faqs }: { faqs: FaqItem[] }) {
               aria-hidden="true"
             />
           </summary>
-          <p className="pb-6 text-[0.9375rem] leading-relaxed text-muted">
+          <p className="pb-6 pr-10 text-[0.9375rem] leading-relaxed text-muted">
             {faq.answer}
           </p>
         </details>

@@ -1,7 +1,7 @@
 'use client';
 
+import { useState, type ReactNode } from 'react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none';
@@ -38,6 +38,7 @@ export function Reveal({
   const prefersReducedMotion = useReducedMotion();
   const offset = prefersReducedMotion ? OFFSET.none : OFFSET[direction];
   const MotionTag = motion[as];
+  const [complete, setComplete] = useState(false);
 
   return (
     <MotionTag
@@ -46,6 +47,11 @@ export function Reveal({
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, amount }}
       transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        willChange:
+          prefersReducedMotion || complete ? 'auto' : 'transform, opacity',
+      }}
+      onAnimationComplete={() => setComplete(true)}
     >
       {children}
     </MotionTag>
@@ -60,7 +66,7 @@ export function Stagger({
   children,
   className,
   delayChildren = 0.05,
-  staggerChildren = 0.09,
+  staggerChildren = 0.11,
   amount = 0.15,
 }: {
   children: ReactNode;

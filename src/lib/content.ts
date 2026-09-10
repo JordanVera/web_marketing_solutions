@@ -132,7 +132,7 @@ export const homePage = {
     titleAccent: 'report back',
   },
   faq: {
-    eyebrow: '06 — FAQ',
+    eyebrow: '05 — FAQ',
     title: 'Questions B2B teams ask',
     titleAccent: 'before kickoff',
     description:

@@ -114,7 +114,7 @@ export function Testimonials() {
                 <footer className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-4 pt-10">
                   <span
                     aria-hidden="true"
-                    className="grid size-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-electric to-nebula font-display text-sm font-bold text-white"
+                    className="grid size-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-electric to-nebula font-display text-sm font-bold text-void"
                   >
                     {initials}
                   </span>
