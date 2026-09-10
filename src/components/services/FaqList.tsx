@@ -13,7 +13,7 @@ export function FaqList({ faqs }: { faqs: FaqItem[] }) {
               aria-hidden="true"
               className="h-8 w-0.5 shrink-0 rounded-full bg-white/10 transition-colors duration-300 group-open:bg-aurora"
             />
-            <span className="font-mono text-[0.625rem] tracking-[0.2em] text-muted-dim uppercase tabular-nums">
+            <span className="font-mono text-[0.625rem] tracking-[0.2em] text-aurora uppercase tabular-nums">
               Q-{String(index + 1)}
             </span>
             <span className="flex-1 text-base font-semibold tracking-tight text-cream">
