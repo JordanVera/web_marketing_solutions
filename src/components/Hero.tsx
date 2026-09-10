@@ -1,15 +1,20 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, MapPin, Play } from "lucide-react";
-import { Starfield } from "./ui/Starfield";
-import { Button } from "./ui/Button";
-import { RocketMark } from "./Logo";
-import { heroStats } from "@/lib/content";
+import { useRef } from 'react';
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
+import { ArrowRight, MapPin, Play } from 'lucide-react';
+import { Starfield } from './ui/Starfield';
+import { Button } from './ui/Button';
+import { RocketMark } from './Logo';
+import { heroStats } from '@/lib/content';
 
-const HEADLINE = ["Web", "Marketing", "Solutions", "for"];
-const HEADLINE_ACCENT = ["Ambitious", "Brands"];
+const HEADLINE = ['Web', 'Marketing', 'Solutions', 'for'];
+const HEADLINE_ACCENT = ['Ambitious', 'Brands'];
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -18,16 +23,17 @@ export function Hero() {
   // Drives every parallax layer: 0 at the top of the hero, 1 once scrolled past.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end start"],
+    offset: ['start start', 'end start'],
   });
 
-  const starsY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const nebulaY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const horizonY = useTransform(scrollYProgress, [0, 1], ["0%", "-14%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
+  const starsY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
+  const nebulaY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
+  const horizonY = useTransform(scrollYProgress, [0, 1], ['0%', '-14%']);
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
 
-  const parallax = (value: typeof starsY) => (prefersReducedMotion ? undefined : value);
+  const parallax = (value: typeof starsY) =>
+    prefersReducedMotion ? undefined : value;
 
   return (
     <section
@@ -42,13 +48,17 @@ export function Hero() {
         <Starfield density={0.17} speed={4} shootingStars />
       </motion.div>
 
-      <motion.div style={{ y: parallax(nebulaY) }} className="absolute inset-0" aria-hidden="true">
+      <motion.div
+        style={{ y: parallax(nebulaY) }}
+        className="absolute inset-0"
+        aria-hidden="true"
+      >
         <div className="animate-drift absolute -top-24 -left-32 size-[38rem] rounded-full bg-[radial-gradient(circle,rgba(0,102,255,0.28),transparent_65%)] blur-3xl" />
         <div className="animate-drift absolute -top-10 right-[-10rem] size-[34rem] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.26),transparent_65%)] blur-3xl [animation-delay:-9s]" />
         <div className="animate-drift absolute bottom-10 left-1/3 size-[26rem] rounded-full bg-[radial-gradient(circle,rgba(255,51,51,0.14),transparent_65%)] blur-3xl [animation-delay:-16s]" />
       </motion.div>
 
-      <div className="bg-grid absolute inset-0" aria-hidden="true" />
+      {/* <div className="bg-grid absolute inset-0" aria-hidden="true" /> */}
 
       {/* Planetary horizon anchoring the bottom of the scene */}
       <motion.div
@@ -69,7 +79,10 @@ export function Hero() {
 
       {/* ---------- Foreground ---------- */}
       <motion.div
-        style={{ y: parallax(contentY), opacity: prefersReducedMotion ? 1 : contentOpacity }}
+        style={{
+          y: parallax(contentY),
+          opacity: prefersReducedMotion ? 1 : contentOpacity,
+        }}
         className="container-shell relative z-10"
       >
         <div className="grid items-center gap-16 lg:grid-cols-12 lg:gap-10">
@@ -87,8 +100,13 @@ export function Hero() {
             </motion.div>
 
             <h1 className="text-display mt-8 font-semibold">
-              <span className="sr-only">Web Marketing Solutions for Ambitious Brands</span>
-              <span aria-hidden="true" className="flex flex-wrap gap-x-[0.28em] gap-y-1">
+              <span className="sr-only">
+                Web Marketing Solutions for Ambitious Brands
+              </span>
+              <span
+                aria-hidden="true"
+                className="flex flex-wrap gap-x-[0.28em] gap-y-1"
+              >
                 {HEADLINE.map((word, index) => (
                   <motion.span
                     key={word}
@@ -125,18 +143,26 @@ export function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.55,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="mt-7 max-w-xl text-lg leading-relaxed text-muted"
             >
-              We design and engineer websites and search programs from Space City. Same discipline
-              that launches rockets down the road — checklists, telemetry, and a hard go/no-go
-              before anything ships.
+              We design and engineer websites and search programs from Space
+              City. Same discipline that launches rockets down the road —
+              checklists, telemetry, and a hard go/no-go before anything ships.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.68, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.68,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <Button href="#contact" size="lg">
@@ -152,7 +178,11 @@ export function Hero() {
             <motion.dl
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.82, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.82,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-white/[0.08] pt-6"
             >
               {heroStats.map((stat) => (
@@ -172,7 +202,10 @@ export function Hero() {
           </div>
 
           {/* Orbit visual — decorative, hidden from assistive tech */}
-          <div className="relative hidden lg:col-span-5 lg:block" aria-hidden="true">
+          <div
+            className="relative hidden lg:col-span-5 lg:block"
+            aria-hidden="true"
+          >
             <OrbitVisual prefersReducedMotion={Boolean(prefersReducedMotion)} />
           </div>
         </div>
@@ -183,11 +216,15 @@ export function Hero() {
   );
 }
 
-function OrbitVisual({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+function OrbitVisual({
+  prefersReducedMotion,
+}: {
+  prefersReducedMotion: boolean;
+}) {
   const rings = [
-    { size: "100%", duration: 44, border: "rgba(124,178,255,0.30)" },
-    { size: "74%", duration: 32, border: "rgba(124,178,255,0.22)" },
-    { size: "48%", duration: 22, border: "rgba(255,107,92,0.22)" },
+    { size: '100%', duration: 44, border: 'rgba(124,178,255,0.30)' },
+    { size: '74%', duration: 32, border: 'rgba(124,178,255,0.22)' },
+    { size: '48%', duration: 22, border: 'rgba(255,107,92,0.22)' },
   ];
 
   return (
@@ -198,9 +235,21 @@ function OrbitVisual({ prefersReducedMotion }: { prefersReducedMotion: boolean }
         <motion.div
           key={ring.size}
           className="absolute rounded-full border border-dashed"
-          style={{ width: ring.size, height: ring.size, borderColor: ring.border }}
-          animate={prefersReducedMotion ? undefined : { rotate: index % 2 === 0 ? 360 : -360 }}
-          transition={{ duration: ring.duration, repeat: Infinity, ease: "linear" }}
+          style={{
+            width: ring.size,
+            height: ring.size,
+            borderColor: ring.border,
+          }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { rotate: index % 2 === 0 ? 360 : -360 }
+          }
+          transition={{
+            duration: ring.duration,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
         >
           {/* Satellite riding the orbit */}
           <span className="absolute top-1/2 -right-1 size-2 -translate-y-1/2 rounded-full bg-electric-300 shadow-[0_0_12px_2px_rgba(59,140,255,0.9)]" />
@@ -216,7 +265,7 @@ function OrbitVisual({ prefersReducedMotion }: { prefersReducedMotion: boolean }
       >
         <motion.div
           animate={prefersReducedMotion ? undefined : { y: [0, -14, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         >
           <div className="absolute top-1/2 left-1/2 h-72 w-24 -translate-x-1/2 bg-[linear-gradient(to_bottom,rgba(0,102,255,0.55),transparent_70%)] blur-2xl" />
           <RocketMark className="relative size-40 drop-shadow-[0_0_36px_rgba(0,102,255,0.55)] xl:size-48" />
@@ -276,13 +325,19 @@ function TelemetryChip({
     >
       <motion.div
         animate={prefersReducedMotion ? undefined : { y: [0, -7, 0] }}
-        transition={{ duration: 5 + delay, repeat: Infinity, ease: "easeInOut" }}
+        transition={{
+          duration: 5 + delay,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
         className="rounded-xl border border-white/10 bg-navy/70 px-3.5 py-2.5 backdrop-blur-md"
       >
         <p className="font-mono text-[0.5625rem] tracking-[0.2em] text-muted-dim uppercase">
           {label}
         </p>
-        <p className={`mt-1 font-display text-sm font-semibold ${accent}`}>{value}</p>
+        <p className={`mt-1 font-display text-sm font-semibold ${accent}`}>
+          {value}
+        </p>
       </motion.div>
     </motion.div>
   );
@@ -303,8 +358,8 @@ function ScrollIndicator() {
       </span>
       <span className="relative block h-14 w-px overflow-hidden bg-white/15">
         <motion.span
-          animate={{ y: ["-100%", "180%"] }}
-          transition={{ duration: 2.1, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ y: ['-100%', '180%'] }}
+          transition={{ duration: 2.1, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute inset-x-0 h-6 bg-gradient-to-b from-transparent via-electric-400 to-transparent"
         />
       </span>

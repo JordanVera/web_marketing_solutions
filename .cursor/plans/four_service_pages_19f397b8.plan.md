@@ -4,16 +4,16 @@ overview: Refocus the site on four offerings—web apps, native apps, websites, 
 todos:
   - id: content-model
     content: Add src/lib/services.ts with full SEO copy, FAQs, and related IDs; retarget homepage services + footer in content.ts
-    status: in_progress
+    status: completed
   - id: routes-metadata
     content: Add /services hub and /services/[slug] with generateStaticParams, generateMetadata, JSON-LD, and sitemap entries
-    status: pending
+    status: completed
   - id: nav-dropdown
     content: Services dropdown (desktop + mobile), route-aware /#section links, logo to /, active states
-    status: pending
+    status: completed
   - id: homepage-footer
     content: Homepage 2x2 service cards linking out; FooterLink uses Next Link; root schema/keywords updated
-    status: pending
+    status: in_progress
   - id: verify
     content: Verify dropdown, hub, four pages, internal links, and homepage section in the browser (desktop + mobile)
     status: pending

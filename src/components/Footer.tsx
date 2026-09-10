@@ -1,4 +1,5 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
+import Link from "next/link";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from './Logo';
 import { SocialIcon } from './SocialIcon';
 import { NewsletterForm } from './NewsletterForm';
@@ -24,10 +25,12 @@ export function Footer() {
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
             {/* Brand */}
             <div className="lg:col-span-4">
-              <Logo />
+              <Link href="/" className="inline-flex" aria-label={`${company.name} — home`}>
+                <Logo />
+              </Link>
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted">
-                A Houston web design and SEO studio for brands that would rather
-                build something worth launching than ship another template.
+                A Houston studio for web apps, native apps, websites, and SEO campaigns — for
+                brands that would rather build something worth launching than ship another template.
               </p>
 
               <ul className="mt-7 flex gap-2.5">
@@ -159,12 +162,21 @@ function FooterLink({
   href: string;
   children: React.ReactNode;
 }) {
+  const className = "text-sm text-muted transition-colors duration-300 hover:text-cream";
+  const useNativeAnchor =
+    href.startsWith("#") || href.includes("#") || href.startsWith("http") || href.startsWith("mailto");
+
+  if (useNativeAnchor) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <a
-      href={href}
-      className="text-sm text-muted transition-colors duration-300 hover:text-cream"
-    >
+    <Link href={href} className={className}>
       {children}
-    </a>
+    </Link>
   );
 }

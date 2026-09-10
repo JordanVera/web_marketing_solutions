@@ -24,22 +24,23 @@ const spaceMono = Space_Mono({
 });
 
 const description =
-  "Houston web design, SEO, and digital strategy for ambitious brands. We build fast, conversion-focused websites and search programs from Space City.";
+  "Houston web app, native app, website, and SEO campaign studio. We build conversion-focused products and search programs from Space City.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${company.name} | Houston Web Design & SEO Agency`,
+    default: `${company.name} | Houston Web App, Website & SEO Agency`,
     template: `%s | ${company.name}`,
   },
   description,
   keywords: [
-    "Houston web design",
+    "Houston web app development",
+    "Houston native app development",
+    "Houston website development",
+    "Houston SEO campaigns",
     "Houston SEO agency",
     "web marketing solutions",
-    "digital strategy Houston",
     "Next.js development agency",
-    "local SEO Houston",
   ],
   authors: [{ name: company.name }],
   creator: company.name,
@@ -49,12 +50,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: company.name,
-    title: `${company.name} | Houston Web Design & SEO Agency`,
+    title: `${company.name} | Houston Web App, Website & SEO Agency`,
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${company.name} | Houston Web Design & SEO`,
+    title: `${company.name} | Houston Web App, Website & SEO`,
     description,
   },
   robots: {
@@ -98,7 +99,12 @@ const structuredData = {
     { "@type": "City", name: "Houston" },
     { "@type": "State", name: "Texas" },
   ],
-  knowsAbout: ["Web Design", "Search Engine Optimization", "Digital Strategy", "Paid Media"],
+  knowsAbout: [
+    "Web Application Development",
+    "Native App Development",
+    "Website Development",
+    "SEO Campaigns",
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

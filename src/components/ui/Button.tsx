@@ -62,7 +62,7 @@ export function Button(props: ButtonProps | AnchorProps) {
 
   if ("href" in props && props.href !== undefined) {
     const { href, external } = props;
-    const isAnchorLink = href.startsWith("#");
+    const isAnchorLink = href.startsWith("#") || href.startsWith("/#");
 
     const content = (
       <>

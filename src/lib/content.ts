@@ -76,26 +76,22 @@ export type Project = {
   image: string;
   metric: string;
   href: string;
+  serviceIds: string[];
 };
 
-export const projectCategories = [
-  'All',
-  'Web Design',
-  'SEO',
-  'E-commerce',
-  'Brand',
-] as const;
+export const projectCategories = ['All', 'Web App', 'Website', 'SEO'] as const;
 
 export const projects: Project[] = [
   {
     id: 'orbital-energy',
     title: 'Orbital Energy Partners',
-    category: 'Web Design',
+    category: 'Website',
     description:
       'A full rebuild for an energy consultancy on the Gulf Coast — new design system, headless CMS, and a 3x faster site.',
     image: '/projects/orbital-energy.svg',
     metric: '+212% qualified leads',
-    href: '#work',
+    href: '/#work',
+    serviceIds: ['website-development'],
   },
   {
     id: 'bayou-dental',
@@ -105,27 +101,30 @@ export const projects: Project[] = [
       'Local SEO program across six Houston clinics, from map pack rankings to a location-page architecture that scales.',
     image: '/projects/bayou-dental.svg',
     metric: '#1 map pack, 6 clinics',
-    href: '#work',
+    href: '/#work',
+    serviceIds: ['seo-campaigns'],
   },
   {
     id: 'apex-outfitters',
     title: 'Apex Outfitters',
-    category: 'E-commerce',
+    category: 'Website',
     description:
       'Headless Shopify storefront with a rebuilt checkout flow and merchandising that finally matches the brand.',
     image: '/projects/apex-outfitters.svg',
     metric: '+38% conversion rate',
-    href: '#work',
+    href: '/#work',
+    serviceIds: ['website-development', 'web-app-development'],
   },
   {
     id: 'meridian-labs',
     title: 'Meridian Labs',
-    category: 'Brand',
+    category: 'Website',
     description:
       'Identity system and launch site for a biotech spin-out, delivered from first sketch to production in nine weeks.',
     image: '/projects/meridian-labs.svg',
     metric: '9-week launch',
-    href: '#work',
+    href: '/#work',
+    serviceIds: ['website-development'],
   },
   {
     id: 'gulf-coast-legal',
@@ -135,17 +134,19 @@ export const projects: Project[] = [
       'Content and technical SEO overhaul that moved 40+ practice-area pages onto page one in a brutal market.',
     image: '/projects/gulf-coast-legal.svg',
     metric: '40+ page-one terms',
-    href: '#work',
+    href: '/#work',
+    serviceIds: ['seo-campaigns'],
   },
   {
     id: 'nova-fitness',
     title: 'Nova Fitness Collective',
-    category: 'Web Design',
+    category: 'Web App',
     description:
       "Membership platform and marketing site for a studio group, with booking, billing, and a members' portal.",
     image: '/projects/nova-fitness.svg',
     metric: '+64% trial signups',
-    href: '#work',
+    href: '/#work',
+    serviceIds: ['web-app-development', 'native-app-development'],
   },
 ];
 
@@ -280,19 +281,17 @@ export const houstonHighlights = [
 ] as const;
 
 export const footerNav = {
-  services: [
-    { label: 'Web Design', href: '#services' },
-    { label: 'SEO & Local Search', href: '#services' },
-    { label: 'Digital Strategy', href: '#services' },
-    { label: 'Paid Media', href: '#services' },
-  ],
+  services: servicePages.map((service) => ({
+    label: service.shortTitle,
+    href: `/services/${service.slug}`,
+  })),
   company: [
-    { label: 'Our Process', href: '#process' },
-    { label: 'Case Studies', href: '#work' },
-    { label: 'Why Houston', href: '#houston' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Our Process', href: '/#process' },
+    { label: 'Case Studies', href: '/#work' },
+    { label: 'Why Houston', href: '/#houston' },
+    { label: 'Contact', href: '/#contact' },
   ],
-} as const;
+};
 
 export const socials = [
   // { label: "LinkedIn", href: "https://www.linkedin.com/", icon: "linkedin" as const },
