@@ -4,6 +4,7 @@ import { Logo } from './Logo';
 import { SocialIcon } from './SocialIcon';
 import { NewsletterForm } from './NewsletterForm';
 import { Reveal } from './ui/Reveal';
+import { StatusDot } from './ui/StatusDot';
 import { company, footerNav, socials } from '@/lib/content';
 
 export function Footer() {
@@ -13,11 +14,11 @@ export function Footer() {
     <footer className="relative overflow-hidden border-t border-white/[0.07] bg-void">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-electric/40 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-aurora/40 to-transparent"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-40 left-1/2 size-[42rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(0,102,255,0.10),transparent_65%)] blur-3xl"
+        className="pointer-events-none glow-aurora absolute -bottom-40 left-1/2 size-[42rem] -translate-x-1/2 rounded-full blur-3xl"
       />
 
       <div className="container-shell relative py-16 md:py-20">
@@ -127,8 +128,14 @@ export function Footer() {
             © {year} {company.name}. All rights reserved.
           </p>
 
+          <p className="inline-flex items-center gap-2 font-mono text-[0.625rem] tracking-[0.18em] text-aurora-300 uppercase">
+            <StatusDot />
+            All systems nominal
+          </p>
+
           <p className="font-mono text-[0.625rem] tracking-[0.24em] text-muted-dim uppercase">
-            Built in {company.city} · {company.coordinates.lat.toFixed(2)}° N,{' '}
+            Ground station · {company.city} ·{' '}
+            {company.coordinates.lat.toFixed(2)}° N,{' '}
             {Math.abs(company.coordinates.lng).toFixed(2)}° W
           </p>
 

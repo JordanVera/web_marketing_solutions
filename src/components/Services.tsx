@@ -95,7 +95,7 @@ function ServiceCard({
 
   const mouseX = useMotionValue(-400);
   const mouseY = useMotionValue(-400);
-  const spotlight = useMotionTemplate`radial-gradient(320px circle at ${mouseX}px ${mouseY}px, rgba(26,212,238,0.14), rgba(124,58,237,0.08) 42%, transparent 72%)`;
+  const spotlight = useMotionTemplate`radial-gradient(320px circle at ${mouseX}px ${mouseY}px, rgba(26,212,238,0.14), rgba(45,212,191,0.08) 42%, transparent 72%)`;
 
   const handleMouseMove = ({
     currentTarget,

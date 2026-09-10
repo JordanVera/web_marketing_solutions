@@ -103,6 +103,11 @@ export const homePage = {
     titleAccent: 'operators can brief',
     description:
       'Houston does not reward theater. Energy, healthcare, logistics, and professional services buy on proof. We built Web Marketing Solutions the same way this city runs complex work: a written plan, named owners, and a go/no-go before anything public ships.',
+    console: {
+      callsign: 'HOU',
+      station: 'Mission Control',
+      coordinates: '29.76° N 95.37° W',
+    },
   },
   telemetry: [
     { label: 'Organic sessions', readout: '+148%', fill: 0.92 },
@@ -115,7 +120,13 @@ export const homePage = {
     title: "Outcomes we've",
     titleAccent: 'shipped',
     description:
-      'Case studies only matter if they change a number a CFO already watches. Across commercial accounts we have lifted organic sessions by 148% on average after a combined website and SEO campaign, shipped marketing sites with a 0.9s median LCP, and raised conversion rate 38% by cutting pages that could not earn a place in the funnel. Client retention sits at 94% because we refuse work the site cannot support — if the template cannot rank or the “app” is a brochure with a login, we say so in discovery. The two launches below are live: a cinematic film-and-stills studio and an invite-only event site. Different categories, same rule — the public surface has one job, and we instrument whether it did that job.',
+      'The two launches below are live: a cinematic film-and-stills studio and an invite-only event site. Different categories, same rule — the public surface has one job, and we instrument whether it did that job.',
+    metrics: [
+      { value: '+148%', label: 'Organic sessions' },
+      { value: '0.9s', label: 'Median LCP' },
+      { value: '+38%', label: 'Conversion rate' },
+      { value: '94%', label: 'Client retention' },
+    ],
     footerPrompt: 'Want numbers on a program like yours?',
     footerLink: 'Get a custom quote',
   },
@@ -140,6 +151,7 @@ export const homePage = {
   },
   cta: {
     eyebrow: 'Launch window open',
+    windowLabel: 'Launch window · Open · Reply ≤ 2 business days',
     title: 'Ready for a',
     titleAccent: 'real plan?',
     lede: 'Tell us the outcome you need in the next twelve months — more qualified inquiries, a portal your clients will use, a store-ready app, or organic demand that is not rented from ads. We reply with recommended service, scope, timeline, and price within two business days.',
@@ -260,6 +272,7 @@ export function isExternalHref(href: string) {
 export type ProcessStep = {
   id: string;
   phase: string;
+  clock: string;
   title: string;
   description: string;
   icon: LucideIcon;
@@ -269,6 +282,7 @@ export const processSteps: ProcessStep[] = [
   {
     id: 'discovery',
     phase: 'Phase 01',
+    clock: 'T-4',
     title: 'Discovery',
     description:
       'We map the market, audit what you already have, and talk to the people who sell and support your customers — before we recommend a service line.',
@@ -277,6 +291,7 @@ export const processSteps: ProcessStep[] = [
   {
     id: 'strategy',
     phase: 'Phase 02',
+    clock: 'T-3',
     title: 'Flight Plan',
     description:
       'A written strategy with scope, timeline, success metrics, and the trade-offs we would make if it were our budget.',
@@ -285,6 +300,7 @@ export const processSteps: ProcessStep[] = [
   {
     id: 'build',
     phase: 'Phase 03',
+    clock: 'T-2',
     title: 'Design & Build',
     description:
       'Design systems and production code in weekly increments, reviewed in a staging environment you can click through.',
@@ -293,6 +309,7 @@ export const processSteps: ProcessStep[] = [
   {
     id: 'launch',
     phase: 'Phase 04',
+    clock: 'T-0',
     title: 'Launch',
     description:
       'Redirects, analytics, schema, store listings, and performance budgets verified before anything public flips. Zero-drama go-lives.',
@@ -301,6 +318,7 @@ export const processSteps: ProcessStep[] = [
   {
     id: 'optimize',
     phase: 'Phase 05',
+    clock: 'T+1',
     title: 'Optimize',
     description:
       'Monthly experiments against qualified inquiries and revenue. We report on pipeline, not impressions dressed up as a report.',

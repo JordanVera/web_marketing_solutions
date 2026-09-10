@@ -2,7 +2,7 @@
 
 /* ---------------------------------------------------------------------------
    Design tokens. Tailwind v4 turns every custom property declared inside
-   @theme into a utility class (e.g. --color-nebula -> bg-nebula / text-nebula).
+   @theme into a utility class (e.g. --color-aurora -> bg-aurora / text-aurora).
    --------------------------------------------------------------------------- */
 @theme {
   /* Core palette */
@@ -18,8 +18,9 @@
   --color-rocket: #ff3333;
   --color-rocket-400: #ff6b5c;
 
-  --color-nebula: #7c3aed;
-  --color-nebula-400: #a855f7;
+  --color-aurora: #2dd4bf;
+  --color-aurora-300: #5eead4;
+  --color-aurora-500: #10b981;
 
   --color-amber: #ff5c00;
   --color-amber-400: #ff8533;
@@ -48,6 +49,8 @@
   --animate-drift: drift 32s ease-in-out infinite;
   --animate-pulse-glow: pulse-glow 5s ease-in-out infinite;
   --animate-scan: scan 3.6s linear infinite;
+  --animate-blink: blink 1.8s ease-in-out infinite;
+  --animate-sweep: sweep 18s linear infinite;
 
   @keyframes drift {
     0%,
@@ -75,6 +78,25 @@
     }
     100% {
       transform: translateY(400%);
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    45% {
+      opacity: 0.2;
+    }
+    55% {
+      opacity: 0.2;
+    }
+  }
+
+  @keyframes sweep {
+    to {
+      transform: rotate(360deg);
     }
   }
 }
@@ -158,9 +180,10 @@
   .text-gradient {
     background: linear-gradient(
       100deg,
-      var(--color-nebula-400) 0%,
-      var(--color-nebula) 45%,
-      var(--color-amber) 100%
+      var(--color-electric-400) 0%,
+      var(--color-electric) 38%,
+      var(--color-aurora-300) 72%,
+      var(--color-aurora-500) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -172,9 +195,10 @@
   .text-gradient-hero {
     background: linear-gradient(
       96deg,
-      /* #c4b5fd 0%, */
-      #a855f7 42%,
-      #ff5c00 100%
+      var(--color-electric-400) 0%,
+      var(--color-electric) 36%,
+      var(--color-aurora) 72%,
+      var(--color-aurora-500) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -194,7 +218,7 @@
     background: linear-gradient(
       160deg,
       color-mix(in oklab, var(--color-electric) 50%, transparent),
-      color-mix(in oklab, var(--color-nebula) 28%, transparent) 42%,
+      color-mix(in oklab, var(--color-aurora) 32%, transparent) 42%,
       color-mix(in oklab, var(--color-amber) 18%, transparent) 72%,
       transparent 88%
     );
@@ -217,8 +241,8 @@
     background: radial-gradient(circle, rgba(26, 212, 238, 0.22), transparent 65%);
   }
 
-  .glow-violet {
-    background: radial-gradient(circle, rgba(124, 58, 237, 0.22), transparent 65%);
+  .glow-aurora {
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.22), transparent 65%);
   }
 
   .glow-amber {
@@ -238,6 +262,15 @@
   .mask-fade-b {
     -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  }
+
+  /* Fine CRT/HUD scanlines over a panel. Keep opacity low. */
+  .bg-scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(154, 237, 248, 0.045) 0 1px,
+      transparent 1px 4px
+    );
   }
 }
 

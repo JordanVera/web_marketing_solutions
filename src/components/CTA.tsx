@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import { ArrowRight, Mail } from 'lucide-react';
 import { Atmosphere } from './ui/Atmosphere';
 import { Button } from './ui/Button';
 import { Reveal } from './ui/Reveal';
+import { StatusDot } from './ui/StatusDot';
 import { company, homePage } from '@/lib/content';
 
 const AMBER_SHEEN =
@@ -17,19 +19,16 @@ export function CTA() {
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-electric/40 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-px bg-gradient-to-r from-transparent via-aurora/40 to-transparent"
       />
 
-      <div className="container-shell relative">
+      <div className="container-shell relative z-10">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <Reveal direction="up">
-            <span className="inline-flex items-center gap-3">
-              <span
-                aria-hidden="true"
-                className="size-1.5 rounded-full bg-amber shadow-[0_0_10px_2px_rgba(255,92,0,0.65)]"
-              />
+            <span className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">
+              <StatusDot />
               <span className="font-mono text-[0.625rem] tracking-[0.24em] text-muted uppercase">
-                {homePage.cta.eyebrow}
+                {homePage.cta.windowLabel}
               </span>
             </span>
           </Reveal>
@@ -65,13 +64,9 @@ export function CTA() {
           </Reveal>
 
           <Reveal direction="up" delay={0.32}>
-            <ul className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-[0.625rem] tracking-[0.16em] text-muted-dim uppercase">
+            <ul className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase">
               {homePage.cta.trustSignals.map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <span
-                    aria-hidden="true"
-                    className="size-1 rounded-full bg-amber"
-                  />
+                <li key={item} className="inline-flex items-center gap-2">
                   {item}
                 </li>
               ))}
@@ -80,5 +75,26 @@ export function CTA() {
         </div>
       </div>
     </section>
+  );
+}
+
+function MoonHorizon() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-40 overflow-hidden md:h-56"
+    >
+      <div className="glow-aurora absolute -bottom-24 left-1/2 size-[36rem] -translate-x-1/2 rounded-full blur-3xl" />
+      <div className="absolute top-[calc(100%-5rem)] left-1/2 aspect-square w-[160vw] -translate-x-1/2 md:top-[calc(100%-7rem)]">
+        <Image
+          src="/moon/full-moon.webp"
+          alt=""
+          fill
+          sizes="160vw"
+          className="scale-[1.01] object-cover object-top opacity-80"
+        />
+        <div className="absolute inset-0 rounded-full shadow-[inset_0_0_80px_rgba(45,212,191,0.18)]" />
+      </div>
+    </div>
   );
 }
