@@ -73,7 +73,7 @@ export const homePage = {
     headline: ['Houston Digital Agency:'] as const,
     headlineAccent: ['Web Development & SEO Services'] as const,
     h1: 'Houston Digital Agency: Web Development & SEO Services',
-    lede: 'Most B2B sites focus on explaining the company, not the offer. We do the opposite. Web Marketing Solutions is a Houston digital agency delivering custom web development, apps, and SEO services designed for commercial results—not vanity traffic. We define the true business need, pick the right platform, and measure real demand from launch. Want a partner that ships software and search from one team? Book a 20-minute consult. We’ll tell you what matters—and what to skip.',
+    lede: 'Custom web development, apps, and SEO built for commercial results—not vanity traffic. Software and search from one team.',
     primaryCta: 'Schedule Your Free Consultation',
     primaryHref: '/contact',
     secondaryCta: 'Learn More',
