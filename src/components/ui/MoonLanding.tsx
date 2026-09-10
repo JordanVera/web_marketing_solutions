@@ -129,7 +129,9 @@ export function MoonLanding({ className }: MoonLandingProps) {
       ? `${(1 - (p as number)) * -(start as number)}px`
       : `${(1 - (p as number)) * -DESCENT_START_FALLBACK_VH}vh`,
   );
-  const x = useTransform(progress, [0, 0.7, 1], [26, 6, 0]);
+  // Lateral drift is a share of the rocket's own width so it stays on the
+  // plume's axis at every size.
+  const x = useTransform(progress, [0, 0.7, 1], ['38%', '9%', '0%']);
   const attitude = useTransform(progress, [0, 0.65, 1], [-7, -2.5, 0]);
   // Engine stays lit right through contact, then cuts.
   const plumeOpacity = useTransform(progress, [0, 0.994, 1], [1, 1, 0]);
@@ -179,7 +181,10 @@ export function MoonLanding({ className }: MoonLandingProps) {
           transform: 'translate(-50%, -100%) rotate(var(--tilt))',
         }}
       >
-        <div ref={padRef} className="relative aspect-80/186 w-full">
+        {/* Container so blurs/shadows below can be sized in cqw and scale
+            with the rocket instead of fixed px (which swamps the small
+            mobile rocket and visually detaches the plume). */}
+        <div ref={padRef} className="relative @container aspect-80/186 w-full">
           {/* Exhaust washing over the regolith as the rocket gets close. */}
           <motion.div
             style={{ opacity: surfaceGlow }}
@@ -213,11 +218,11 @@ export function MoonLanding({ className }: MoonLandingProps) {
                   className="absolute inset-0 origin-top"
                 >
                   {/* Soft outer haze: a cone that widens as it leaves the nozzles. */}
-                  <div className="absolute inset-x-0 top-0 h-full bg-[linear-gradient(to_bottom,rgba(154,237,248,0.55)_0%,rgba(26,212,238,0.32)_35%,rgba(94,228,245,0.12)_70%,transparent_100%)] blur-[6px] [clip-path:polygon(38%_0,62%_0,100%_100%,0_100%)]" />
+                  <div className="absolute inset-x-0 top-0 h-full bg-[linear-gradient(to_bottom,rgba(154,237,248,0.55)_0%,rgba(26,212,238,0.32)_35%,rgba(94,228,245,0.12)_70%,transparent_100%)] blur-[8.5cqw] [clip-path:polygon(38%_0,62%_0,100%_100%,0_100%)]" />
                   {/* Hot core. */}
-                  <div className="absolute top-0 left-1/2 h-[72%] w-[52%] -translate-x-1/2 bg-[linear-gradient(to_bottom,#ffffff_0%,#e6fbff_22%,rgba(154,237,248,0.85)_55%,rgba(26,212,238,0.3)_85%,transparent_100%)] blur-[1.5px] [clip-path:polygon(34%_0,66%_0,92%_100%,8%_100%)]" />
+                  <div className="absolute top-0 left-1/2 h-[72%] w-[52%] -translate-x-1/2 bg-[linear-gradient(to_bottom,#ffffff_0%,#e6fbff_22%,rgba(154,237,248,0.85)_55%,rgba(26,212,238,0.3)_85%,transparent_100%)] blur-[2.2cqw] [clip-path:polygon(34%_0,66%_0,92%_100%,8%_100%)]" />
                   {/* Mach diamonds. */}
-                  <div className="absolute top-0 left-1/2 h-[42%] w-[16%] -translate-x-1/2 bg-[repeating-linear-gradient(to_bottom,rgba(255,255,255,0.95)_0_18%,rgba(255,255,255,0.35)_30%_50%)] blur-[0.6px] [clip-path:polygon(30%_0,70%_0,100%_100%,0_100%)]" />
+                  <div className="absolute top-0 left-1/2 h-[42%] w-[16%] -translate-x-1/2 bg-[repeating-linear-gradient(to_bottom,rgba(255,255,255,0.95)_0_18%,rgba(255,255,255,0.35)_30%_50%)] blur-[0.9cqw] [clip-path:polygon(30%_0,70%_0,100%_100%,0_100%)]" />
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -279,7 +284,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
               {/* Engine light under the skirt. */}
               <motion.div
                 style={{ opacity: plumeOpacity }}
-                className="absolute top-[88%] left-1/2 h-[12%] w-[95%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(154,237,248,0.85),transparent_70%)] blur-sm"
+                className="absolute top-[88%] left-1/2 h-[12%] w-[95%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(154,237,248,0.85),transparent_70%)] blur-[11.5cqw]"
               />
 
               {/* Nav beacon. */}
@@ -331,7 +336,7 @@ function RocketSvg({ legsOut }: { legsOut: boolean }) {
   return (
     <svg
       viewBox="0 0 80 186"
-      className="absolute inset-0 h-full w-full overflow-visible drop-shadow-[0_6px_14px_rgba(0,0,0,0.55)]"
+      className="absolute inset-0 h-full w-full overflow-visible drop-shadow-[0_8.5cqw_20cqw_rgba(0,0,0,0.55)]"
     >
       <defs>
         <linearGradient id="ml-hull" x1="0" x2="1" y1="0" y2="0">
