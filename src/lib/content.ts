@@ -24,7 +24,7 @@ export const company = {
   blurb:
     'A Houston digital agency for commercial teams: custom website development, web app development, native app development, and SEO services built to move pipeline — not vanity metrics.',
   city: 'Houston, Texas',
-  email: 'hello@webmarketingsolutions.com',
+  email: 'verawebdev@protonmail.com',
   phone: '+1 (713) 555-0142',
   address: {
     street: '1200 Space Park Dr, Suite 210',
@@ -75,8 +75,8 @@ export const homePage = {
       'Web Development & SEO',
       'Services for Businesses',
     ] as const,
-    h1: 'Houston Digital Agency: Web Development & SEO Services for Businesses',
-    lede: 'Most B2B sites explain the company and hide the offer. Dashboards get bolted onto marketing templates. Paid ads keep the lights on while organic search stays an afterthought. Web Marketing Solutions is a Houston digital agency for commercial clients who need the opposite: custom web development, web app development, native app development, and SEO services Houston operators can defend in a budget meeting. We write the job to be done, pick the surface that fits — website, web app, or native app — and instrument the launch so you can see qualified demand, not just traffic. If you are comparing a digital marketing agency in Houston that ships production software and search programs from the same studio, start with a 20-minute consult. We will tell you what to build, what to skip, and what it costs.',
+    h1: 'Houston Digital Agency: Web Development & SEO Services',
+    lede: 'Most B2B sites focus on explaining the company, not the offer. We do the opposite. Web Marketing Solutions is a Houston digital agency delivering custom web development, apps, and SEO services designed for commercial results—not vanity traffic. We define the true business need, pick the right platform, and measure real demand from launch. Want a partner that ships software and search from one team? Book a 20-minute consult. We’ll tell you what matters—and what to skip.',
     primaryCta: 'Schedule Your Free Consultation',
     primaryHref: '/contact',
     secondaryCta: 'Learn More',

@@ -1,29 +1,29 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { CheckCircle2, Clock, Mail, MapPin, Phone } from "lucide-react";
-import { ContactForm } from "@/components/ContactForm";
-import { Reveal } from "@/components/ui/Reveal";
-import { company, contactPage } from "@/lib/content";
-import { SITE_URL } from "@/lib/utils";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { CheckCircle2, Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { ContactForm } from '@/components/ContactForm';
+import { Reveal } from '@/components/ui/Reveal';
+import { company, contactPage } from '@/lib/content';
+import { SITE_URL } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: contactPage.metaTitle,
   description: contactPage.metaDescription,
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: '/contact' },
   openGraph: {
     title: contactPage.metaTitle,
     description: contactPage.metaDescription,
     url: `${SITE_URL}/contact`,
-    type: "website",
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: contactPage.metaTitle,
     description: contactPage.metaDescription,
   },
 };
 
-const PHONE_HREF = `tel:${company.phone.replace(/[^\d+]/g, "")}`;
+const PHONE_HREF = `tel:${company.phone.replace(/[^\d+]/g, '')}`;
 
 type ContactPageProps = {
   searchParams: Promise<{ sent?: string }>;
@@ -31,7 +31,7 @@ type ContactPageProps = {
 
 export default async function ContactPage({ searchParams }: ContactPageProps) {
   const { sent } = await searchParams;
-  const submitted = sent === "1";
+  const submitted = sent === '1';
 
   return (
     <main id="main">
@@ -69,11 +69,15 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           </Reveal>
 
           <Reveal direction="up" delay={0.14}>
-            <h1 className="text-heading mt-6 max-w-3xl font-semibold">{contactPage.h1}</h1>
+            <h1 className="text-heading mt-6 max-w-3xl font-semibold">
+              {contactPage.h1}
+            </h1>
           </Reveal>
 
           <Reveal direction="up" delay={0.2}>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{contactPage.lede}</p>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+              {contactPage.lede}
+            </p>
           </Reveal>
 
           {submitted && (
@@ -82,12 +86,18 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 role="status"
                 className="mt-10 flex items-start gap-3 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-5 py-4"
               >
-                <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-emerald-400" aria-hidden="true" />
+                <CheckCircle2
+                  className="mt-0.5 size-5 shrink-0 text-emerald-400"
+                  aria-hidden="true"
+                />
                 <div>
-                  <p className="font-medium text-cream">Message received — we&apos;re on it.</p>
+                  <p className="font-medium text-cream">
+                    Message received — we&apos;re on it.
+                  </p>
                   <p className="mt-1 text-sm leading-relaxed text-muted">
-                    Expect a reply within two business days. If this is your first submission, check your
-                    inbox for a FormSubmit confirmation email.
+                    Expect a reply within two business days. If this is your
+                    first submission, check your inbox for a FormSubmit
+                    confirmation email.
                   </p>
                 </div>
               </div>
@@ -97,10 +107,12 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           <div className="mt-16 grid gap-10 lg:grid-cols-12 lg:gap-12">
             <Reveal direction="up" delay={0.26} className="lg:col-span-7">
               <div className="border-gradient rounded-3xl bg-navy/40 p-6 md:p-8">
-                <h2 className="text-xl font-semibold text-cream">Send a message</h2>
+                <h2 className="text-xl font-semibold text-cream">
+                  Send a message
+                </h2>
                 <p className="mt-2 text-sm leading-relaxed text-muted">
-                  Share your goals and we&apos;ll send back scope, timeline, and price within two business
-                  days.
+                  Share your goals and we&apos;ll send back scope, timeline, and
+                  price within two business days.
                 </p>
                 <div className="mt-8">
                   <ContactForm />
@@ -121,7 +133,10 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                         className="group flex items-start gap-4 text-muted transition-colors hover:text-cream"
                       >
                         <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
-                          <Mail className="size-4 text-electric-300" aria-hidden="true" />
+                          <Mail
+                            className="size-4 text-electric-300"
+                            aria-hidden="true"
+                          />
                         </span>
                         <span>
                           <span className="block text-xs font-mono tracking-[0.16em] text-muted-dim uppercase">
@@ -139,19 +154,27 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                         className="group flex items-start gap-4 text-muted transition-colors hover:text-cream"
                       >
                         <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
-                          <Phone className="size-4 text-electric-300" aria-hidden="true" />
+                          <Phone
+                            className="size-4 text-electric-300"
+                            aria-hidden="true"
+                          />
                         </span>
                         <span>
                           <span className="block text-xs font-mono tracking-[0.16em] text-muted-dim uppercase">
                             Phone
                           </span>
-                          <span className="mt-1 block text-sm text-cream">{company.phone}</span>
+                          <span className="mt-1 block text-sm text-cream">
+                            {company.phone}
+                          </span>
                         </span>
                       </a>
                     </li>
                     <li className="flex items-start gap-4">
                       <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
-                        <MapPin className="size-4 text-electric-300" aria-hidden="true" />
+                        <MapPin
+                          className="size-4 text-electric-300"
+                          aria-hidden="true"
+                        />
                       </span>
                       <span>
                         <span className="block text-xs font-mono tracking-[0.16em] text-muted-dim uppercase">
@@ -160,7 +183,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                         <address className="mt-1 text-sm not-italic leading-relaxed text-cream">
                           {company.address.street}
                           <br />
-                          {company.address.locality}, {company.address.region}{" "}
+                          {company.address.locality}, {company.address.region}{' '}
                           {company.address.postalCode}
                         </address>
                       </span>
@@ -170,18 +193,27 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
                 <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6">
                   <div className="flex items-start gap-3">
-                    <Clock className="mt-0.5 size-4 shrink-0 text-electric-300" aria-hidden="true" />
+                    <Clock
+                      className="mt-0.5 size-4 shrink-0 text-electric-300"
+                      aria-hidden="true"
+                    />
                     <div>
-                      <p className="text-sm font-medium text-cream">Response time</p>
+                      <p className="text-sm font-medium text-cream">
+                        Response time
+                      </p>
                       <p className="mt-1 text-sm leading-relaxed text-muted">
-                        We reply to every serious inquiry within two business days — usually faster.
+                        We reply to every serious inquiry within two business
+                        days — usually faster.
                       </p>
                     </div>
                   </div>
                   <ul className="mt-6 flex flex-col gap-2.5 border-t border-white/[0.07] pt-6 font-mono text-[0.625rem] tracking-[0.16em] text-muted-dim uppercase">
                     {contactPage.trustSignals.map((item) => (
                       <li key={item} className="flex items-center gap-2">
-                        <span aria-hidden="true" className="size-1 rounded-full bg-electric-400" />
+                        <span
+                          aria-hidden="true"
+                          className="size-1 rounded-full bg-electric-400"
+                        />
                         {item}
                       </li>
                     ))}
