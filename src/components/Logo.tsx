@@ -142,13 +142,14 @@ export function Logo({
       <RocketMark className="size-7 shrink-0 transition-transform duration-500 ease-out group-hover:-translate-y-0.5" />
       <span className="flex flex-col leading-none">
         <span className="font-display text-[0.9375rem] font-bold tracking-tight text-cream">
-          WEB MARKETING
+          WEB MARKETING <br />
+          SOLUTIONS
         </span>
-        {!compact && (
+        {/* {!compact && (
           <span className="mt-1 font-mono text-[0.5625rem] tracking-[0.34em] text-muted-dim">
-            SOLUTIONS · HOUSTON
+            HOUSTON, TX
           </span>
-        )}
+        )} */}
       </span>
     </span>
   );

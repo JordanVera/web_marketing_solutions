@@ -605,6 +605,14 @@ export const servicePages: ServicePage[] = [
   },
 ];
 
+/** Primary nav service links — order and labels for the header. */
+export const serviceNavLinks = [
+  { slug: "web-app-development", label: "Web Apps" },
+  { slug: "website-development", label: "Websites" },
+  { slug: "native-app-development", label: "Native Apps" },
+  { slug: "seo-campaigns", label: "SEO" },
+] as const satisfies ReadonlyArray<{ slug: ServiceSlug; label: string }>;
+
 export function getServiceBySlug(slug: string): ServicePage | undefined {
   return servicePages.find((service) => service.slug === slug);
 }

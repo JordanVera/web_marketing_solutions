@@ -22,7 +22,7 @@ export function Projects() {
   );
 
   return (
-    <section id="work" className="relative scroll-mt-24 py-28 md:py-36">
+    <section id="work" className="relative scroll-mt-24 py-16 md:py-24">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
@@ -40,7 +40,7 @@ export function Projects() {
         />
 
         {projectCategories.length > 2 && (
-          <Reveal direction="up" delay={0.1} className="mt-12 flex justify-center">
+          <Reveal direction="up" delay={0.1} className="mt-8 flex justify-center">
             <div
               role="group"
               aria-label="Filter projects by category"
@@ -102,7 +102,7 @@ export function Projects() {
           </AnimatePresence>
         </motion.div>
 
-        <Reveal direction="up" className="mt-14 text-center">
+        <Reveal direction="up" className="mt-10 text-center">
           <p className="text-sm text-muted-dim">
             Building the next one?{" "}
             <a

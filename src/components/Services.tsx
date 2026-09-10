@@ -10,7 +10,7 @@ import { services, type Service } from "@/lib/content";
 
 export function Services() {
   return (
-    <section id="services" className="relative scroll-mt-24 overflow-hidden py-28 md:py-36">
+    <section id="services" className="relative scroll-mt-24 overflow-hidden py-16 md:py-24">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute top-0 left-1/2 h-[40rem] w-[64rem] -translate-x-1/2 bg-[radial-gradient(ellipse_50%_40%_at_50%_40%,rgba(0,102,255,0.10),transparent_70%)]"
@@ -27,7 +27,7 @@ export function Services() {
           description="Web apps, native apps, websites, and SEO campaigns. Each engagement is a dedicated practice — not a channel we padded onto a menu."
         />
 
-        <Stagger className="mt-16 grid gap-5 md:grid-cols-2">
+        <Stagger className="mt-10 grid gap-5 md:grid-cols-2">
           {services.map((service) => (
             <StaggerItem key={service.id}>
               <ServiceCard service={service} />

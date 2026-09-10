@@ -18,7 +18,7 @@ const TELEMETRY = [
 
 export function Houston() {
   return (
-    <section id="houston" className="relative scroll-mt-24 overflow-hidden py-28 md:py-36">
+    <section id="houston" className="relative scroll-mt-24 overflow-hidden pt-16 pb-0 md:pt-24">
       <Starfield density={0.07} speed={2} className="opacity-60" />
       <div
         aria-hidden="true"
@@ -39,7 +39,7 @@ export function Houston() {
               description="Houston doesn't do incremental. It's the city that put people on the moon and still runs every mission from a room full of screens. We build marketing the same way."
             />
 
-            <Stagger className="mt-12 flex flex-col gap-8">
+            <Stagger className="mt-8 flex flex-col gap-8">
               {houstonHighlights.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -278,7 +278,7 @@ function Skyline() {
   ];
 
   return (
-    <div aria-hidden="true" className="pointer-events-none relative mt-24 md:mt-32">
+    <div aria-hidden="true" className="pointer-events-none relative mt-12 md:mt-16">
       <svg
         viewBox="0 0 1440 280"
         preserveAspectRatio="none"

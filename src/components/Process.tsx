@@ -27,7 +27,7 @@ export function Process() {
   const rocketLeft = useTransform(progress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="process" className="relative scroll-mt-24 overflow-hidden py-28 md:py-36">
+    <section id="process" className="relative scroll-mt-24 overflow-hidden py-16 md:py-24">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_30%_at_50%_72%,rgba(124,58,237,0.12),transparent_70%)]"
@@ -44,7 +44,7 @@ export function Process() {
           description="Five phases, fixed deliverables, and a written go/no-go at every gate. You always know what's shipping next and why."
         />
 
-        <div ref={railRef} className="relative mt-20">
+        <div ref={railRef} className="relative mt-12">
           {/* Vertical rail (mobile / tablet) */}
           <div
             aria-hidden="true"

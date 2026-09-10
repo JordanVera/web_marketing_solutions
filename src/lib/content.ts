@@ -35,12 +35,10 @@ export const company = {
   founded: '2016',
 } as const;
 
-/** Homepage section links. Services is a dropdown handled in Navigation. */
+/** Primary nav links appended after service links in Navigation. */
 export const navLinks = [
-  { label: 'Houston', href: '/#houston' },
-  { label: 'Work', href: '/#work' },
-  { label: 'Process', href: '/#process' },
-  { label: 'Clients', href: '/#testimonials' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ] as const;
 
 export const heroStats = [
@@ -243,16 +241,63 @@ export const houstonHighlights = [
   },
 ] as const;
 
+export const aboutPage = {
+  metaTitle: 'About',
+  metaDescription:
+    'Web Marketing Solutions is a Houston studio for web apps, native apps, websites, and SEO campaigns — built with launch discipline since 2016.',
+  h1: 'We build digital products worth launching.',
+  lede:
+    'Web Marketing Solutions is a Houston studio for ambitious brands. We design and ship web apps, native apps, websites, and SEO campaigns — with the same checklist-driven discipline Houston has used for complex launches since 1961.',
+  mission:
+    'Most agencies sell deliverables. We ship outcomes — faster sites, clearer positioning, and search programs tied to pipeline, not vanity metrics.',
+  pillars: [
+    {
+      title: 'Strategy before pixels',
+      description:
+        'Every engagement starts with discovery: market mapping, competitive audit, and honest scope. We tell you what to cut before we design anything.',
+    },
+    {
+      title: 'Production code, not prototypes',
+      description:
+        'Design systems and real Next.js, React Native, and CMS builds in weekly increments — reviewed in staging environments you can click through.',
+    },
+    {
+      title: 'Instrumented from day one',
+      description:
+        'Analytics, event tracking, and performance budgets wired before launch. Mission control never guesses — neither do we.',
+    },
+    {
+      title: 'Local roots, national reach',
+      description:
+        'Based in Space City with deep Houston market knowledge — from Energy Corridor B2B to Heights retail — and a playbook that travels well beyond the Beltway.',
+    },
+  ],
+  stats: heroStats,
+} as const;
+
+export const contactPage = {
+  metaTitle: 'Contact',
+  metaDescription:
+    'Start a project with Web Marketing Solutions. Tell us your goals and get a scope, timeline, and price within two business days.',
+  h1: 'Let\u2019s chart your flight plan.',
+  lede:
+    'Whether you need a web app, native app, website, or SEO campaign — tell us where you want to land. We\u2019ll reply with a real plan, not a generic pitch deck.',
+  trustSignals: [
+    'No long-term contracts',
+    'Houston-based team',
+    'Reply in 2 business days',
+  ],
+} as const;
+
 export const footerNav = {
   services: servicePages.map((service) => ({
     label: service.shortTitle,
     href: `/services/${service.slug}`,
   })),
   company: [
-    { label: 'Our Process', href: '/#process' },
-    { label: 'Case Studies', href: '/#work' },
-    { label: 'Why Houston', href: '/#houston' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'About', href: '/about' },
+    { label: 'Services', href: '/services' },
+    { label: 'Contact', href: '/contact' },
   ],
 };
 

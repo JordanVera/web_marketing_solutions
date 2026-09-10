@@ -47,7 +47,7 @@ export function Testimonials() {
     .join("");
 
   return (
-    <section id="testimonials" className="relative scroll-mt-24 py-28 md:py-36">
+    <section id="testimonials" className="relative scroll-mt-24 py-16 md:py-24">
       <div className="container-shell">
         <SectionHeading
           eyebrow="05 — Client signal"
@@ -59,7 +59,7 @@ export function Testimonials() {
         />
 
         <div
-          className="relative mx-auto mt-14 max-w-4xl"
+          className="relative mx-auto mt-10 max-w-4xl"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           onFocusCapture={() => setPaused(true)}
@@ -160,7 +160,7 @@ export function Testimonials() {
         </div>
 
         {/* Client wordmarks — swap for real logo files when available */}
-        <Reveal direction="up" className="mt-20">
+        <Reveal direction="up" className="mt-12">
           <p className="text-center font-mono text-[0.625rem] tracking-[0.28em] text-muted-dim uppercase">
             Trusted by teams across Texas
           </p>

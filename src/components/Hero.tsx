@@ -39,7 +39,7 @@ export function Hero() {
     <section
       id="top"
       ref={sectionRef}
-      className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-28 pb-24"
+      className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-28 pb-16"
     >
       {/* ---------- Background layers, back to front ---------- */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-10%,#12244a_0%,#0a1628_38%,#050b16_78%)]" />
