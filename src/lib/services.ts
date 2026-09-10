@@ -22,6 +22,12 @@ export type ServiceBlock = {
   body: string;
 };
 
+export type ServiceSectionHeading = {
+  eyebrow: string;
+  title: string;
+  accent: string;
+};
+
 export type ServicePage = {
   slug: ServiceSlug;
   title: string;
@@ -36,6 +42,16 @@ export type ServicePage = {
   keywords: string[];
   h1: string;
   lede: string;
+  sections: {
+    audience: ServiceSectionHeading;
+    problems: ServiceSectionHeading;
+    deliverables: ServiceSectionHeading;
+    delivery: ServiceSectionHeading;
+    whyUs: ServiceSectionHeading;
+    relatedWork: ServiceSectionHeading;
+    faq: ServiceSectionHeading;
+    related: ServiceSectionHeading;
+  };
   whoItsFor: ServiceBlock[];
   problems: ServiceBlock[];
   deliverables: string[];
@@ -59,7 +75,7 @@ export const servicesHub = {
     "web marketing solutions",
   ],
   h1: "Four services. No filler retainers.",
-  lede: "We build products people use and search programs that actually move pipeline. Pick a lane — or start with a 20-minute flight check and we will tell you which one you need.",
+  lede: "We build products people use every day and search programs that move pipeline. Pick a lane — or start with a 20-minute flight check and we will tell you which one you actually need.",
 } as const;
 
 export const servicePages: ServicePage[] = [

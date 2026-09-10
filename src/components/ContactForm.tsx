@@ -1,10 +1,10 @@
-import { ArrowRight } from "lucide-react";
-import { company } from "@/lib/content";
-import { servicePages } from "@/lib/services";
-import { SITE_URL, cn } from "@/lib/utils";
+import { ArrowRight } from 'lucide-react';
+import { company } from '@/lib/content';
+import { servicePages } from '@/lib/services';
+import { SITE_URL, cn } from '@/lib/utils';
 
 const FIELD =
-  "w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-cream placeholder:text-muted-dim transition-colors focus:border-electric-400/60 focus:outline-none";
+  'w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-cream placeholder:text-muted-dim transition-colors focus:border-electric-400/60 focus:outline-none';
 
 type ContactFormProps = {
   className?: string;
@@ -17,18 +17,31 @@ export function ContactForm({ className }: ContactFormProps) {
     <form
       action={formAction}
       method="POST"
-      className={cn("flex flex-col gap-5", className)}
+      className={cn('flex flex-col gap-5', className)}
     >
-      <input type="hidden" name="_subject" value="New inquiry — Web Marketing Solutions" />
+      <input
+        type="hidden"
+        name="_subject"
+        value="New inquiry — Web Marketing Solutions"
+      />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_next" value={`${SITE_URL}/contact?sent=1`} />
       {/* Honeypot — leave empty */}
-      <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
+      <input
+        type="text"
+        name="_honey"
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+      />
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="contact-name" className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase">
+          <label
+            htmlFor="contact-name"
+            className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
+          >
             Full name <span className="text-rocket">*</span>
           </label>
           <input
@@ -43,7 +56,10 @@ export function ContactForm({ className }: ContactFormProps) {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="contact-email" className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase">
+          <label
+            htmlFor="contact-email"
+            className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
+          >
             Email <span className="text-rocket">*</span>
           </label>
           <input
@@ -60,7 +76,10 @@ export function ContactForm({ className }: ContactFormProps) {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="contact-company" className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase">
+          <label
+            htmlFor="contact-company"
+            className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
+          >
             Company
           </label>
           <input
@@ -74,7 +93,10 @@ export function ContactForm({ className }: ContactFormProps) {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="contact-phone" className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase">
+          <label
+            htmlFor="contact-phone"
+            className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
+          >
             Phone
           </label>
           <input
@@ -89,10 +111,18 @@ export function ContactForm({ className }: ContactFormProps) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="contact-service" className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase">
+        <label
+          htmlFor="contact-service"
+          className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
+        >
           What can we help with?
         </label>
-        <select id="contact-service" name="service" defaultValue="" className={cn(FIELD, "cursor-pointer")}>
+        <select
+          id="contact-service"
+          name="service"
+          defaultValue=""
+          className={cn(FIELD, 'cursor-pointer')}
+        >
           <option value="" disabled>
             Select a service line
           </option>
@@ -106,7 +136,10 @@ export function ContactForm({ className }: ContactFormProps) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="contact-message" className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase">
+        <label
+          htmlFor="contact-message"
+          className="font-mono text-[0.625rem] tracking-[0.16em] text-muted uppercase"
+        >
           Project details <span className="text-rocket">*</span>
         </label>
         <textarea
@@ -115,14 +148,18 @@ export function ContactForm({ className }: ContactFormProps) {
           required
           rows={5}
           placeholder="Tell us where you want to be twelve months from now — goals, timeline, budget range, anything that helps us prepare a real flight plan."
-          className={cn(FIELD, "resize-y min-h-32")}
+          className={cn(FIELD, 'resize-y min-h-32')}
         />
       </div>
 
       <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs leading-relaxed text-muted-dim">
-          By submitting, you agree we may use your details to respond to this inquiry. See our{" "}
-          <a href="/privacy" className="text-electric-300 underline underline-offset-4 hover:text-cream">
+          By submitting, you agree we may use your details to respond to this
+          inquiry. See our{' '}
+          <a
+            href="/privacy"
+            className="text-electric-300 underline underline-offset-4 hover:text-cream"
+          >
             privacy policy
           </a>
           .

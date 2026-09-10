@@ -21,8 +21,10 @@ export const company = {
   name: 'Web Marketing Solutions',
   shortName: 'WMS',
   tagline: 'Web Marketing Solutions for Ambitious Brands',
+  blurb:
+    'A Houston studio for web apps, native apps, websites, and SEO campaigns — for brands that would rather build something worth launching than ship another template.',
   city: 'Houston, Texas',
-  email: 'hello@webmarketingsolutions.com',
+  email: 'verawebdev@protonmail.com',
   phone: '+1 (713) 555-0142',
   address: {
     street: '1200 Space Park Dr, Suite 210',
@@ -46,6 +48,74 @@ export const heroStats = [
   { value: '0.9s', label: 'Median load time shipped' },
   { value: '60+', label: 'Brands launched since 2016' },
 ] as const;
+
+export const homePage = {
+  metaTitle: 'Houston Web Apps, Websites & SEO Agency',
+  metaDescription:
+    'Web Marketing Solutions designs and ships custom web apps, native iOS and Android apps, conversion-first websites, and SEO campaigns from Houston, Texas.',
+  hero: {
+    eyebrow: 'Houston, Texas — Mission Control for Growth',
+    headline: ['Web', 'Marketing', 'Solutions', 'for'] as const,
+    headlineAccent: ['Ambitious', 'Brands'] as const,
+    lede: 'Custom web apps, native iOS and Android, conversion-first websites, and SEO campaigns — designed and engineered in Space City. Same discipline that launches rockets down the road: a written plan, telemetry, and a hard go/no-go before anything ships.',
+    primaryCta: 'Start Your Launch',
+    primaryHref: '#contact',
+    secondaryCta: 'Explore services',
+    secondaryHref: '#services',
+  },
+  services: {
+    eyebrow: '01 — Capabilities',
+    title: 'Four services. No filler',
+    titleAccent: 'retainers',
+    description:
+      'Web apps, native apps, websites, and SEO campaigns. Each is a dedicated practice with its own process — not a channel we padded onto a menu to look complete.',
+    flightCheckTitle: 'Not sure which service you need?',
+    flightCheckBody:
+      'Book a 20-minute flight check. We will tell you whether you need a website, a web app, a native app, or an SEO campaign — and what to skip. No pitch deck.',
+    flightCheckCta: 'Book a flight check',
+  },
+  houston: {
+    eyebrow: '02 — Why Houston',
+    title: 'Built in',
+    titleAccent: 'Space City',
+    description:
+      'Houston does not do incremental. It is the city that put people on the moon and still runs every mission from a room full of screens. We build digital products and search programs the same way.',
+  },
+  telemetry: [
+    { label: 'Organic sessions', readout: '+148%', fill: 0.92 },
+    { label: 'Core Web Vitals', readout: '98/100', fill: 0.98 },
+    { label: 'Conversion rate', readout: '+38%', fill: 0.74 },
+    { label: 'Client retention', readout: '94%', fill: 0.94 },
+  ],
+  projects: {
+    eyebrow: '03 — Selected work',
+    title: "Missions we've",
+    titleAccent: 'flown',
+    description:
+      'Live websites we designed and shipped — a cinematic film-and-stills studio and an invite-only event for Shedeur Sanders. Each card opens the real site.',
+    footerPrompt: 'Building the next one?',
+    footerLink: 'Tell us about the launch',
+  },
+  process: {
+    eyebrow: '04 — How we work',
+    title: 'A flight plan, not a',
+    titleAccent: 'guessing game',
+    description:
+      'Five phases, named deliverables, and a written go/no-go at every gate. You always know what is shipping next — and why it earned a place on the plan.',
+  },
+  cta: {
+    eyebrow: 'Launch window open',
+    title: 'Ready for',
+    titleAccent: 'liftoff?',
+    lede: 'Tell us where you want to be twelve months from now. We will send back a real flight plan — recommended service, scope, timeline, and price — within two business days.',
+    primaryCta: 'Start Your Launch',
+    trustSignals: [
+      'No long-term contracts',
+      'Houston-based team',
+      'Reply in 2 business days',
+    ],
+  },
+} as const;
 
 export type Service = {
   id: string;
@@ -83,7 +153,7 @@ export const projects: Project[] = [
     title: 'Capturing All Angles',
     category: 'Website',
     description:
-      'A cinematic film-and-stills site for a photographer and videographer — mosaic reel, work archives, and a booking flow.',
+      'A cinematic film-and-stills site for a Houston photographer and videographer — mosaic reel, work archives, and a booking flow that matches the work.',
     image: '/projects/capturing-all-angles.png',
     metric: 'Film & stills',
     href: 'https://www.capturingallangles.com/',
@@ -94,7 +164,7 @@ export const projects: Project[] = [
     title: "Shedeur's Legendary Barber Competition",
     category: 'Website',
     description:
-      'Invite-only event site for Shedeur Sanders — story, process, submissions, and partners, launched for Cleveland 2026.',
+      'Invite-only event site for Shedeur Sanders — story, process, submissions, and partners, designed to feel as sharp as the competition itself.',
     image: '/projects/legendary-barber-competition.png',
     metric: 'Event launch',
     href: 'https://www.legendarybarbercompetition.com/',
@@ -125,7 +195,7 @@ export const processSteps: ProcessStep[] = [
     phase: 'Phase 01',
     title: 'Discovery',
     description:
-      'We map your market, audit what exists, and interview the people who actually talk to your customers.',
+      'We map the market, audit what you already have, and talk to the people who sell and support your customers — before we recommend a service line.',
     icon: Radar,
   },
   {
@@ -133,7 +203,7 @@ export const processSteps: ProcessStep[] = [
     phase: 'Phase 02',
     title: 'Flight Plan',
     description:
-      'A written strategy with scope, timeline, success metrics, and the trade-offs we recommend making.',
+      'A written strategy with scope, timeline, success metrics, and the trade-offs we would make if it were our budget.',
     icon: Compass,
   },
   {
@@ -149,7 +219,7 @@ export const processSteps: ProcessStep[] = [
     phase: 'Phase 04',
     title: 'Launch',
     description:
-      'Redirects, analytics, schema, and performance budgets verified before we ever flip DNS. Zero-drama go-lives.',
+      'Redirects, analytics, schema, store listings, and performance budgets verified before anything public flips. Zero-drama go-lives.',
     icon: Rocket,
   },
   {
@@ -157,7 +227,7 @@ export const processSteps: ProcessStep[] = [
     phase: 'Phase 05',
     title: 'Optimize',
     description:
-      'Monthly experiments against real revenue data. We report on pipeline, not impressions.',
+      'Monthly experiments against qualified inquiries and revenue. We report on pipeline, not impressions dressed up as a report.',
     icon: Gauge,
   },
 ];
@@ -225,7 +295,7 @@ export const houstonHighlights = [
     icon: Satellite,
     title: 'Built where missions launch',
     description:
-      'Houston has been running complex launches since 1961. We borrowed the discipline: checklists, telemetry, and a go/no-go before anything ships.',
+      'Houston has been running complex launches since 1961. We borrowed the discipline: named checklists, telemetry on day one, and a written go/no-go before anything ships.',
   },
   {
     icon: LineChart,
@@ -237,19 +307,18 @@ export const houstonHighlights = [
     icon: BarChart3,
     title: 'Local knowledge, national reach',
     description:
-      'We know the Houston market cold, from Energy Corridor B2B to Heights retail — and the playbook travels well beyond the Beltway.',
+      'Energy Corridor B2B, medical and legal practices, Heights retail, and Gulf Coast operators — we know this market, and the playbook travels well beyond the Beltway.',
   },
 ] as const;
 
 export const aboutPage = {
   metaTitle: 'About',
   metaDescription:
-    'Web Marketing Solutions is a Houston studio for web apps, native apps, websites, and SEO campaigns — built with launch discipline since 2016.',
+    'Web Marketing Solutions is a Houston studio for custom web apps, native apps, websites, and SEO campaigns — built with launch discipline since 2016.',
   h1: 'We build digital products worth launching.',
-  lede:
-    'Web Marketing Solutions is a Houston studio for ambitious brands. We design and ship web apps, native apps, websites, and SEO campaigns — with the same checklist-driven discipline Houston has used for complex launches since 1961.',
+  lede: 'Web Marketing Solutions is a Houston studio for ambitious brands. We design and ship web apps, native apps, websites, and SEO campaigns — with the same checklist-driven discipline Houston has used for complex launches since 1961.',
   mission:
-    'Most agencies sell deliverables. We ship outcomes — faster sites, clearer positioning, and search programs tied to pipeline, not vanity metrics.',
+    'Most agencies sell deliverables. We ship outcomes — products people use every day, sites that convert, and search programs tied to pipeline, not vanity metrics.',
   pillars: [
     {
       title: 'Strategy before pixels',
@@ -278,10 +347,9 @@ export const aboutPage = {
 export const contactPage = {
   metaTitle: 'Contact',
   metaDescription:
-    'Start a project with Web Marketing Solutions. Tell us your goals and get a scope, timeline, and price within two business days.',
+    'Start a project with Web Marketing Solutions. Tell us your goals and get a recommended service, scope, timeline, and price within two business days.',
   h1: 'Let\u2019s chart your flight plan.',
-  lede:
-    'Whether you need a web app, native app, website, or SEO campaign — tell us where you want to land. We\u2019ll reply with a real plan, not a generic pitch deck.',
+  lede: 'Whether you need a web app, native app, website, or SEO campaign — tell us where you want to land. We will reply with a real plan, not a generic pitch deck.',
   trustSignals: [
     'No long-term contracts',
     'Houston-based team',
