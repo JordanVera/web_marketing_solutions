@@ -34,7 +34,9 @@ export function SectionHeading({
     <div
       className={cn(
         'flex flex-col gap-5',
-        align === 'center' ? 'items-center text-center' : 'items-start text-left',
+        align === 'center'
+          ? 'items-center text-center'
+          : 'items-start text-left',
         className,
       )}
     >
