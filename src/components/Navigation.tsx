@@ -9,9 +9,8 @@ import {
   useScroll,
   useMotionValueEvent,
 } from 'framer-motion';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, Phone, X } from 'lucide-react';
 import { Logo } from './Logo';
-import { Button } from './ui/Button';
 import { company, navLinks } from '@/lib/content';
 import { servicePages, servicePath } from '@/lib/services';
 import { cn } from '@/lib/utils';
@@ -23,6 +22,10 @@ const HOME_SECTION_IDS = [
   'process',
   'testimonials',
 ] as const;
+
+const PHONE_HREF = `tel:${company.phone.replace(/[^\d+]/g, '')}`;
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 export function Navigation() {
   const pathname = usePathname();
@@ -37,6 +40,10 @@ export function Navigation() {
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 24);
   });
+
+  useEffect(() => {
+    setScrolled(window.scrollY > 24);
+  }, []);
 
   useEffect(() => {
     if (!isHome) return;
@@ -61,6 +68,10 @@ export function Navigation() {
   }, [isHome]);
 
   useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     if (!menuOpen) return;
 
     const previousOverflow = document.body.style.overflow;
@@ -79,117 +90,122 @@ export function Navigation() {
 
   const currentSection = isHome ? activeSection : '';
   const servicesActive = onServices || currentSection === 'services';
+  const shellWidth = scrolled ? 'max-w-5xl' : 'max-w-6xl';
 
   return (
-    <>
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+    <motion.header
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.1, ease: EASE_OUT }}
+      className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:pt-4"
+    >
+      <nav
+        aria-label="Primary"
         className={cn(
-          'fixed inset-x-0 top-0 z-50 transition-all duration-500',
+          'mx-auto flex items-center justify-between rounded-full border px-3 py-2 transition-all duration-300 sm:px-4',
+          shellWidth,
           scrolled
-            ? 'border-b border-white/[0.07] bg-void/80 backdrop-blur-xl'
-            : 'border-b border-transparent bg-transparent',
+            ? 'border-white/15 bg-void/95 shadow-lg shadow-black/40 backdrop-blur-xl'
+            : 'border-transparent bg-transparent',
         )}
       >
-        <nav
-          aria-label="Primary"
-          className="container-shell flex h-18 items-center justify-between gap-6"
+        <Link
+          href="/"
+          className="group shrink-0 rounded-lg pl-1"
+          aria-label={`${company.name} — home`}
         >
-          <Link
-            href="/"
-            className="group rounded-lg"
-            aria-label={`${company.name} — home`}
+          <Logo />
+        </Link>
+
+        <ul className="hidden items-center gap-0.5 lg:flex">
+          <ServicesDropdown active={servicesActive} />
+          {navLinks.map((link) => {
+            const section = link.href.split('#')[1];
+            const isActive = currentSection === section;
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={cn(
+                    'relative rounded-full px-2.5 py-1.5 text-sm transition-colors duration-300 xl:px-3',
+                    isActive ? 'text-cream' : 'text-muted hover:text-cream',
+                  )}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      className="absolute inset-0 -z-10 rounded-full border border-electric/25 bg-electric/10"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 380,
+                        damping: 32,
+                      }}
+                    />
+                  )}
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="flex items-center gap-1.5">
+          <a
+            href="/#contact"
+            className="hidden items-center rounded-full border border-white px-3.5 py-1.5 text-[10px] tracking-[0.2em] text-white uppercase transition-all duration-200 hover:bg-white hover:text-navy sm:inline-flex"
           >
-            <Logo />
-          </Link>
-
-          <ul className="hidden items-center gap-1 lg:flex">
-            <ServicesDropdown active={servicesActive} />
-            {navLinks.map((link) => {
-              const section = link.href.split('#')[1];
-              const isActive = currentSection === section;
-              return (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className={cn(
-                      'relative rounded-full px-4 py-2 text-sm transition-colors duration-300',
-                      isActive ? 'text-cream' : 'text-muted hover:text-cream',
-                    )}
-                  >
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-active-pill"
-                        className="absolute inset-0 -z-10 rounded-full border border-electric/25 bg-electric/10"
-                        transition={{
-                          type: 'spring',
-                          stiffness: 380,
-                          damping: 32,
-                        }}
-                      />
-                    )}
-                    {link.label}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-
-          <div className="hidden items-center gap-3 lg:flex">
-            <Button href="/#contact" variant="primary" size="sm">
-              Start Your Launch
-            </Button>
-          </div>
-
+            Start Your Launch
+          </a>
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            className="inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-cream transition-colors hover:border-electric-400/50 hover:bg-white/10 lg:hidden"
+            className="inline-flex size-9 items-center justify-center rounded-full text-cream lg:hidden"
           >
             {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
-        </nav>
-      </motion.header>
+        </div>
+      </nav>
 
       <AnimatePresence>
-        {menuOpen && (
+        {menuOpen ? (
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-void/95 backdrop-blur-2xl lg:hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            className={cn(
+              'mx-auto mt-2 max-h-[min(70vh,32rem)] overflow-y-auto rounded-3xl border border-white/15 bg-void/95 p-4 shadow-xl backdrop-blur-xl lg:hidden',
+              shellWidth,
+            )}
           >
-            <div className="container-shell flex h-full flex-col overflow-y-auto pt-28 pb-10">
-              <MobileNav
-                servicesActive={servicesActive}
-                onNavigate={() => setMenuOpen(false)}
-              />
-
-              <motion.div
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.42, duration: 0.5 }}
-                className="mt-auto flex flex-col gap-4 pt-8"
+            <MobileNav
+              servicesActive={servicesActive}
+              onNavigate={() => setMenuOpen(false)}
+            />
+            <div className="mt-3 grid gap-2 border-t border-white/10 pt-3">
+              <a
+                href="/#contact"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-xl bg-white px-4 py-3 text-center text-sm font-semibold tracking-[0.15em] text-navy uppercase"
               >
-                <Button href="/#contact" size="lg" className="w-full">
-                  Start Your Launch
-                </Button>
-                <p className="text-center font-mono text-xs tracking-widest text-muted-dim uppercase">
-                  Houston, TX · 29.55° N, 95.10° W
-                </p>
-              </motion.div>
+                Start Your Launch
+              </a>
+              <a
+                href={PHONE_HREF}
+                className="flex items-center justify-center gap-2 rounded-xl border border-white/40 px-4 py-3 text-center text-sm font-medium text-cream"
+              >
+                <Phone className="size-3.5" aria-hidden="true" />
+                {company.phone}
+              </a>
             </div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
-    </>
+    </motion.header>
   );
 }
 
@@ -256,7 +272,7 @@ function ServicesDropdown({ active }: { active: boolean }) {
         <Link
           href="/services"
           className={cn(
-            'rounded-full py-2 pr-1 pl-4 text-sm transition-colors duration-300',
+            'rounded-full py-1.5 pr-1 pl-3 text-sm transition-colors duration-300',
             active ? 'text-cream' : 'text-muted hover:text-cream',
           )}
         >
@@ -270,7 +286,7 @@ function ServicesDropdown({ active }: { active: boolean }) {
           aria-label="Open services menu"
           onClick={() => setOpen((value) => !value)}
           className={cn(
-            'rounded-full py-2 pr-3 pl-1 text-sm transition-colors duration-300',
+            'rounded-full py-1.5 pr-3 pl-1 text-sm transition-colors duration-300',
             active ? 'text-cream' : 'text-muted hover:text-cream',
           )}
         >
@@ -293,8 +309,8 @@ function ServicesDropdown({ active }: { active: boolean }) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-full left-0 z-50 mt-3 w-[22.5rem] overflow-hidden rounded-2xl border border-white/[0.08] bg-navy/95 p-2 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.8)] backdrop-blur-xl"
+            transition={{ duration: 0.2, ease: EASE_OUT }}
+            className="absolute top-full left-0 z-50 mt-3 w-90 overflow-hidden rounded-2xl border border-white/8 bg-navy/95 p-2 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.8)] backdrop-blur-xl"
           >
             {servicePages.map((service) => {
               const Icon = service.icon;
@@ -304,9 +320,9 @@ function ServicesDropdown({ active }: { active: boolean }) {
                   href={servicePath(service.slug)}
                   role="menuitem"
                   onClick={() => setOpen(false)}
-                  className="group flex items-start gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-white/[0.05]"
+                  className="group flex items-start gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-white/5"
                 >
-                  <span className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04]">
+                  <span className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/4">
                     <Icon
                       className="size-4 text-electric-300"
                       aria-hidden="true"
@@ -341,102 +357,75 @@ function MobileNav({
   const [servicesOpen, setServicesOpen] = useState(true);
 
   return (
-    <ul className="flex flex-col gap-1">
-      <motion.li
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    <div className="flex flex-col">
+      <button
+        type="button"
+        aria-expanded={servicesOpen}
+        onClick={() => setServicesOpen((open) => !open)}
+        className={cn(
+          'flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition hover:bg-white/10',
+          servicesActive ? 'text-cream' : 'text-white/80 hover:text-cream',
+        )}
       >
-        <button
-          type="button"
-          aria-expanded={servicesOpen}
-          onClick={() => setServicesOpen((open) => !open)}
-          className="flex w-full items-baseline justify-between gap-4 border-b border-white/[0.07] py-5 font-display text-3xl font-semibold text-cream"
-        >
-          <span className="flex items-baseline gap-4">
-            <span
+        Services
+        <ChevronDown
+          className={cn(
+            'size-4 text-muted-dim transition-transform duration-300',
+            servicesOpen && 'rotate-180',
+          )}
+          aria-hidden="true"
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {servicesOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.22, ease: EASE_OUT }}
+            className="overflow-hidden"
+          >
+            <Link
+              href="/services"
+              onClick={onNavigate}
               className={cn(
-                'font-mono text-xs',
-                servicesActive ? 'text-electric-300' : 'text-muted-dim',
+                'block rounded-xl py-2 pr-3 pl-6 text-sm transition hover:bg-white/10',
+                pathname === '/services'
+                  ? 'text-cream'
+                  : 'text-white/70 hover:text-cream',
               )}
             >
-              01
-            </span>
-            Services
-          </span>
-          <ChevronDown
-            className={cn(
-              'size-6 text-muted-dim transition-transform duration-300',
-              servicesOpen && 'rotate-180',
-            )}
-            aria-hidden="true"
-          />
-        </button>
-        <AnimatePresence initial={false}>
-          {servicesOpen && (
-            <motion.ul
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="overflow-hidden"
-            >
-              <li>
-                <Link
-                  href="/services"
-                  onClick={onNavigate}
-                  className={cn(
-                    'flex border-b border-white/[0.05] py-3.5 pl-12 text-base transition-colors hover:text-cream',
-                    pathname === '/services' ? 'text-cream' : 'text-muted',
-                  )}
-                >
-                  All services
-                </Link>
-              </li>
-              {servicePages.map((service) => (
-                <li key={service.slug}>
-                  <Link
-                    href={servicePath(service.slug)}
-                    onClick={onNavigate}
-                    className={cn(
-                      'flex border-b border-white/[0.05] py-3.5 pl-12 text-base transition-colors hover:text-cream',
-                      pathname === servicePath(service.slug)
-                        ? 'text-cream'
-                        : 'text-muted',
-                    )}
-                  >
-                    {service.navLabel}
-                  </Link>
-                </li>
-              ))}
-            </motion.ul>
-          )}
-        </AnimatePresence>
-      </motion.li>
+              All services
+            </Link>
+            {servicePages.map((service) => (
+              <Link
+                key={service.slug}
+                href={servicePath(service.slug)}
+                onClick={onNavigate}
+                className={cn(
+                  'block rounded-xl py-2 pr-3 pl-6 text-sm transition hover:bg-white/10',
+                  pathname === servicePath(service.slug)
+                    ? 'text-cream'
+                    : 'text-white/70 hover:text-cream',
+                )}
+              >
+                {service.navLabel}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {navLinks.map((link, index) => (
-        <motion.li
+      {navLinks.map((link) => (
+        <a
           key={link.href}
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.14 + index * 0.06,
-            duration: 0.5,
-            ease: [0.16, 1, 0.3, 1],
-          }}
+          href={link.href}
+          onClick={onNavigate}
+          className="rounded-xl px-3 py-2.5 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-cream"
         >
-          <a
-            href={link.href}
-            onClick={onNavigate}
-            className="flex items-baseline gap-4 border-b border-white/[0.07] py-5 font-display text-3xl font-semibold text-cream"
-          >
-            <span className="font-mono text-xs text-electric-300">
-              0{index + 2}
-            </span>
-            {link.label}
-          </a>
-        </motion.li>
+          {link.label}
+        </a>
       ))}
-    </ul>
+    </div>
   );
 }

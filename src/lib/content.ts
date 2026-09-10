@@ -79,76 +79,39 @@ export type Project = {
   serviceIds: string[];
 };
 
-export const projectCategories = ['All', 'Web App', 'Website', 'SEO'] as const;
-
 export const projects: Project[] = [
   {
-    id: 'orbital-energy',
-    title: 'Orbital Energy Partners',
+    id: 'capturing-all-angles',
+    title: 'Capturing All Angles',
     category: 'Website',
     description:
-      'A full rebuild for an energy consultancy on the Gulf Coast — new design system, headless CMS, and a 3x faster site.',
-    image: '/projects/orbital-energy.svg',
-    metric: '+212% qualified leads',
-    href: '/#work',
+      'A cinematic film-and-stills site for a photographer and videographer — mosaic reel, work archives, and a booking flow.',
+    image: '/projects/capturing-all-angles.jpg',
+    metric: 'Film & stills',
+    href: 'https://www.capturingallangles.com/',
     serviceIds: ['website-development'],
   },
   {
-    id: 'bayou-dental',
-    title: 'Bayou Dental Group',
-    category: 'SEO',
-    description:
-      'Local SEO program across six Houston clinics, from map pack rankings to a location-page architecture that scales.',
-    image: '/projects/bayou-dental.svg',
-    metric: '#1 map pack, 6 clinics',
-    href: '/#work',
-    serviceIds: ['seo-campaigns'],
-  },
-  {
-    id: 'apex-outfitters',
-    title: 'Apex Outfitters',
+    id: 'legendary-barber-competition',
+    title: "Shedeur's Legendary Barber Competition",
     category: 'Website',
     description:
-      'Headless Shopify storefront with a rebuilt checkout flow and merchandising that finally matches the brand.',
-    image: '/projects/apex-outfitters.svg',
-    metric: '+38% conversion rate',
-    href: '/#work',
-    serviceIds: ['website-development', 'web-app-development'],
-  },
-  {
-    id: 'meridian-labs',
-    title: 'Meridian Labs',
-    category: 'Website',
-    description:
-      'Identity system and launch site for a biotech spin-out, delivered from first sketch to production in nine weeks.',
-    image: '/projects/meridian-labs.svg',
-    metric: '9-week launch',
-    href: '/#work',
+      'Invite-only event site for Shedeur Sanders — story, process, submissions, and partners, launched for Cleveland 2026.',
+    image: '/projects/legendary-barber.png',
+    metric: 'Event launch',
+    href: 'https://www.legendarybarbercompetition.com/',
     serviceIds: ['website-development'],
-  },
-  {
-    id: 'gulf-coast-legal',
-    title: 'Gulf Coast Legal',
-    category: 'SEO',
-    description:
-      'Content and technical SEO overhaul that moved 40+ practice-area pages onto page one in a brutal market.',
-    image: '/projects/gulf-coast-legal.svg',
-    metric: '40+ page-one terms',
-    href: '/#work',
-    serviceIds: ['seo-campaigns'],
-  },
-  {
-    id: 'nova-fitness',
-    title: 'Nova Fitness Collective',
-    category: 'Web App',
-    description:
-      "Membership platform and marketing site for a studio group, with booking, billing, and a members' portal.",
-    image: '/projects/nova-fitness.svg',
-    metric: '+64% trial signups',
-    href: '/#work',
-    serviceIds: ['web-app-development', 'native-app-development'],
   },
 ];
+
+export const projectCategories = [
+  'All',
+  ...Array.from(new Set(projects.map((project) => project.category))),
+];
+
+export function isExternalHref(href: string) {
+  return href.startsWith('http://') || href.startsWith('https://');
+}
 
 export type ProcessStep = {
   id: string;

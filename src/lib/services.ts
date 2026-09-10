@@ -196,7 +196,7 @@ export const servicePages: ServicePage[] = [
       },
     ],
     relatedSlugs: ["native-app-development", "website-development"],
-    relatedProjectIds: ["nova-fitness", "apex-outfitters"],
+    relatedProjectIds: [],
   },
   {
     slug: "native-app-development",
