@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -60,6 +61,7 @@ export function Navigation() {
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
@@ -67,6 +69,7 @@ export function Navigation() {
   });
 
   useEffect(() => {
+    setMounted(true);
     setScrolled(window.scrollY > 24);
   }, []);
 
@@ -123,7 +126,7 @@ export function Navigation() {
           <Logo />
         </Link>
 
-        <ul className="hidden items-center gap-0.5 xl:flex">
+        <ul className="hidden items-center gap-0.5 lg:flex">
           {serviceNavLinks.map((link) => {
             const href = servicePath(link.slug);
             return (
@@ -160,12 +163,32 @@ export function Navigation() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            className="inline-flex size-9 items-center justify-center rounded-full text-cream xl:hidden"
+            className="inline-flex size-9 items-center justify-center rounded-full text-cream lg:hidden"
           >
             {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
       </nav>
+
+      {mounted
+        ? createPortal(
+            <AnimatePresence>
+              {menuOpen ? (
+                <motion.button
+                  type="button"
+                  aria-label="Close menu"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={closeMenu}
+                  className="fixed inset-0 z-40 bg-void/40 backdrop-blur-md lg:hidden"
+                />
+              ) : null}
+            </AnimatePresence>,
+            document.body,
+          )
+        : null}
 
       <AnimatePresence>
         {menuOpen ? (
