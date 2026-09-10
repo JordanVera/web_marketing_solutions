@@ -113,9 +113,10 @@ export function Navigation() {
       >
         <Link
           href="/"
-          onClick={() =>
-            scrollToPageTop(pathname === '/' ? 'smooth' : 'instant')
-          }
+          scroll={false}
+          onClick={() => {
+            if (pathname === '/') scrollToPageTop('smooth');
+          }}
           className="group shrink-0 rounded-lg pl-1"
           aria-label={`${company.name} — home`}
         >
