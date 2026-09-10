@@ -125,7 +125,7 @@ export function Navigation() {
           aria-label={`${company.name} — home`}
         >
           <Image
-            src="/logo.PNG"
+            src="/logo.png"
             alt={company.name}
             height={120}
             width={120}
