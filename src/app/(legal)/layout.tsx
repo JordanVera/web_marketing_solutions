@@ -1,10 +1,14 @@
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { Logo } from "@/components/Logo";
-import { Footer } from "@/components/Footer";
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
+import { Logo } from '@/components/Logo';
+import { Footer } from '@/components/Footer';
 
 /** Shared chrome for the plain-text legal routes. */
-export default function LegalLayout({ children }: { children: React.ReactNode }) {
+export default function LegalLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <>
       <header className="border-b border-white/[0.07]">

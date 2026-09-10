@@ -5,6 +5,8 @@ import { SITE_URL } from '@/lib/utils';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import '@/styles/globals.css';
 import { Analytics } from '@vercel/analytics/next';
+import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -113,6 +115,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="antialiased">
+        <Navigation />
         <ScrollToTop />
         {children}
         <script
@@ -122,6 +125,8 @@ export default function RootLayout({
         />
 
         <Analytics />
+
+        <Footer />
       </body>
     </html>
   );
