@@ -168,9 +168,9 @@ function TrajectoryCanvas({
         />
         <defs>
           <linearGradient id="traj-aurora" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#5ee4f5" />
-            <stop offset="0.55" stopColor="#2dd4bf" />
-            <stop offset="1" stopColor="#10b981" />
+            <stop offset="0" stopColor="#fdba74" />
+            <stop offset="0.55" stopColor="#f43f9a" />
+            <stop offset="1" stopColor="#ec4899" />
           </linearGradient>
         </defs>
         {points.map((point, index) => (
@@ -179,8 +179,8 @@ function TrajectoryCanvas({
             cx={point.x}
             cy={point.y}
             r={index <= passed ? 7 : 5}
-            fill={index <= passed ? '#2dd4bf' : '#0a1628'}
-            stroke={index <= passed ? '#5eead4' : 'rgba(255,255,255,0.2)'}
+            fill={index <= passed ? '#fb923c' : '#0a1628'}
+            stroke={index <= passed ? '#fdba74' : 'rgba(255,255,255,0.2)'}
             strokeWidth="1.5"
           />
         ))}
@@ -188,8 +188,8 @@ function TrajectoryCanvas({
           cx={markerX}
           cy={markerY}
           r="9"
-          fill="#1ad4ee"
-          className="drop-shadow-[0_0_10px_rgba(26,212,238,0.8)]"
+          fill="#fb923c"
+          className="drop-shadow-[0_0_10px_rgba(251,146,60,0.8)]"
         />
       </svg>
 
@@ -239,7 +239,7 @@ function StepItem({ step, index }: { step: ProcessStep; index: number }) {
           className="relative grid size-11 place-items-center rounded-full border bg-void"
           animate={{
             borderColor: inView
-              ? 'rgba(45,212,191,0.55)'
+              ? 'rgba(251,146,60,0.55)'
               : 'rgba(255,255,255,0.10)',
           }}
           transition={{ duration: 0.6, delay: index * 0.06 }}

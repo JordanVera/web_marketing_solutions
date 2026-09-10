@@ -10,8 +10,8 @@ const BASE =
 
 const VARIANTS: Record<Variant, string> = {
   primary: cn(
-    'bg-electric text-void shadow-[0_8px_30px_-8px_rgba(26,212,238,0.7)]',
-    'hover:bg-electric-400 hover:shadow-[0_12px_44px_-8px_rgba(26,212,238,0.85)] hover:-translate-y-0.5',
+    'bg-electric text-void shadow-[0_8px_30px_-8px_rgba(251,146,60,0.7)]',
+    'hover:bg-electric-400 hover:shadow-[0_12px_44px_-8px_rgba(251,146,60,0.85)] hover:-translate-y-0.5',
     'active:translate-y-0',
   ),
   secondary: cn(

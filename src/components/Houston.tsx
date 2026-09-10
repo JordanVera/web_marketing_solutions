@@ -109,7 +109,7 @@ function RadarSweep() {
       <div className="absolute inset-[48%] rounded-full border border-electric/10" />
       <div className="absolute inset-x-0 top-1/2 h-px bg-aurora/10" />
       <div className="absolute inset-y-0 left-1/2 w-px bg-aurora/10" />
-      <div className="animate-sweep motion-reduce:animate-none absolute inset-0 origin-center rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,rgba(45,212,191,0.28)_22deg,transparent_48deg)]" />
+      <div className="animate-sweep motion-reduce:animate-none absolute inset-0 origin-center rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,rgba(244,63,154,0.28)_22deg,transparent_48deg)]" />
     </div>
   );
 }

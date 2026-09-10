@@ -16,7 +16,7 @@ import { homePage } from '@/lib/content';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const AMBER_SHEEN =
-  'shadow-[0_8px_36px_-8px_rgba(255,92,0,0.5),0_8px_30px_-8px_rgba(26,212,238,0.55)]';
+  'shadow-[0_8px_36px_-8px_rgba(255,92,0,0.5),0_8px_30px_-8px_rgba(251,146,60,0.55)]';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);

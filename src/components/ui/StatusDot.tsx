@@ -19,7 +19,7 @@ export function StatusDot({
       ? 'bg-amber shadow-[0_0_8px_2px_rgba(255,92,0,0.55)]'
       : tone === 'idle'
         ? 'bg-muted-dim'
-        : 'bg-aurora shadow-[0_0_8px_2px_rgba(45,212,191,0.55)]';
+        : 'bg-aurora shadow-[0_0_8px_2px_rgba(244,63,154,0.55)]';
 
   return (
     <span

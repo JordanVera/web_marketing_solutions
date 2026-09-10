@@ -16,7 +16,7 @@ const SERVICE_ART: Record<
   { src: string; imageClass: string; overlayClass: string }
 > = {
   'website-development': {
-    src: '/space/cyan-nebula.webp',
+    src: '/space/amber-nebula.webp',
     imageClass: 'object-center',
     overlayClass:
       'bg-linear-to-r from-void/88 via-void/70 to-void/40 md:via-void/55 md:to-void/25',
@@ -95,7 +95,7 @@ function ServiceCard({
 
   const mouseX = useMotionValue(-400);
   const mouseY = useMotionValue(-400);
-  const spotlight = useMotionTemplate`radial-gradient(320px circle at ${mouseX}px ${mouseY}px, rgba(26,212,238,0.14), rgba(45,212,191,0.08) 42%, transparent 72%)`;
+  const spotlight = useMotionTemplate`radial-gradient(320px circle at ${mouseX}px ${mouseY}px, rgba(251,146,60,0.14), rgba(244,63,154,0.08) 42%, transparent 72%)`;
 
   const handleMouseMove = ({
     currentTarget,

@@ -151,10 +151,10 @@ export function MoonLanding({ className }: MoonLandingProps) {
       )}
     >
       {/* Backlight so the disc separates from the void. */}
-      <div className="absolute inset-[-8%] rounded-full bg-[radial-gradient(circle,rgba(26,212,238,0.14),transparent_62%)] blur-3xl" />
+      <div className="absolute inset-[-8%] rounded-full bg-[radial-gradient(circle,rgba(251,146,60,0.14),transparent_62%)] blur-3xl" />
 
       {/* The Moon. */}
-      <div className="absolute inset-0 overflow-hidden rounded-full bg-[#0b0f16] shadow-[0_0_120px_-24px_rgba(26,212,238,0.3)]">
+      <div className="absolute inset-0 overflow-hidden rounded-full bg-[#0b0f16] shadow-[0_0_120px_-24px_rgba(251,146,60,0.3)]">
         <Image
           src="/moon/full-moon.webp"
           alt=""
@@ -168,7 +168,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
             away toward the lower right. */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_18%,rgba(255,133,51,0.16),transparent_50%)] mix-blend-soft-light" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_18%,transparent_34%,rgba(5,11,22,0.26)_58%,rgba(5,11,22,0.9)_92%)]" />
-        <div className="absolute inset-0 rounded-full shadow-[inset_0_0_70px_rgba(154,237,248,0.08),inset_0_0_2px_rgba(244,247,251,0.28)]" />
+        <div className="absolute inset-0 rounded-full shadow-[inset_0_0_70px_rgba(253,186,116,0.08),inset_0_0_2px_rgba(244,247,251,0.28)]" />
       </div>
 
       {/* Landing zone: bottom-centre of this box sits on the limb, rotated to
@@ -188,7 +188,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
           {/* Exhaust washing over the regolith as the rocket gets close. */}
           <motion.div
             style={{ opacity: surfaceGlow }}
-            className="absolute bottom-0 left-1/2 h-[30%] w-[420%] -translate-x-1/2 translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(244,247,251,0.9)_0%,rgba(154,237,248,0.6)_22%,rgba(255,133,51,0.22)_48%,transparent_72%)] blur-md"
+            className="absolute bottom-0 left-1/2 h-[30%] w-[420%] -translate-x-1/2 translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(244,247,251,0.9)_0%,rgba(253,186,116,0.6)_22%,rgba(244,63,154,0.22)_48%,transparent_72%)] blur-md"
           />
 
           {/* Plume, clipped at the surface so it never paints across the moon. */}
@@ -218,9 +218,9 @@ export function MoonLanding({ className }: MoonLandingProps) {
                   className="absolute inset-0 origin-top"
                 >
                   {/* Soft outer haze: a cone that widens as it leaves the nozzles. */}
-                  <div className="absolute inset-x-0 top-0 h-full bg-[linear-gradient(to_bottom,rgba(154,237,248,0.55)_0%,rgba(26,212,238,0.32)_35%,rgba(94,228,245,0.12)_70%,transparent_100%)] blur-[8.5cqw] [clip-path:polygon(38%_0,62%_0,100%_100%,0_100%)]" />
+                  <div className="absolute inset-x-0 top-0 h-full bg-[linear-gradient(to_bottom,rgba(253,186,116,0.55)_0%,rgba(251,146,60,0.32)_35%,rgba(244,63,154,0.12)_70%,transparent_100%)] blur-[8.5cqw] [clip-path:polygon(38%_0,62%_0,100%_100%,0_100%)]" />
                   {/* Hot core. */}
-                  <div className="absolute top-0 left-1/2 h-[72%] w-[52%] -translate-x-1/2 bg-[linear-gradient(to_bottom,#ffffff_0%,#e6fbff_22%,rgba(154,237,248,0.85)_55%,rgba(26,212,238,0.3)_85%,transparent_100%)] blur-[2.2cqw] [clip-path:polygon(34%_0,66%_0,92%_100%,8%_100%)]" />
+                  <div className="absolute top-0 left-1/2 h-[72%] w-[52%] -translate-x-1/2 bg-[linear-gradient(to_bottom,#ffffff_0%,#fff0e6_22%,rgba(253,186,116,0.85)_55%,rgba(251,146,60,0.3)_85%,transparent_100%)] blur-[2.2cqw] [clip-path:polygon(34%_0,66%_0,92%_100%,8%_100%)]" />
                   {/* Mach diamonds. */}
                   <div className="absolute top-0 left-1/2 h-[42%] w-[16%] -translate-x-1/2 bg-[repeating-linear-gradient(to_bottom,rgba(255,255,255,0.95)_0_18%,rgba(255,255,255,0.35)_30%_50%)] blur-[0.9cqw] [clip-path:polygon(30%_0,70%_0,100%_100%,0_100%)]" />
                 </motion.div>
@@ -284,7 +284,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
               {/* Engine light under the skirt. */}
               <motion.div
                 style={{ opacity: plumeOpacity }}
-                className="absolute top-[88%] left-1/2 h-[12%] w-[95%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(154,237,248,0.85),transparent_70%)] blur-[11.5cqw]"
+                className="absolute top-[88%] left-1/2 h-[12%] w-[95%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(253,186,116,0.85),transparent_70%)] blur-[11.5cqw]"
               />
 
               {/* Nav beacon. */}
@@ -318,7 +318,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
         }}
       >
         <div className="flex items-center gap-2 text-electric-300">
-          <span className="size-1.5 rounded-full bg-electric-400 shadow-[0_0_8px_2px_rgba(94,228,245,0.6)]" />
+          <span className="size-1.5 rounded-full bg-electric-400 shadow-[0_0_8px_2px_rgba(253,186,116,0.6)]" />
           Touchdown confirmed
         </div>
         <div className="pl-3.5 text-muted-dim">LZ-01 &middot; Moon Base</div>
@@ -358,7 +358,7 @@ function RocketSvg({ legsOut }: { legsOut: boolean }) {
         </linearGradient>
         <linearGradient id="ml-visor" x1="0" x2="1" y1="0" y2="0">
           <stop offset="0" stopColor="#0a1628" />
-          <stop offset="0.5" stopColor="#1ad4ee" />
+          <stop offset="0.5" stopColor="#fb923c" />
           <stop offset="1" stopColor="#062033" />
         </linearGradient>
         <linearGradient id="ml-bell" x1="0" x2="0" y1="0" y2="1">

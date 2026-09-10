@@ -57,7 +57,7 @@ export function TrustBar() {
           className="border-gradient glass-panel overflow-hidden rounded-2xl"
         >
           <Stagger
-            className="flex snap-x snap-mandatory overflow-x-auto md:grid md:grid-cols-5 md:overflow-visible"
+            className="flex flex-col md:grid md:grid-cols-5"
             staggerChildren={0.08}
           >
             {METRICS.map((metric, index) => {
@@ -65,13 +65,13 @@ export function TrustBar() {
               return (
                 <StaggerItem
                   key={metric.label}
-                  className="min-w-[70%] snap-center px-6 py-6 sm:min-w-[44%] md:min-w-0 md:px-5 md:py-7"
+                  className="px-6 py-5 md:px-5 md:py-7"
                 >
                   <div
                     className={
                       index === 0
                         ? ''
-                        : 'md:border-l md:border-white/[0.08] md:pl-5'
+                        : 'border-t border-white/[0.08] pt-5 md:border-t-0 md:border-l md:pl-5'
                     }
                   >
                     <p className="font-display text-2xl font-semibold tracking-tight text-cream tabular-nums sm:text-3xl">

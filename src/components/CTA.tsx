@@ -7,7 +7,7 @@ import { StatusDot } from './ui/StatusDot';
 import { company, homePage } from '@/lib/content';
 
 const AMBER_SHEEN =
-  'shadow-[0_8px_36px_-8px_rgba(255,92,0,0.5),0_8px_30px_-8px_rgba(26,212,238,0.55)]';
+  'shadow-[0_8px_36px_-8px_rgba(255,92,0,0.5),0_8px_30px_-8px_rgba(251,146,60,0.55)]';
 
 export function CTA() {
   return (
@@ -93,7 +93,7 @@ function MoonHorizon() {
           sizes="160vw"
           className="scale-[1.01] object-cover object-top opacity-80"
         />
-        <div className="absolute inset-0 rounded-full shadow-[inset_0_0_80px_rgba(45,212,191,0.18)]" />
+        <div className="absolute inset-0 rounded-full shadow-[inset_0_0_80px_rgba(244,63,154,0.18)]" />
       </div>
     </div>
   );

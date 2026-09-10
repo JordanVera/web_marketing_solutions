@@ -11,16 +11,16 @@
   --color-navy-600: #0f2038;
   --color-navy-500: #16294a;
 
-  --color-electric: #1ad4ee;
-  --color-electric-400: #5ee4f5;
-  --color-electric-300: #9aedf8;
+  --color-electric: #fb923c;
+  --color-electric-400: #fdba74;
+  --color-electric-300: #fed7aa;
 
   --color-rocket: #ff3333;
   --color-rocket-400: #ff6b5c;
 
-  --color-aurora: #2dd4bf;
-  --color-aurora-300: #5eead4;
-  --color-aurora-500: #10b981;
+  --color-aurora: #f43f9a;
+  --color-aurora-300: #fda4cf;
+  --color-aurora-500: #ec4899;
 
   --color-amber: #ff5c00;
   --color-amber-400: #ff8533;
@@ -238,11 +238,11 @@
   }
 
   .glow-cyan {
-    background: radial-gradient(circle, rgba(26, 212, 238, 0.22), transparent 65%);
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.22), transparent 65%);
   }
 
   .glow-aurora {
-    background: radial-gradient(circle, rgba(45, 212, 191, 0.22), transparent 65%);
+    background: radial-gradient(circle, rgba(244, 63, 154, 0.22), transparent 65%);
   }
 
   .glow-amber {
@@ -268,7 +268,7 @@
   .bg-scanlines {
     background-image: repeating-linear-gradient(
       to bottom,
-      rgba(154, 237, 248, 0.045) 0 1px,
+      rgba(253, 186, 116, 0.045) 0 1px,
       transparent 1px 4px
     );
   }

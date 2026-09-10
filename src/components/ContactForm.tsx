@@ -309,7 +309,7 @@ export function ContactForm({ className }: ContactFormProps) {
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="group/btn relative inline-flex h-13 shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-electric px-7 text-base font-medium tracking-tight text-void shadow-[0_8px_30px_-8px_rgba(26,212,238,0.7)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-electric-400 hover:shadow-[0_12px_44px_-8px_rgba(26,212,238,0.85)] active:translate-y-0 disabled:pointer-events-none disabled:opacity-60"
+          className="group/btn relative inline-flex h-13 shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-electric px-7 text-base font-medium tracking-tight text-void shadow-[0_8px_30px_-8px_rgba(251,146,60,0.7)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-electric-400 hover:shadow-[0_12px_44px_-8px_rgba(251,146,60,0.85)] active:translate-y-0 disabled:pointer-events-none disabled:opacity-60"
         >
           <span
             aria-hidden="true"
