@@ -39,7 +39,7 @@ export default function Home() {
         <TrustBar />
         <Services />
         <Houston />
-        <Projects />
+        {/* <Projects /> */}
         <Process />
         <HomeFaq />
         <CTA />
