@@ -34,7 +34,7 @@ export const company = {
     country: 'US',
   },
   coordinates: { lat: 29.5502, lng: -95.097 },
-  founded: '2016',
+  founded: '2025',
 } as const;
 
 /** Primary nav links appended after service links in Navigation. */
@@ -44,7 +44,7 @@ export const navLinks = [
 ] as const;
 
 export const heroStats = [
-  { value: '2016', label: 'Houston studio founded' },
+  { value: '2025', label: 'Houston studio founded' },
   { value: '60+', label: 'Commercial clients served' },
   { value: '148%', label: 'Avg. organic traffic lift' },
 ] as const;
@@ -390,14 +390,14 @@ export const houstonHighlights = [
     icon: Gauge,
     title: 'Written go/no-go, not a vibe',
     description:
-      'Since 2016 we have shipped with named checklists, staging you can click, and a hard stop before anything public. That is how commercial teams keep risk off the homepage.',
+      'Since 2025 we have shipped with named checklists, staging you can click, and a hard stop before anything public. That is how commercial teams keep risk off the homepage.',
   },
 ] as const;
 
 export const aboutPage = {
   metaTitle: 'About',
   metaDescription:
-    'Web Marketing Solutions is a Houston digital agency for custom web apps, native apps, websites, and SEO campaigns — built with launch discipline since 2016.',
+    'Web Marketing Solutions is a Houston digital agency for custom web apps, native apps, websites, and SEO campaigns — built with launch discipline since 2025.',
   h1: 'We build digital products worth launching.',
   lede: 'Web Marketing Solutions is a Houston studio for ambitious brands. We design and ship web apps, native apps, websites, and SEO campaigns — with the same checklist-driven discipline Houston has used for complex launches since 1961.',
   mission:
