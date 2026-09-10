@@ -5,7 +5,7 @@ import { Services } from '@/components/Services';
 import { Houston } from '@/components/Houston';
 import { Projects } from '@/components/Projects';
 import { Process } from '@/components/Process';
-import { Testimonials } from '@/components/Testimonials';
+// import { Testimonials } from '@/components/Testimonials';
 import { HomeFaq } from '@/components/HomeFaq';
 import { CTA } from '@/components/CTA';
 import { Footer } from '@/components/Footer';
@@ -40,7 +40,7 @@ export default function Home() {
         <Services />
         <Projects />
         <Process />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <HomeFaq />
         <CTA />
       </main>
