@@ -28,7 +28,7 @@ export function Projects() {
           title={
             <>
               {homePage.results.title}{' '}
-              <span className="text-gradient">
+              <span className="text-electric">
                 {homePage.results.titleAccent}
               </span>
             </>
@@ -160,7 +160,7 @@ function ProjectCard({
             </span>
           )}
 
-          <span className="absolute bottom-5 left-5 z-20 font-display text-sm font-semibold text-amber">
+          <span className="absolute bottom-5 left-5 z-20 font-display text-sm font-semibold text-electric">
             {project.metric}
           </span>
         </div>

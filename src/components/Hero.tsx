@@ -122,7 +122,7 @@ export function Hero() {
                       0.12 + (homePage.hero.headline.length + index) * 0.08,
                     ease: EASE,
                   }}
-                  className="text-gradient-hero block"
+                  className="text-electric block"
                 >
                   {phrase}
                 </motion.span>

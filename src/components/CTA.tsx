@@ -36,7 +36,7 @@ export function CTA() {
           <Reveal direction="up" delay={0.08}>
             <h2 className="text-display mt-8 font-semibold">
               {homePage.cta.title}{' '}
-              <span className="text-gradient">{homePage.cta.titleAccent}</span>
+              <span className="text-electric">{homePage.cta.titleAccent}</span>
             </h2>
           </Reveal>
 

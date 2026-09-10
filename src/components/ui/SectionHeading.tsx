@@ -43,7 +43,7 @@ export function SectionHeading({
       <Reveal direction="up">
         <span className="inline-flex items-center gap-3">
           {index && (
-            <span className="font-mono text-[0.6875rem] tracking-[0.22em] text-amber tabular-nums">
+            <span className="font-mono text-[0.6875rem] tracking-[0.22em] text-electric tabular-nums">
               {index}
             </span>
           )}

@@ -54,7 +54,7 @@ export function Services() {
           title={
             <>
               {homePage.services.title}{' '}
-              <span className="text-gradient">
+              <span className="text-electric">
                 {homePage.services.titleAccent}
               </span>
             </>
@@ -170,7 +170,7 @@ function ServiceCard({
           ))}
         </ul>
 
-        <span className="inline-flex items-center gap-1.5 font-mono text-[0.6875rem] tracking-[0.16em] text-amber uppercase transition-colors duration-300">
+        <span className="inline-flex items-center gap-1.5 font-mono text-[0.6875rem] tracking-[0.16em] text-electric uppercase transition-colors duration-300">
           Explore
           <ArrowUpRight
             className="size-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transform-none"
@@ -232,11 +232,11 @@ function FlightCheckPanel() {
       />
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 z-10 h-px bg-linear-to-r from-transparent via-amber/70 to-transparent"
+        className="absolute inset-x-0 top-0 z-10 h-px bg-linear-to-r from-transparent via-electric/70 to-transparent"
       />
       <div
         aria-hidden="true"
-        className="animate-drift glow-amber absolute -right-16 -bottom-16 z-1 size-52 rounded-full blur-2xl"
+        className="animate-drift glow-electric absolute -right-16 -bottom-16 z-1 size-52 rounded-full blur-2xl"
       />
 
       <div className="relative z-10 max-w-xl">
@@ -248,7 +248,7 @@ function FlightCheckPanel() {
         </p>
       </div>
 
-      <span className="relative z-10 mt-7 inline-flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-amber uppercase drop-shadow-[0_2px_12px_rgba(5,11,22,0.9)] md:mt-0">
+      <span className="relative z-10 mt-7 inline-flex items-center gap-2 font-mono text-xs tracking-[0.18em] text-electric uppercase drop-shadow-[0_2px_12px_rgba(5,11,22,0.9)] md:mt-0">
         {homePage.services.flightCheckCta}
         <ArrowUpRight
           className="size-4 transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transform-none"

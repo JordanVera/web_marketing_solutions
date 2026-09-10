@@ -266,7 +266,7 @@ export function ContactForm({ className }: ContactFormProps) {
           className="flex items-start gap-3 rounded-2xl border border-amber-400/30 bg-amber-400/10 px-5 py-4"
         >
           <CircleAlert
-            className="mt-0.5 size-5 shrink-0 text-amber-400"
+            className="mt-0.5 size-5 shrink-0 text-electric"
             aria-hidden="true"
           />
           <div>

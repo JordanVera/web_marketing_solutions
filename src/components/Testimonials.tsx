@@ -59,7 +59,7 @@ export function Testimonials() {
           title={
             <>
               {homePage.testimonials.title}{' '}
-              <span className="text-gradient">
+              <span className="text-electric">
                 {homePage.testimonials.titleAccent}
               </span>
             </>

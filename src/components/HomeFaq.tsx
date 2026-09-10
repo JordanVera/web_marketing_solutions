@@ -33,7 +33,7 @@ export function HomeFaq() {
           title={
             <>
               {homePage.faq.title}{' '}
-              <span className="text-gradient">{homePage.faq.titleAccent}</span>
+              <span className="text-electric">{homePage.faq.titleAccent}</span>
             </>
           }
           description={homePage.faq.description}

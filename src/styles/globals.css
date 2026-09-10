@@ -177,34 +177,6 @@
     }
   }
 
-  .text-gradient {
-    background: linear-gradient(
-      96deg,
-      /* var(--color-electric-400) 0%, */
-      var(--color-electric) 38%,
-      var(--color-aurora-500) 72%,
-      var(--color-aurora-500) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  /* Saturated variant for the hero headline, where each phrase carries its own
-     gradient and needs to read as deliberate rather than washed out. */
-  .text-gradient-hero {
-    background: linear-gradient(
-      96deg,
-      /* var(--color-electric-400) 0%, */
-      var(--color-electric) 36%,
-      var(--color-aurora) 72%,
-      var(--color-aurora-500) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
   /* 1px gradient hairline used on cards and panels. */
   .border-gradient {
     position: relative;

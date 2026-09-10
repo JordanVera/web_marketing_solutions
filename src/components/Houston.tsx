@@ -40,7 +40,7 @@ export function Houston() {
               title={
                 <>
                   {homePage.houston.title}{' '}
-                  <span className="text-gradient">
+                  <span className="text-electric">
                     {homePage.houston.titleAccent}
                   </span>
                 </>

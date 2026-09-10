@@ -52,7 +52,7 @@ export function Process() {
                 title={
                   <>
                     {homePage.process.title}{' '}
-                    <span className="text-gradient">
+                    <span className="text-electric">
                       {homePage.process.titleAccent}
                     </span>
                   </>

@@ -194,7 +194,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               title={
                 <>
                   {service.sections.audience.title}{' '}
-                  <span className="text-gradient">
+                  <span className="text-electric">
                     {service.sections.audience.accent}
                   </span>
                 </>
@@ -229,7 +229,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               title={
                 <>
                   {service.sections.problems.title}{' '}
-                  <span className="text-gradient">
+                  <span className="text-electric">
                     {service.sections.problems.accent}
                   </span>
                 </>
@@ -263,7 +263,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               title={
                 <>
                   {service.sections.deliverables.title}{' '}
-                  <span className="text-gradient">
+                  <span className="text-electric">
                     {service.sections.deliverables.accent}
                   </span>
                 </>
@@ -296,7 +296,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               title={
                 <>
                   {service.sections.delivery.title}{' '}
-                  <span className="text-gradient">
+                  <span className="text-electric">
                     {service.sections.delivery.accent}
                   </span>
                 </>
@@ -336,7 +336,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                 title={
                   <>
                     {section.title}{' '}
-                    <span className="text-gradient">{section.accent}</span>
+                    <span className="text-electric">{section.accent}</span>
                   </>
                 }
               />
@@ -429,7 +429,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               title={
                 <>
                   {service.sections.whyUs.title}{' '}
-                  <span className="text-gradient">
+                  <span className="text-electric">
                     {service.sections.whyUs.accent}
                   </span>
                 </>
@@ -466,7 +466,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
                 title={
                   <>
                     {service.sections.relatedWork.title}{' '}
-                    <span className="text-gradient">
+                    <span className="text-electric">
                       {service.sections.relatedWork.accent}
                     </span>
                   </>
@@ -540,7 +540,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               title={
                 <>
                   {service.sections.faq.title}{' '}
-                  <span className="text-gradient">
+                  <span className="text-electric">
                     {service.sections.faq.accent}
                   </span>
                 </>
@@ -560,7 +560,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
               title={
                 <>
                   {service.sections.related.title}{' '}
-                  <span className="text-gradient">
+                  <span className="text-electric">
                     {service.sections.related.accent}
                   </span>
                 </>
