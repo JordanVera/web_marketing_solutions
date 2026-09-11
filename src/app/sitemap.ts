@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { blogPath, getSortedBlogPosts } from '@/lib/blog';
 import { servicePages, servicePath } from '@/lib/services';
 import { SITE_URL } from '@/lib/utils';
 
@@ -23,6 +24,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: SITE_URL, lastModified, changeFrequency: 'monthly', priority: 1 },
     ...serviceRoutes,
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    ...getSortedBlogPosts().map((post) => ({
+      url: `${SITE_URL}${blogPath(post.slug)}`,
+      lastModified: new Date(post.updatedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+    })),
     {
       url: `${SITE_URL}/about`,
       lastModified,

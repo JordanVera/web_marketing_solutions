@@ -14,7 +14,7 @@ export function ServiceHero({ service }: { service: ServicePageData }) {
   const theme = SERVICE_THEME[service.slug];
 
   return (
-    <section className="relative px-5 pt-24 pb-8 sm:px-6 md:pt-28">
+    <section className="relative px-5 pt-6  sm:px-6 ">
       <div className="relative mx-auto">
         <div className="relative min-h-[32rem] overflow-hidden rounded-[1.75rem] md:min-h-[36rem] md:rounded-[2rem]">
           <NebulaBackdrop
@@ -59,7 +59,7 @@ export function ServiceHero({ service }: { service: ServicePageData }) {
             </Reveal>
 
             <Reveal direction="up" delay={0.06}>
-              <span className="mt-10 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-void/40 px-3.5 py-1.5 font-mono text-[0.6875rem] tracking-[0.22em] text-electric-300 uppercase backdrop-blur-sm">
+              <span className="mt-10 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-void/40 px-3.5 py-1.5 font-mono text-[0.6875rem] tracking-[0.22em] text-electric uppercase backdrop-blur-sm">
                 <Icon className="size-3.5" aria-hidden="true" />
                 {theme.callsign} · {company.address.locality} ·{' '}
                 {service.shortTitle}

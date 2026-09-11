@@ -40,6 +40,7 @@ export const company = {
 /** Primary nav links appended after service links in Navigation. */
 export const navLinks = [
   { label: 'About', href: '/about' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ] as const;
 
@@ -465,6 +466,7 @@ export const footerNav = {
   })),
   company: [
     { label: 'About', href: '/about' },
+    { label: 'Blog', href: '/blog' },
     { label: 'Services', href: '/services' },
     { label: 'Contact', href: '/contact' },
   ],
