@@ -153,8 +153,8 @@ export const homePage = {
   cta: {
     eyebrow: 'Launch window open',
     windowLabel: 'Launch window · Open · Reply ≤ 2 business days',
-    title: 'Ready for a',
-    titleAccent: 'real plan?',
+    title: 'Ready for',
+    titleAccent: 'Lift Off?',
     lede: 'Tell us the outcome you need in the next twelve months — more qualified inquiries, a portal your clients will use, a store-ready app, or organic demand that is not rented from ads. We reply with recommended service, scope, timeline, and price within two business days.',
     primaryCta: 'Schedule Your Free Consultation',
     secondaryCta: 'Get a Custom Quote',
