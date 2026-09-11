@@ -1,8 +1,9 @@
 /* ---------------------------------------------------------------------------
    Curated stock images for blog posts.
-   All entries use Unsplash (free license) — already allowed in next.config.ts.
-   Swap photoPath after searching: https://unsplash.com/s/photos/{query}
+   Unsplash and Pexels (free licenses) — both allowed in next.config.ts.
    --------------------------------------------------------------------------- */
+
+export type BlogImageProvider = 'unsplash' | 'pexels';
 
 export type BlogImageCredit = {
   photographer: string;
@@ -15,13 +16,21 @@ export type BlogImageCredit = {
 export type BlogImage = {
   /** Stable key — reference from blog.ts */
   id: string;
-  /** Unsplash path segment, e.g. photo-1530080862112-274ed9315894 */
+  provider?: BlogImageProvider;
+  /**
+   * Unsplash: path segment, e.g. photo-1530080862112-274ed9315894
+   * Pexels: numeric photo id, e.g. 17995530
+   */
   photoPath: string;
   defaultAlt: string;
   credit: BlogImageCredit;
   /** Search terms that surfaced this image — reuse for future posts */
   tags: string[];
 };
+
+function imageProvider(entry: BlogImage): BlogImageProvider {
+  return entry.provider ?? 'unsplash';
+}
 
 /** Build an optimized Unsplash CDN URL from a photo path segment. */
 export function unsplashImage(
@@ -31,16 +40,27 @@ export function unsplashImage(
   return `https://images.unsplash.com/${photoPath}?auto=format&fit=crop&w=${width}&q=80`;
 }
 
+/** Build an optimized Pexels CDN URL from a numeric photo id. */
+export function pexelsImage(
+  photoId: string,
+  width: 1600 | 1200 | 800 = 1600,
+) {
+  return `https://images.pexels.com/photos/${photoId}/pexels-photo-${photoId}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
+}
+
 export function blogImageSrc(
   entry: BlogImage,
   width: 1600 | 1200 | 800 = 1600,
 ) {
-  return unsplashImage(entry.photoPath, width);
+  return imageProvider(entry) === 'pexels'
+    ? pexelsImage(entry.photoPath, width)
+    : unsplashImage(entry.photoPath, width);
 }
 
 /** Optional caption suffix with photographer credit. */
 export function blogImageCreditLine(entry: BlogImage) {
-  return `Photo: ${entry.credit.photographer} / Unsplash`;
+  const host = imageProvider(entry) === 'pexels' ? 'Pexels' : 'Unsplash';
+  return `Photo: ${entry.credit.photographer} / ${host}`;
 }
 
 /**
@@ -48,6 +68,64 @@ export function blogImageCreditLine(entry: BlogImage) {
  * here so credits and URLs stay in one place.
  */
 export const blogImageCatalog = {
+  houstonSkylineNight: {
+    id: 'houstonSkylineNight',
+    provider: 'pexels',
+    photoPath: '17995530',
+    defaultAlt:
+      'Aerial view of downtown Houston Texas skyline at dusk — website development for Houston businesses',
+    credit: {
+      photographer: 'Jeswin Thomas',
+      profileUrl: 'https://www.pexels.com/@jeswin/',
+      photoUrl: 'https://www.pexels.com/photo/downtown-at-night-17995530/',
+    },
+    tags: ['houston', 'skyline', 'local', 'hero', 'texas', 'night'],
+  },
+
+  wordpressTyping: {
+    id: 'wordpressTyping',
+    provider: 'pexels',
+    photoPath: '261662',
+    defaultAlt:
+      'Hands typing a blog post on a laptop — WordPress publishing for Houston teams',
+    credit: {
+      photographer: 'Pixabay',
+      profileUrl: 'https://www.pexels.com/@pixabay/',
+      photoUrl: 'https://www.pexels.com/photo/close-up-of-typing-on-a-laptop-261662/',
+    },
+    tags: ['wordpress', 'cms', 'content', 'editor', 'publishing'],
+  },
+
+  nextjsCodeLaptop: {
+    id: 'nextjsCodeLaptop',
+    provider: 'pexels',
+    photoPath: '177598',
+    defaultAlt:
+      'Laptop displaying source code — custom Next.js website development',
+    credit: {
+      photographer: 'Markus Spiske',
+      profileUrl: 'https://www.pexels.com/@markusspiske/',
+      photoUrl:
+        'https://www.pexels.com/photo/black-laptop-computer-turned-on-showing-computer-codes-177598/',
+    },
+    tags: ['nextjs', 'coding', 'developer', 'react', 'web-development'],
+  },
+
+  seoAnalyticsDesk: {
+    id: 'seoAnalyticsDesk',
+    provider: 'pexels',
+    photoPath: '669610',
+    defaultAlt:
+      'Laptop and charts on a desk — SEO analytics and performance tracking',
+    credit: {
+      photographer: 'Lukas Blazek',
+      profileUrl: 'https://www.pexels.com/@goumbik/',
+      photoUrl:
+        'https://www.pexels.com/photo/person-holding-blue-ballpoint-pen-on-white-notebook-669610/',
+    },
+    tags: ['seo', 'analytics', 'dashboard', 'metrics', 'search-console'],
+  },
+
   houstonSkylineDusk: {
     id: 'houstonSkylineDusk',
     photoPath: 'photo-1530080862112-274ed9315894',
@@ -182,14 +260,14 @@ export const blogImageCatalog = {
 export type BlogImageKey = keyof typeof blogImageCatalog;
 
 /**
- * Suggested Unsplash search queries by blog topic — use when drafting new posts.
- * Open any URL, pick a photo, copy the photo-… segment into blogImageCatalog.
+ * Suggested search queries by blog topic — use when drafting new posts.
+ * Unsplash: copy the photo-… path. Pexels: copy the numeric id.
  */
 export const blogImageSearchGuide = {
   houstonLocal: [
+    'https://www.pexels.com/search/houston%20skyline/',
     'https://unsplash.com/s/photos/houston-skyline',
     'https://unsplash.com/s/photos/downtown-houston',
-    'https://unsplash.com/s/photos/houston-texas',
   ],
   webDevelopment: [
     'https://unsplash.com/s/photos/web-development',

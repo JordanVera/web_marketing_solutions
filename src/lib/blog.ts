@@ -51,10 +51,10 @@ export const blogHub = {
 } as const;
 
 const IMG = {
-  houstonHero: blogImageCatalog.houstonSkylineDusk,
-  wordpressCms: blogImageCatalog.contentEditor,
-  nextjsCode: blogImageCatalog.reactCodeEditor,
-  seoDashboard: blogImageCatalog.seoAnalytics,
+  houstonHero: blogImageCatalog.houstonSkylineNight,
+  wordpressCms: blogImageCatalog.wordpressTyping,
+  nextjsCode: blogImageCatalog.nextjsCodeLaptop,
+  seoDashboard: blogImageCatalog.seoAnalyticsDesk,
 } as const;
 
 export const blogPosts: BlogPost[] = [
