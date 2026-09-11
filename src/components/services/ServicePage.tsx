@@ -118,7 +118,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
       <JsonLd data={structuredData} />
 
       <main id="main">
-      <ServiceHero service={service} />
+        <ServiceHero service={service} />
         <section className="relative py-20 md:py-28">
           <div className="container-shell">
             <SectionHeading
