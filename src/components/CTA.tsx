@@ -48,7 +48,7 @@ export function CTA() {
           <source src="/videos/launch.mp4" type="video/mp4" />
         </video>
 
-        <div className="absolute inset-0 bg-void/50 motion-reduce:hidden" />
+        <div className="absolute inset-0 bg-void/60 motion-reduce:hidden" />
       </div>
 
       <Atmosphere
