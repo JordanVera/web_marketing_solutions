@@ -1,3 +1,8 @@
+import {
+  blogImageCatalog,
+  blogImageCreditLine,
+  blogImageSrc,
+} from '@/lib/blog-images';
 import { SITE_URL } from '@/lib/utils';
 
 /* ---------------------------------------------------------------------------
@@ -46,12 +51,10 @@ export const blogHub = {
 } as const;
 
 const IMG = {
-  houstonSkyline:
-    'https://images.unsplash.com/photo-1530080862112-274ed9315894?auto=format&fit=crop&w=1600&q=80',
-  developerDesk:
-    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
-  teamPlanning:
-    'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
+  houstonHero: blogImageCatalog.houstonSkylineDusk,
+  wordpressCms: blogImageCatalog.contentEditor,
+  nextjsCode: blogImageCatalog.reactCodeEditor,
+  seoDashboard: blogImageCatalog.seoAnalytics,
 } as const;
 
 export const blogPosts: BlogPost[] = [
@@ -73,12 +76,11 @@ export const blogPosts: BlogPost[] = [
       'SEO services Houston',
     ],
     author: 'Web Marketing Solutions',
-    publishedAt: '2026-03-15',
-    updatedAt: '2026-03-15',
+    publishedAt: '2026-09-10',
+    updatedAt: '2026-09-10',
     readTimeMinutes: 9,
-    heroImage: IMG.houstonSkyline,
-    heroImageAlt:
-      'Houston Texas downtown skyline at dusk — custom website development for Houston businesses',
+    heroImage: blogImageSrc(IMG.houstonHero),
+    heroImageAlt: IMG.houstonHero.defaultAlt,
     heroOverlay: 'bg-linear-to-br from-void/88 via-void/72 to-void/58',
     callsign: 'WMS-WEB-01',
     blocks: [
@@ -103,6 +105,12 @@ export const blogPosts: BlogPost[] = [
         text: 'The tradeoff shows up on performance, security, and long-term SEO. Every plugin is another dependency. Page builders add markup weight. Updates break layouts. Hosting matters more. A WordPress site can rank — we have seen it — but ranking in competitive Houston local search often means fighting the theme, not refining the strategy.',
       },
       {
+        type: 'image',
+        src: blogImageSrc(IMG.wordpressCms, 1200),
+        alt: IMG.wordpressCms.defaultAlt,
+        caption: `WordPress wins when Houston teams need daily publishing without a developer. ${blogImageCreditLine(IMG.wordpressCms)}`,
+      },
+      {
         type: 'heading',
         text: 'Next.js in one minute',
       },
@@ -116,10 +124,9 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'image',
-        src: IMG.developerDesk,
-        alt: 'Developer working on a laptop — custom Next.js web development for Houston companies',
-        caption:
-          'Custom Next.js builds trade plugin sprawl for a codebase your Houston team can measure, secure, and extend.',
+        src: blogImageSrc(IMG.nextjsCode, 1200),
+        alt: IMG.nextjsCode.defaultAlt,
+        caption: `Custom Next.js builds trade plugin sprawl for a codebase your Houston team can measure, secure, and extend. ${blogImageCreditLine(IMG.nextjsCode)}`,
       },
       {
         type: 'heading',
@@ -166,10 +173,9 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: 'image',
-        src: IMG.teamPlanning,
-        alt: 'Business team planning a website project — Houston digital agency consultation',
-        caption:
-          'Platform decisions should follow how your Houston team sells, publishes, and measures pipeline — not the other way around.',
+        src: blogImageSrc(IMG.seoDashboard, 1200),
+        alt: IMG.seoDashboard.defaultAlt,
+        caption: `Pair the platform choice with Search Console, analytics, and a written SEO strategy — not hope. ${blogImageCreditLine(IMG.seoDashboard)}`,
       },
       {
         type: 'heading',
