@@ -90,7 +90,8 @@ export function ContactForm({ className }: ContactFormProps) {
 
       setStatus('error');
       setErrorMessage(
-        message || 'Something went wrong. Please email us directly or try again.',
+        message ||
+          'Something went wrong. Please email us directly or try again.',
       );
     } catch {
       setStatus('error');
@@ -111,7 +112,9 @@ export function ContactForm({ className }: ContactFormProps) {
           aria-hidden="true"
         />
         <div>
-          <p className="font-medium text-void">Message received — we&apos;re on it.</p>
+          <p className="font-medium text-void">
+            Message received — we&apos;re on it.
+          </p>
           <p className="mt-1 text-sm leading-relaxed text-muted">
             Expect a reply within two business days.
           </p>
@@ -294,11 +297,14 @@ export function ContactForm({ className }: ContactFormProps) {
             aria-hidden="true"
           />
           <div>
-            <p className="font-medium text-void">One-time FormSubmit activation</p>
+            <p className="font-medium text-void">
+              One-time FormSubmit activation
+            </p>
             <p className="mt-1 text-sm leading-relaxed text-muted">
               FormSubmit emailed an activate link to{' '}
               <span className="text-void">{company.email}</span>. Click it once,
-              then send this form again — after that, inquiries land in the inbox.
+              then send this form again — after that, inquiries land in the
+              inbox.
             </p>
           </div>
         </div>

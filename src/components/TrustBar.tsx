@@ -69,9 +69,9 @@ export function TrustBar() {
                 >
                   <div
                     className={
-                      index === 0
-                        ? ''
-                        : 'border-t border-white/[0.08] pt-5 md:border-t-0 md:border-l md:pl-5'
+                      index > 0
+                        ? 'border-t border-white/[0.08] pt-5 md:border-t-0 md:border-l md:pt-0 md:pl-5'
+                        : undefined
                     }
                   >
                     <p className="font-display text-2xl font-semibold tracking-tight text-cream tabular-nums sm:text-3xl">
