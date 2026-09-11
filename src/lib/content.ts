@@ -24,7 +24,7 @@ export const company = {
   blurb:
     'A Houston digital agency for commercial teams: custom website development, web app development, native app development, and SEO services built to move pipeline — not vanity metrics.',
   city: 'Houston, Texas',
-  email: 'verawebdev@protonmail.com',
+  email: 'contact@webmarketingsolutionstx.com',
   phone: '+1 (713) 555-0142',
   address: {
     street: '1200 Space Park Dr, Suite 210',

@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import Link from 'next/link';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { Logo } from './Logo';
 import { SocialIcon } from './SocialIcon';
 import { NewsletterForm } from './NewsletterForm';
@@ -26,7 +26,11 @@ export function Footer() {
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
             {/* Brand */}
             <div className="lg:col-span-4">
-              <Link href="/" className="inline-flex" aria-label={`${company.name} — home`}>
+              <Link
+                href="/"
+                className="inline-flex"
+                aria-label={`${company.name} — home`}
+              >
                 <Logo />
               </Link>
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted">
@@ -168,9 +172,13 @@ function FooterLink({
   href: string;
   children: React.ReactNode;
 }) {
-  const className = "text-sm text-muted transition-colors duration-300 hover:text-cream";
+  const className =
+    'text-sm text-muted transition-colors duration-300 hover:text-cream';
   const useNativeAnchor =
-    href.startsWith("#") || href.includes("#") || href.startsWith("http") || href.startsWith("mailto");
+    href.startsWith('#') ||
+    href.includes('#') ||
+    href.startsWith('http') ||
+    href.startsWith('mailto');
 
   if (useNativeAnchor) {
     return (

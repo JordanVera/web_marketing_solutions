@@ -1,4 +1,6 @@
-import Image from 'next/image';
+'use client';
+
+import { useRef } from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
 import { Atmosphere } from './ui/Atmosphere';
 import { Button } from './ui/Button';
@@ -9,13 +11,50 @@ import { company, homePage } from '@/lib/content';
 const AMBER_SHEEN =
   'shadow-[0_8px_36px_-8px_rgba(255,92,0,0.5),0_8px_30px_-8px_rgba(251,146,60,0.55)]';
 
+const LOOP_START = 6;
+const LOOP_END = 25;
+
 export function CTA() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleLoadedMetadata = () => {
+    const video = videoRef.current;
+    if (video) video.currentTime = LOOP_START;
+  };
+
+  const handleTimeUpdate = () => {
+    const video = videoRef.current;
+    if (video && video.currentTime >= LOOP_END) {
+      video.currentTime = LOOP_START;
+    }
+  };
+
   return (
     <section
       id="contact"
       className="relative scroll-mt-24 overflow-hidden py-24 md:py-32"
     >
-      <Atmosphere variant="horizon" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          onLoadedMetadata={handleLoadedMetadata}
+          onTimeUpdate={handleTimeUpdate}
+          className="absolute inset-0 size-full object-cover motion-reduce:hidden"
+        >
+          <source src="/videos/launch.mp4" type="video/mp4" />
+        </video>
+
+        <div className="absolute inset-0 bg-void/50 motion-reduce:hidden" />
+      </div>
+
+      <Atmosphere
+        variant="horizon"
+        className="opacity-40 motion-reduce:opacity-100"
+      />
 
       <div
         aria-hidden="true"
@@ -75,26 +114,5 @@ export function CTA() {
         </div>
       </div>
     </section>
-  );
-}
-
-function MoonHorizon() {
-  return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-40 overflow-hidden md:h-56"
-    >
-      <div className="glow-aurora absolute -bottom-24 left-1/2 size-[36rem] -translate-x-1/2 rounded-full blur-3xl" />
-      <div className="absolute top-[calc(100%-5rem)] left-1/2 aspect-square w-[160vw] -translate-x-1/2 md:top-[calc(100%-7rem)]">
-        <Image
-          src="/moon/full-moon.webp"
-          alt=""
-          fill
-          sizes="160vw"
-          className="scale-[1.01] object-cover object-top opacity-80"
-        />
-        <div className="absolute inset-0 rounded-full shadow-[inset_0_0_80px_rgba(244,63,154,0.18)]" />
-      </div>
-    </div>
   );
 }

@@ -45,7 +45,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_-10%,#12244a_0%,#0a1628_38%,#050b16_78%)]" />
 
       <motion.div style={{ y: parallax(starsY) }} className="absolute inset-0">
-        <Starfield density={0.15} speed={3} shootingStars />
+        <Starfield density={1.35} speed={3} shootingStars constellations />
       </motion.div>
 
       <motion.div style={{ y: parallax(nebulaY) }} className="absolute inset-0">
