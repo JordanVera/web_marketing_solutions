@@ -53,11 +53,11 @@ export function Hero() {
       </motion.div>
 
       {/* Below lg the moon is a horizon along the bottom edge with the rocket
-          landing at its apex; from lg up it swings to the lower right and the
-          rocket lands on the limb at the 11 o'clock mark. The section's
-          bottom padding below lg reserves room for the crest plus a standing
-          rocket, so the hero fits a phone viewport and the moon stays at the
-          bottom of the screen. */}
+          lifting off from its apex; from lg up it swings to the lower right
+          and the rocket launches from the limb at the 11 o'clock mark. The
+          section's bottom padding below lg reserves room for the crest plus a
+          standing rocket, so the hero fits a phone viewport and the moon
+          stays at the bottom of the screen. */}
       <motion.div style={{ y: parallax(moonY) }} className="absolute inset-0">
         <MoonLanding className="absolute top-[calc(100%-7rem)] left-1/2 w-[180vw] -translate-x-1/2 lg:top-[112%] lg:left-[82%] lg:w-[min(128svh,110vw)] lg:-translate-y-1/2" />
       </motion.div>
