@@ -14,24 +14,27 @@ import {
 import { cn } from '@/lib/utils';
 
 /**
- * Descent profile: comes in quick from above the viewport, then bleeds speed
- * off continuously into a soft touchdown with no visible hover.
+ * Launch profile: hold on the pad through a T-minus count, light the engines
+ * before the vehicle moves, then accelerate along the surface normal until
+ * the rocket and plume clear the top of the page.
  */
-const LANDING_EASE = [0.22, 0.5, 0.55, 0.92] as const;
-const DESCENT_DURATION = 5.8;
-const DESCENT_DELAY = 0.5;
+const LAUNCH_EASE = [0.45, 0.0, 0.75, 0.2] as const;
+const LAUNCH_DURATION = 5.8;
+const COUNTDOWN_FROM = 5;
+const IGNITE_AT = 2;
+const HUD_FADE_MS = 800;
 /**
  * Minimum flight distance along the surface normal, in viewport heights. On
- * small screens the pad sits below the fold, so the real start is pushed
+ * small screens the pad sits below the fold, so the destination is pushed
  * further up until the rocket and its plume clear the top of the page;
- * otherwise it would sit parked mid-viewport behind the hero copy.
+ * otherwise it would stall mid-viewport behind the hero copy.
  */
-const DESCENT_MIN_VH = 90;
+const FLIGHT_MIN_VH = 90;
 /** Pre-measurement fallback: far enough up to be offscreen on any device. */
-const DESCENT_START_FALLBACK_VH = 300;
+const FLIGHT_END_FALLBACK_VH = 300;
 /** How far the full-throttle plume hangs below the rocket, in rocket heights. */
 const PLUME_OVERHANG = 1.75;
-const LEGS_DEPLOY_AT = 0.6;
+const LEGS_RETRACT_AT = 0.22;
 
 /**
  * Where the rocket's base sits on the limb, in the moon's own box. Radius is
@@ -42,6 +45,121 @@ const LANDING_ANCHOR = {
   left: 'calc(50% + 49.55% * sin(var(--tilt)))',
   top: 'calc(50% - 49.55% * cos(var(--tilt)))',
 } as const;
+
+type CountPhase = number | 'liftoff' | null;
+
+type SmokePuff = {
+  dx: number;
+  dy: number;
+  w: number;
+  h: number;
+  duration: number;
+  delay: number;
+  scale: number;
+  warm?: boolean;
+};
+
+const SMOKE_IGNITION: readonly SmokePuff[] = [
+  {
+    dx: -36,
+    dy: -10,
+    w: 72,
+    h: 40,
+    duration: 3.2,
+    delay: 0,
+    scale: 2.2,
+    warm: true,
+  },
+  {
+    dx: 40,
+    dy: -8,
+    w: 78,
+    h: 42,
+    duration: 3.4,
+    delay: 0.04,
+    scale: 2.3,
+    warm: true,
+  },
+  {
+    dx: -12,
+    dy: -4,
+    w: 90,
+    h: 48,
+    duration: 2.8,
+    delay: 0.02,
+    scale: 2.0,
+    warm: true,
+  },
+  {
+    dx: 8,
+    dy: -6,
+    w: 86,
+    h: 44,
+    duration: 3.0,
+    delay: 0.08,
+    scale: 2.1,
+    warm: true,
+  },
+  { dx: -90, dy: -18, w: 110, h: 56, duration: 4.0, delay: 0.1, scale: 2.5 },
+  { dx: 95, dy: -16, w: 118, h: 58, duration: 4.2, delay: 0.12, scale: 2.6 },
+  { dx: -140, dy: -8, w: 130, h: 52, duration: 4.5, delay: 0.18, scale: 2.4 },
+  { dx: 148, dy: -10, w: 136, h: 54, duration: 4.6, delay: 0.16, scale: 2.5 },
+  { dx: -70, dy: -28, w: 88, h: 44, duration: 3.6, delay: 0.22, scale: 2.2 },
+  { dx: 74, dy: -26, w: 92, h: 46, duration: 3.7, delay: 0.2, scale: 2.3 },
+  { dx: -40, dy: 4, w: 220, h: 36, duration: 4.8, delay: 0.06, scale: 1.8 },
+  { dx: 50, dy: 6, w: 240, h: 38, duration: 5.0, delay: 0.1, scale: 1.9 },
+];
+
+const SMOKE_LIFTOFF: readonly SmokePuff[] = [
+  {
+    dx: -55,
+    dy: -14,
+    w: 100,
+    h: 50,
+    duration: 3.6,
+    delay: 0,
+    scale: 2.6,
+    warm: true,
+  },
+  {
+    dx: 58,
+    dy: -12,
+    w: 108,
+    h: 52,
+    duration: 3.8,
+    delay: 0.03,
+    scale: 2.7,
+    warm: true,
+  },
+  {
+    dx: -20,
+    dy: -8,
+    w: 96,
+    h: 48,
+    duration: 3.2,
+    delay: 0.05,
+    scale: 2.4,
+    warm: true,
+  },
+  {
+    dx: 24,
+    dy: -9,
+    w: 100,
+    h: 50,
+    duration: 3.3,
+    delay: 0.02,
+    scale: 2.5,
+    warm: true,
+  },
+  { dx: -120, dy: -22, w: 140, h: 64, duration: 4.4, delay: 0.08, scale: 2.8 },
+  { dx: 128, dy: -20, w: 148, h: 66, duration: 4.5, delay: 0.1, scale: 2.9 },
+  { dx: -180, dy: -6, w: 132, h: 50, duration: 4.8, delay: 0.14, scale: 2.5 },
+  { dx: 188, dy: -8, w: 140, h: 52, duration: 4.9, delay: 0.12, scale: 2.6 },
+  { dx: -85, dy: -32, w: 104, h: 48, duration: 3.9, delay: 0.16, scale: 2.4 },
+  { dx: 90, dy: -30, w: 110, h: 50, duration: 4.0, delay: 0.18, scale: 2.5 },
+  { dx: -10, dy: 2, w: 260, h: 42, duration: 5.0, delay: 0.04, scale: 2.0 },
+  { dx: 16, dy: 4, w: 280, h: 44, duration: 5.2, delay: 0.08, scale: 2.1 },
+];
 
 const DUST = [
   { dx: -140, dy: -38, size: 4, duration: 1.5, delay: 0 },
@@ -62,31 +180,33 @@ type MoonLandingProps = {
 
 /**
  * Photoreal Moon (NASA/GSFC LRO render, public domain) with a rocket that
- * flies in from above the viewport, throttles down, deploys its legs and
- * settles on the limb. The whole sequence is driven from one motion value so
- * every layer stays in sync. Under reduced motion it renders landed.
+ * sits on the limb through a T-minus count, ignites, then retracts its legs
+ * and accelerates off-screen. Flight is driven from one motion value so
+ * every layer stays in sync. Under reduced motion it renders parked on the
+ * pad.
  *
  * Position and size the moon with `className`; `--tilt` sets where on the
- * limb the rocket lands (0deg = top of the disc) and the rocket is rotated to
+ * limb the pad sits (0deg = top of the disc) and the rocket is rotated to
  * stand perpendicular to the surface there.
  */
 export function MoonLanding({ className }: MoonLandingProps) {
   const prefersReducedMotion = useReducedMotion();
   const padRef = useRef<HTMLDivElement | null>(null);
-  // On small screens the landing site sits below the fold, so hold the
-  // descent until the pad scrolls into view rather than landing unseen.
+  // On small screens the pad sits below the fold, so hold the launch until
+  // it scrolls into view rather than lifting off unseen.
   const padInView = useInView(padRef, { once: true, amount: 'some' });
-  const progress = useMotionValue(prefersReducedMotion ? 1 : 0);
+  const progress = useMotionValue(0);
   // Flight distance in px; 0 until the pad has been measured.
-  const descentStart = useMotionValue(0);
-  const [touchedDown, setTouchedDown] = useState(false);
-  const [legsDeployed, setLegsDeployed] = useState(false);
-  // Reduced motion skips the flight entirely and renders the settled state.
-  const landed = touchedDown || Boolean(prefersReducedMotion);
-  const legsOut = legsDeployed || landed;
+  const flightDistance = useMotionValue(0);
+  const [count, setCount] = useState<CountPhase>(null);
+  const [hudVisible, setHudVisible] = useState(false);
+  const [ignited, setIgnited] = useState(false);
+  const [launching, setLaunching] = useState(false);
+  const [legsRetracted, setLegsRetracted] = useState(false);
+  const legsOut = !legsRetracted;
 
-  // Measure where the pad sits on the page so the parked rocket (and plume)
-  // always start above the document, however tall the hero ends up.
+  // Measure how far the rocket must travel so it (and the plume) clear the
+  // top of the page, however tall the hero ends up.
   useEffect(() => {
     const pad = padRef.current;
     if (!pad) return;
@@ -94,53 +214,71 @@ export function MoonLanding({ className }: MoonLandingProps) {
       const rect = pad.getBoundingClientRect();
       const padBottom = rect.bottom + window.scrollY;
       const clearance = padBottom + rect.height * PLUME_OVERHANG;
-      descentStart.set(
-        Math.max(window.innerHeight * (DESCENT_MIN_VH / 100), clearance),
+      flightDistance.set(
+        Math.max(window.innerHeight * (FLIGHT_MIN_VH / 100), clearance),
       );
     };
     measure();
     window.addEventListener('resize', measure);
     return () => window.removeEventListener('resize', measure);
-  }, [descentStart]);
+  }, [flightDistance]);
+
+  useEffect(() => {
+    if (prefersReducedMotion || !padInView) return;
+    let remaining = COUNTDOWN_FROM;
+    setCount(remaining);
+    setHudVisible(true);
+    const id = window.setInterval(() => {
+      remaining -= 1;
+      if (remaining === IGNITE_AT) setIgnited(true);
+      if (remaining <= 0) {
+        window.clearInterval(id);
+        setCount('liftoff');
+        setLaunching(true);
+        return;
+      }
+      setCount(remaining);
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, [padInView, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (count !== 'liftoff') return;
+    const fade = window.setTimeout(() => setHudVisible(false), HUD_FADE_MS);
+    return () => window.clearTimeout(fade);
+  }, [count]);
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      progress.set(1);
+      progress.set(0);
       return;
     }
-    if (!padInView) return;
+    if (!launching) return;
     const controls = animate(progress, 1, {
-      duration: DESCENT_DURATION,
-      delay: DESCENT_DELAY,
-      ease: LANDING_EASE,
-      onComplete: () => setTouchedDown(true),
+      duration: LAUNCH_DURATION,
+      ease: LAUNCH_EASE,
     });
     return () => controls.stop();
-  }, [padInView, prefersReducedMotion, progress]);
+  }, [launching, prefersReducedMotion, progress]);
 
   useMotionValueEvent(progress, 'change', (value) => {
-    if (value >= LEGS_DEPLOY_AT) setLegsDeployed(true);
+    if (value >= LEGS_RETRACT_AT) setLegsRetracted(true);
   });
 
-  // Travel along the rocket's own "up" axis, so the descent follows the
-  // surface normal at the landing site rather than screen-vertical.
-  const y = useTransform([progress, descentStart], ([p, start]) =>
+  // Travel along the rocket's own "up" axis, so the ascent follows the
+  // surface normal at the pad rather than screen-vertical.
+  const y = useTransform([progress, flightDistance], ([p, start]) =>
     (start as number) > 0
-      ? `${(1 - (p as number)) * -(start as number)}px`
-      : `${(1 - (p as number)) * -DESCENT_START_FALLBACK_VH}vh`,
+      ? `${(p as number) * -(start as number)}px`
+      : `${(p as number) * -FLIGHT_END_FALLBACK_VH}vh`,
   );
   // Lateral drift is a share of the rocket's own width so it stays on the
   // plume's axis at every size.
-  const x = useTransform(progress, [0, 0.7, 1], ['38%', '9%', '0%']);
-  const attitude = useTransform(progress, [0, 0.65, 1], [-7, -2.5, 0]);
-  // Engine stays lit right through contact, then cuts.
-  const plumeOpacity = useTransform(progress, [0, 0.994, 1], [1, 1, 0]);
-  const throttle = useTransform(progress, [0, 0.75, 1], [1.35, 1, 0.55]);
-  const surfaceGlow = useTransform(
-    progress,
-    [0.7, 0.94, 0.994, 1],
-    [0, 0.85, 0.75, 0],
-  );
+  const x = useTransform(progress, [0, 0.3, 1], ['0%', '9%', '38%']);
+  const attitude = useTransform(progress, [0, 0.35, 1], [0, -2.5, -7]);
+  const throttle = useTransform(progress, [0, 0.2, 1], [0.55, 1, 1.35]);
+  // Bright on the pad through hold-down, then fade as the vehicle leaves.
+  const surfaceGlow = useTransform(progress, [0, 0.08, 0.28], [0.85, 0.75, 0]);
 
   return (
     <div
@@ -171,7 +309,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
         <div className="absolute inset-0 rounded-full shadow-[inset_0_0_70px_rgba(253,186,116,0.08),inset_0_0_2px_rgba(244,247,251,0.28)]" />
       </div>
 
-      {/* Landing zone: bottom-centre of this box sits on the limb, rotated to
+      {/* Launch pad: bottom-centre of this box sits on the limb, rotated to
           the surface normal. Everything inside moves in the rocket's frame. */}
       <div
         className="absolute w-[6%] origin-bottom"
@@ -185,11 +323,13 @@ export function MoonLanding({ className }: MoonLandingProps) {
             with the rocket instead of fixed px (which swamps the small
             mobile rocket and visually detaches the plume). */}
         <div ref={padRef} className="relative @container aspect-80/186 w-full">
-          {/* Exhaust washing over the regolith as the rocket gets close. */}
-          <motion.div
-            style={{ opacity: surfaceGlow }}
-            className="absolute bottom-0 left-1/2 h-[30%] w-[420%] -translate-x-1/2 translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(244,247,251,0.9)_0%,rgba(253,186,116,0.6)_22%,rgba(244,63,154,0.22)_48%,transparent_72%)] blur-md"
-          />
+          {/* Exhaust washing over the regolith at ignition. */}
+          {ignited && (
+            <motion.div
+              style={{ opacity: surfaceGlow }}
+              className="absolute bottom-0 left-1/2 h-[30%] w-[420%] -translate-x-1/2 translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(244,247,251,0.9)_0%,rgba(253,186,116,0.6)_22%,rgba(244,63,154,0.22)_48%,transparent_72%)] blur-md"
+            />
+          )}
 
           {/* Plume, clipped at the surface so it never paints across the moon. */}
           <div className="absolute inset-x-[-200%] top-[-400vh] bottom-0 overflow-hidden">
@@ -198,7 +338,10 @@ export function MoonLanding({ className }: MoonLandingProps) {
               className="absolute bottom-0 left-1/2 aspect-80/186 w-[20%] -translate-x-1/2"
             >
               <motion.div
-                style={{ opacity: plumeOpacity, scaleY: throttle }}
+                style={{
+                  opacity: ignited ? 1 : 0,
+                  scaleY: throttle,
+                }}
                 className="absolute top-[93%] left-1/2 h-[120%] w-[140%] origin-top -translate-x-1/2"
               >
                 <motion.div
@@ -228,8 +371,9 @@ export function MoonLanding({ className }: MoonLandingProps) {
             </motion.div>
           </div>
 
-          {/* Dust kicked up on contact. */}
-          {landed && !prefersReducedMotion && (
+          {/* Dust and booster smoke at ignition; a second dump at liftoff.
+              Parent is the pad, not the rocket, so clouds stay on the limb. */}
+          {ignited && !prefersReducedMotion && (
             <div className="absolute bottom-0 left-1/2">
               <motion.span
                 initial={{ scaleX: 0.25, scaleY: 0.5, opacity: 0.7 }}
@@ -262,6 +406,8 @@ export function MoonLanding({ className }: MoonLandingProps) {
                   className="absolute bottom-0 left-0 rounded-full bg-cream/80"
                 />
               ))}
+              <SmokeCloud puffs={SMOKE_IGNITION} />
+              {launching && <SmokeCloud puffs={SMOKE_LIFTOFF} />}
             </div>
           )}
 
@@ -272,7 +418,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
           >
             <motion.div
               animate={
-                landed && !prefersReducedMotion
+                ignited && !prefersReducedMotion
                   ? { scaleY: [1, 0.985, 1] }
                   : undefined
               }
@@ -283,7 +429,7 @@ export function MoonLanding({ className }: MoonLandingProps) {
 
               {/* Engine light under the skirt. */}
               <motion.div
-                style={{ opacity: plumeOpacity }}
+                style={{ opacity: ignited ? 1 : 0 }}
                 className="absolute top-[88%] left-1/2 h-[12%] w-[95%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(253,186,116,0.85),transparent_70%)] blur-[11.5cqw]"
               />
 
@@ -306,11 +452,14 @@ export function MoonLanding({ className }: MoonLandingProps) {
         </div>
       </div>
 
-      {/* HUD readout, desktop only. */}
+      {/* Countdown HUD, desktop only. */}
       <motion.div
         initial={false}
-        animate={{ opacity: landed ? 1 : 0, x: landed ? 0 : 10 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        animate={{
+          opacity: hudVisible ? 1 : 0,
+          x: hudVisible ? 0 : 10,
+        }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="absolute hidden font-mono text-[0.625rem] leading-relaxed tracking-[0.18em] uppercase lg:block"
         style={{
           left: `calc(${LANDING_ANCHOR.left} + 4.5rem)`,
@@ -319,13 +468,51 @@ export function MoonLanding({ className }: MoonLandingProps) {
       >
         <div className="flex items-center gap-2 text-electric-300">
           <span className="size-1.5 rounded-full bg-electric-400 shadow-[0_0_8px_2px_rgba(253,186,116,0.6)]" />
-          Touchdown confirmed
+          <motion.span
+            key={String(count)}
+            initial={{ opacity: 0.35, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {count === 'liftoff' ? 'Liftoff' : `T-minus ${count ?? ''}`}
+          </motion.span>
         </div>
-        <div className="pl-3.5 text-muted-dim">LZ-01 &middot; Moon Base</div>
+        <div className="pl-3.5 text-muted-dim">Pad 01 &middot; Moon Base</div>
         {/* Leader line back toward the rocket. */}
         <span className="absolute top-[0.55rem] right-full h-px w-12 bg-linear-to-l from-electric/50 via-electric/30 to-transparent" />
       </motion.div>
     </div>
+  );
+}
+
+function SmokeCloud({ puffs }: { puffs: readonly SmokePuff[] }) {
+  return (
+    <>
+      {puffs.map((puff, index) => (
+        <motion.span
+          key={index}
+          initial={{ x: 0, y: 0, scale: 0.2, opacity: 0 }}
+          animate={{
+            x: puff.dx,
+            y: [0, puff.dy, puff.dy * 0.35],
+            scale: puff.scale,
+            opacity: [0, 0.82, 0],
+          }}
+          transition={{
+            duration: puff.duration,
+            delay: puff.delay,
+            ease: 'easeOut',
+          }}
+          style={{ width: puff.w, height: puff.h }}
+          className={cn(
+            'absolute bottom-0 left-0 -translate-x-1/2 rounded-full blur-lg',
+            puff.warm
+              ? 'bg-[radial-gradient(ellipse_at_center,rgba(253,186,116,0.55)_0%,rgba(226,232,240,0.4)_42%,transparent_72%)]'
+              : 'bg-[radial-gradient(ellipse_at_center,rgba(241,245,249,0.75)_0%,rgba(148,163,184,0.4)_45%,transparent_74%)]',
+          )}
+        />
+      ))}
+    </>
   );
 }
 
@@ -372,7 +559,7 @@ function RocketSvg({ legsOut }: { legsOut: boolean }) {
       </defs>
 
       {/* Legs hinge at the hull. Stowed, they fold in behind the body so
-          deployment reads as them unfolding out during final approach. */}
+          retraction reads as them tucking away after leaving the surface. */}
       <g
         className={cn(
           legClass,

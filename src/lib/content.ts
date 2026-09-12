@@ -27,10 +27,10 @@ export const company = {
   email: 'contact@webmarketingsolutionstx.com',
   phone: '+1 (713) 555-0142',
   address: {
-    street: '1200 Space Park Dr, Suite 210',
+    street: '8820 Westheimer Rd',
     locality: 'Houston',
     region: 'TX',
-    postalCode: '77058',
+    postalCode: '77063',
     country: 'US',
   },
   coordinates: { lat: 29.5502, lng: -95.097 },
