@@ -101,8 +101,8 @@ function ServiceCard({
     >
       {art && (
         <CardBackdrop
-          src={art.src}
-          imageClass={art.imageClass}
+          src={art.cardSrc}
+          imageClass={art.cardImageClass ?? art.imageClass}
           overlayClass={art.cardOverlay}
           sizes={
             featured
@@ -200,7 +200,7 @@ function FlightCheckPanel() {
       className="group border-gradient glass-panel relative flex flex-col justify-between overflow-hidden rounded-2xl bg-void/50 p-7 transition-transform duration-500 ease-out hover:-translate-y-1.5 active:scale-[0.98] md:flex-row md:items-end md:p-8 motion-reduce:transform-none"
     >
       <CardBackdrop
-        src="/space/consultation-nebula.webp"
+        src="/space/consultation-rocket.webp"
         imageClass="object-center"
         overlayClass="bg-linear-to-r from-void/88 via-void/70 to-void/40 md:via-void/55 md:to-void/30"
         sizes="(min-width: 768px) 80rem, 100vw"
