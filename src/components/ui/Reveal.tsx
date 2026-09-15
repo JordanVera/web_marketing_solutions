@@ -68,12 +68,15 @@ export function Stagger({
   delayChildren = 0.05,
   staggerChildren = 0.11,
   amount = 0.15,
+  /** Animate immediately on mount instead of waiting for scroll into view. */
+  immediate = false,
 }: {
   children: ReactNode;
   className?: string;
   delayChildren?: number;
   staggerChildren?: number;
   amount?: number;
+  immediate?: boolean;
 }) {
   const variants: Variants = {
     hidden: {},
@@ -85,8 +88,9 @@ export function Stagger({
       className={cn(className)}
       variants={variants}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount }}
+      {...(immediate
+        ? { animate: 'visible' }
+        : { whileInView: 'visible', viewport: { once: true, amount } })}
     >
       {children}
     </motion.div>

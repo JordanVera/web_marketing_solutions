@@ -36,7 +36,7 @@ export default function Home() {
       <Hero />
       <TrustBar />
       <Services />
-      <Houston />
+      {/* <Houston /> */}
       {/* <Projects /> */}
       <Process />
       <HomeFaq />

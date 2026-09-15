@@ -15,6 +15,7 @@ import { GoConsole } from '@/components/services/GoConsole';
 import { ProcessRail } from '@/components/services/ProcessRail';
 import { LongformSections } from '@/components/services/LongformSections';
 import { FlightCheckCta } from '@/components/services/FlightCheckCta';
+import { ServicePricingSection } from '@/components/pricing/ServicePricingSection';
 import { NebulaBackdrop } from '@/components/services/NebulaBackdrop';
 import { missionEyebrow, SERVICE_THEME } from '@/components/services/theme';
 import { company, isExternalHref, projects } from '@/lib/content';
@@ -34,6 +35,7 @@ function numberHeadings(service: ServicePageData, hasRelatedWork: boolean) {
     problems: next(service.sections.problems.eyebrow),
     deliverables: next(service.sections.deliverables.eyebrow),
     delivery: next(service.sections.delivery.eyebrow),
+    pricing: next('Packages'),
     longform: service.longform.map((section) => next(section.eyebrow)),
     whyUs: next(service.sections.whyUs.eyebrow),
     relatedWork: hasRelatedWork
@@ -199,6 +201,11 @@ export function ServicePage({ service }: { service: ServicePageData }) {
             <ProcessRail steps={service.process} />
           </div>
         </section>
+
+        <ServicePricingSection
+          slug={service.slug}
+          eyebrow={headings.pricing}
+        />
 
         <LongformSections
           sections={service.longform}
