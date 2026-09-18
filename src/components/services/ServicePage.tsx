@@ -73,7 +73,7 @@ export function ServicePage({ service }: { service: ServicePageData }) {
           '@type': 'ProfessionalService',
           name: company.name,
           url: SITE_URL,
-          telephone: company.phone,
+          // telephone: company.phone,
           address: {
             '@type': 'PostalAddress',
             streetAddress: company.address.street,
