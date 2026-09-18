@@ -52,6 +52,7 @@ export const blogHub = {
 
 const IMG = {
   houstonHero: blogImageCatalog.houstonSkylineNight,
+  floristHero: blogImageCatalog.floristShopArrangement,
   wordpressCms: blogImageCatalog.wordpressTyping,
   nextjsCode: blogImageCatalog.nextjsCodeLaptop,
   seoDashboard: blogImageCatalog.seoAnalyticsDesk,
@@ -244,6 +245,233 @@ export const blogPosts: BlogPost[] = [
       {
         type: 'paragraph',
         text: 'Schedule a free consultation. We will tell you whether you need custom website development in Next.js, a lean WordPress rebuild, or an SEO campaign on what you already have — and what to skip.',
+      },
+    ],
+  },
+  {
+    slug: 'houston-florist-website-design',
+    title:
+      'Houston Florist Website Design: Turn Floral Portfolios Into Orders and Inquiries',
+    excerpt:
+      'A practical website design guide for floral companies in Houston, covering portfolios, local SEO, delivery details, online orders, and wedding inquiries.',
+    metaTitle: 'Houston Florist Web Design',
+    metaDescription:
+      'Website design for floral companies in Houston: build a stronger portfolio, clarify delivery areas, and make flower orders and wedding inquiries easier.',
+    category: 'Web Development',
+    tags: [
+      'Houston florist website design',
+      'web design for floral companies in Houston',
+      'florist website development',
+      'Houston florist SEO',
+      'flower shop website design',
+    ],
+    author: 'Web Marketing Solutions',
+    publishedAt: '2026-09-18',
+    updatedAt: '2026-09-18',
+    readTimeMinutes: 8,
+    heroImage: blogImageSrc(IMG.floristHero),
+    heroImageAlt: IMG.floristHero.defaultAlt,
+    heroOverlay: 'bg-linear-to-br from-void/88 via-void/72 to-void/58',
+    callsign: 'WMS-WEB-02',
+    blocks: [
+      {
+        type: 'paragraph',
+        text: 'Your arrangements may stop someone mid-scroll. Your website needs to help that person take the next step. For floral companies in Houston, that could mean ordering birthday flowers, checking wedding availability, or requesting weekly arrangements for an office. Each customer needs a clear path from admiring your work to doing business with you.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Houston florist website design starts with how your floral business actually operates. A wedding studio needs a portfolio and qualified inquiries. A neighborhood flower shop needs accurate delivery information and a dependable ordering experience. A company offering both needs a website that makes those choices obvious. This guide explains what to build, what to prioritize for local SEO, and what to ask before investing in a redesign.',
+      },
+      {
+        type: 'heading',
+        text: 'Start with the floral work you want to book',
+      },
+      {
+        type: 'paragraph',
+        text: 'Before choosing colors or a homepage layout, decide which services the website should grow. If weddings are your priority, lead with installations, bridal flowers, and a consultation button. If daily deliveries support your business, make arrangements, prices, and delivery availability easy to find. Corporate floral work deserves its own explanation of recurring service, installation, and maintenance where applicable.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Wedding and event florists: Help couples and planners evaluate your style, service scope, investment expectations, and availability.',
+          'Retail flower shops: Help customers choose an arrangement, confirm the delivery area, and complete an order.',
+          'Corporate floral companies: Explain recurring arrangements, service frequency, and how a business requests a proposal.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'A homepage can support more than one audience. Use specific choices such as Shop Flowers, Explore Wedding Florals, and Request Corporate Flowers instead of sending everyone to the same general contact form.',
+      },
+      {
+        type: 'heading',
+        text: 'Build service pages around real customer questions',
+      },
+      {
+        type: 'paragraph',
+        text: 'A gallery shows what you can create. Service pages explain what someone can hire you to do. For a Houston floral company, those pages should connect your designs with the practical details customers need before they reach out.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Wedding flowers: Show bouquets, ceremony pieces, and reception designs alongside your planning process and any minimum investment.',
+          'Flower delivery: Explain available areas, ordering deadlines, delivery charges, substitutions, and pickup options.',
+          'Corporate flowers: Describe the types of spaces you serve, recurring options, and how consultations work.',
+          'Sympathy flowers: If offered, explain arrangement options, timing, and the information needed to coordinate delivery.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'Only create pages for services you provide. A smaller website with useful, specific content gives customers a clearer decision than a long menu of thin pages. Keep each page focused on its own service and give it an appropriate next step.',
+      },
+      {
+        type: 'heading',
+        text: 'Make Houston service areas useful, not decorative',
+      },
+      {
+        type: 'paragraph',
+        text: 'Serving Houston can mean very different things to a florist in the Heights and a studio based in Katy. Your website should explain where you deliver, where you provide event installation, and whether those boundaries differ. A customer should not have to complete checkout to discover that an address is outside your delivery zone.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Start with one accurate delivery or service-area page. List the neighborhoods or ZIP codes you actually cover, explain any distance-based charges, and show how customers can confirm eligibility. If you create a separate Katy or Sugar Land page, include useful details specific to that service area, such as delivery availability or examples of completed work you have permission to share.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Avoid publishing near-identical pages with only the city name changed. Google identifies substantially similar regional pages that funnel visitors to another destination as an example of doorway abuse. Build a location page because it helps customers understand a real service, not simply because another place name can be added to a headline.',
+      },
+      {
+        type: 'heading',
+        text: 'Turn your floral portfolio into a decision tool',
+      },
+      {
+        type: 'paragraph',
+        text: 'Organize your portfolio around the work you want to sell. Couples may want to compare ceremony installations and reception tables. An office manager may care about arrangements suited to a reception desk. Separate categories help each visitor find relevant examples without scrolling through every project.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Add short descriptions to selected projects: the occasion, design direction, floral elements, and services you provided. Name a Houston venue only when you worked there and can accurately describe the project. Use photography you own or have permission to publish, and provide required photographer credits.',
+      },
+      {
+        type: 'quote',
+        text: 'A floral website should make three things clear: your style, your service area, and the next step to working with you.',
+        attribution: 'Web Marketing Solutions',
+      },
+      {
+        type: 'heading',
+        text: 'Design the mobile experience around ordering and inquiries',
+      },
+      {
+        type: 'paragraph',
+        text: 'Test your website the way a customer uses it: on a phone, while comparing options and trying to make a decision. Can someone read your delivery policy, view arrangement details, and submit a form comfortably? Large photographs should support that experience without pushing every useful detail several screens down the page.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Keep the main action visible and specific: Order Flowers or Request Wedding Availability.',
+          'Use appropriately sized images and readable text so the portfolio remains comfortable to browse.',
+          'For delivery orders, collect the date, recipient address, card message, and essential delivery instructions.',
+          'For wedding inquiries, ask for the date, venue or location, approximate floral budget, and contact details.',
+          'Show a clear confirmation after submission and explain when the customer should expect a response.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'A submitted wedding inquiry should not imply that a date is reserved. Likewise, an online flower order should not promise same-day delivery unless your availability, cutoff times, and fulfillment process support it. Accurate expectations protect both the customer experience and your team.',
+      },
+      {
+        type: 'heading',
+        text: 'Connect your website with your local presence',
+      },
+      {
+        type: 'paragraph',
+        text: 'Keep your business name, contact information, hours, and service details accurate wherever customers find you. Review your Google Business Profile alongside the website so visitors are not seeing conflicting opening times or outdated links. Represent a private studio accurately rather than implying that customers can walk into a retail shop.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Write page titles and headings that clearly describe each service. For example, a wedding floral page should introduce your Houston wedding services, explain your process, and show relevant work. Use natural descriptions in image alt text. Repeating Houston florist in every sentence or image description makes the content less useful.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Ask customers for honest reviews and feature testimonials with permission. Match testimonials to the service being discussed when possible: wedding feedback belongs near wedding work, while delivery feedback helps someone deciding whether to order flowers.',
+      },
+      {
+        type: 'heading',
+        text: 'Choose technology your team can maintain',
+      },
+      {
+        type: 'paragraph',
+        text: 'Florist web design includes what happens after launch. Who changes holiday hours? Who removes an unavailable arrangement? How do you close delivery dates when the schedule fills? Decide how those updates will work before choosing the platform.',
+      },
+      {
+        type: 'paragraph',
+        text: 'An established ecommerce system may fit a shop that needs a familiar catalog and checkout. A custom website or web app may make sense when the business needs tailored inquiry forms, delivery rules, or connections to existing tools. A Next.js front end can be part of that approach, but the editing system, payment flow, and order management still need to be planned. No framework guarantees search rankings or sales.',
+      },
+      {
+        type: 'paragraph',
+        text: 'If your existing ordering system works, evaluate whether a better branded website can connect to it before replacing everything. The goal is a site your customers understand and your staff can keep accurate during busy holidays.',
+      },
+      {
+        type: 'heading',
+        text: 'Measure orders and qualified leads after launch',
+      },
+      {
+        type: 'paragraph',
+        text: 'Agree on the outcomes before the redesign begins. A wedding studio might track consultation requests with a suitable date and budget. A retail florist might track completed purchases and checkout problems. A corporate florist might track recurring-service inquiries.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Review which search queries bring visitors to your service pages.',
+          'Track successful form submissions separately from clicks on a contact button.',
+          'For online orders, measure completed purchases and revenue where the commerce system supports it.',
+          'Check forms, order notifications, and delivery settings before major seasonal promotions.',
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'These checks help distinguish a visibility problem from a website problem. If the right people arrive but cannot confirm delivery or complete an inquiry, more traffic alone will not solve the issue.',
+      },
+      {
+        type: 'heading',
+        text: 'Questions Houston florists should ask before a redesign',
+      },
+      {
+        type: 'list',
+        items: [
+          'Will we be able to update arrangements, prices, photos, and holiday hours ourselves?',
+          'How will the website handle delivery zones, unavailable dates, and ordering deadlines?',
+          'Will wedding inquiries include the details we need to respond with a useful next step?',
+          'How will existing page URLs be preserved or redirected if they change?',
+          'What is included in ongoing hosting, maintenance, support, and measurement?',
+        ],
+      },
+      {
+        type: 'heading',
+        text: 'Does a Houston florist need a website if Instagram is active?',
+      },
+      {
+        type: 'paragraph',
+        text: 'Instagram can introduce people to your style. A website gives those visitors a consistent place to compare services, check delivery details, and order or inquire. Use your social profile to send people to the page that matches the offer instead of making every customer request basic information through messages.',
+      },
+      {
+        type: 'heading',
+        text: 'How much does a florist website cost?',
+      },
+      {
+        type: 'paragraph',
+        text: 'The scope matters more than the number of pages. A portfolio and inquiry website requires different work from a store with delivery scheduling, payments, product options, and order-system connections. Ask for an itemized proposal that covers content, photography needs, integrations, editing access, launch work, and ongoing costs.',
+      },
+      {
+        type: 'heading',
+        text: 'Build a website that supports your Houston floral business',
+      },
+      {
+        type: 'paragraph',
+        text: 'At Web Marketing Solutions, we help businesses plan websites around the customers they want to reach and the actions those customers need to take. For a Houston floral company, that starts with your arrangements, your service area, and your process for accepting orders or booking events.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Ready to discuss your florist website? Contact Web Marketing Solutions with your current website, the floral services you want to grow, and the part of ordering or inquiries that creates the most extra work. Let’s plan a website that makes your work easy to explore and your business easy to contact.',
       },
     ],
   },

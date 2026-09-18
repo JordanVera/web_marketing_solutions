@@ -41,10 +41,7 @@ export function unsplashImage(
 }
 
 /** Build an optimized Pexels CDN URL from a numeric photo id. */
-export function pexelsImage(
-  photoId: string,
-  width: 1600 | 1200 | 800 = 1600,
-) {
+export function pexelsImage(photoId: string, width: 1600 | 1200 | 800 = 1600) {
   return `https://images.pexels.com/photos/${photoId}/pexels-photo-${photoId}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
 }
 
@@ -91,7 +88,8 @@ export const blogImageCatalog = {
     credit: {
       photographer: 'Pixabay',
       profileUrl: 'https://www.pexels.com/@pixabay/',
-      photoUrl: 'https://www.pexels.com/photo/close-up-of-typing-on-a-laptop-261662/',
+      photoUrl:
+        'https://www.pexels.com/photo/close-up-of-typing-on-a-laptop-261662/',
     },
     tags: ['wordpress', 'cms', 'content', 'editor', 'publishing'],
   },
@@ -109,6 +107,29 @@ export const blogImageCatalog = {
         'https://www.pexels.com/photo/black-laptop-computer-turned-on-showing-computer-codes-177598/',
     },
     tags: ['nextjs', 'coding', 'developer', 'react', 'web-development'],
+  },
+
+  floristShopArrangement: {
+    id: 'floristShopArrangement',
+    provider: 'pexels',
+    photoPath: '5409707',
+    defaultAlt:
+      'Female florist arranging a vibrant floral bouquet in a cozy shop — Houston florist website design',
+    credit: {
+      photographer: 'Amina Filkins',
+      profileUrl: 'https://www.pexels.com/@amina-filkins/',
+      photoUrl:
+        'https://www.pexels.com/photo/woman-preparing-floral-bouquet-in-floral-shop-5409707/',
+    },
+    tags: [
+      'florist',
+      'flowers',
+      'flower-shop',
+      'bouquet',
+      'floral',
+      'wedding',
+      'hero',
+    ],
   },
 
   seoAnalyticsDesk: {
@@ -288,5 +309,11 @@ export const blogImageSearchGuide = {
     'https://unsplash.com/s/photos/business-meeting',
     'https://unsplash.com/s/photos/startup-team',
     'https://unsplash.com/s/photos/consultation',
+  ],
+  floral: [
+    'https://www.pexels.com/search/florist/',
+    'https://www.pexels.com/search/flower%20shop/',
+    'https://unsplash.com/s/photos/florist',
+    'https://unsplash.com/s/photos/flower-arrangement',
   ],
 } as const;
