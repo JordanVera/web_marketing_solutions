@@ -263,13 +263,13 @@ export function Navigation() {
               >
                 Schedule Your Free Consultation
               </Link>
-              <a
+              {/* <a
                 href={PHONE_HREF}
                 className="flex items-center justify-center gap-2 rounded-xl border border-white/40 px-4 py-3 text-center text-sm font-medium text-cream"
               >
                 <Phone className="size-3.5" aria-hidden="true" />
                 {company.phone}
-              </a>
+              </a> */}
             </div>
           </motion.div>
         ) : null}

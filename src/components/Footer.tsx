@@ -97,18 +97,7 @@ export function Footer() {
                     {company.email}
                   </a>
                 </li>
-                <li>
-                  <a
-                    href={`tel:${company.phone.replace(/[^\d+]/g, '')}`}
-                    className="inline-flex items-center gap-3 text-muted transition-colors hover:text-cream"
-                  >
-                    <Phone
-                      className="size-4 shrink-0 text-electric-300"
-                      aria-hidden="true"
-                    />
-                    {company.phone}
-                  </a>
-                </li>
+
                 <li className="flex items-start gap-3 text-muted">
                   <MapPin
                     className="mt-0.5 size-4 shrink-0 text-electric-300"
