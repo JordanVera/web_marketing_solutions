@@ -13,7 +13,7 @@ import {
 import { Menu, Phone, X } from 'lucide-react';
 import { Logo } from './Logo';
 import { scrollToPageTop } from './ScrollToTop';
-import { company, navLinks } from '@/lib/content';
+import { company, navLinks, socials } from '@/lib/content';
 import { serviceNavLinks, servicePath } from '@/lib/services';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
@@ -158,6 +158,25 @@ export function Navigation() {
         </ul>
 
         <div className="flex items-center gap-1.5">
+          <ul className=" flex gap-2.5 mr-1">
+            {socials.map((social) => (
+              <li key={social.label}>
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${company.name} on ${social.label}`}
+                  className="grid size-7 place-items-center rounded-full border border-white/10  text-muted transition-all duration-300 hover:text-cream"
+                >
+                  <img
+                    src={social.image}
+                    alt={social.label}
+                    className="invert"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
           <Link
             href="/contact"
             className="hidden items-center rounded-full border border-electric px-3.5 py-1.5 text-[10px] tracking-[0.2em] text-electric uppercase transition-all duration-200 hover:bg-electric hover:text-white sm:inline-flex"
