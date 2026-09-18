@@ -146,18 +146,6 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   {company.email}
                 </a>
               </div>
-
-              <div>
-                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-electric uppercase">
-                  Contact
-                </p>
-                <a
-                  href={PHONE_HREF}
-                  className="mt-3 block text-sm text-cream/85 transition-colors hover:text-cream"
-                >
-                  {company.phone}
-                </a>
-              </div>
             </div>
           </div>
 
