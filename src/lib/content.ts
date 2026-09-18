@@ -476,9 +476,10 @@ export const socials = [
   // { label: "LinkedIn", href: "https://www.linkedin.com/", icon: "linkedin" as const },
   // { label: "X", href: "https://x.com/", icon: "x" as const },
   {
-    label: 'Instagram',
+    label: 'instagram',
     href: 'https://www.instagram.com/webmarketingsolutions.tx/',
     icon: 'instagram' as const,
+    image: '/instagram.png',
   },
   // { label: "GitHub", href: "https://github.com/", icon: "github" as const },
 ];

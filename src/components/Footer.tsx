@@ -45,9 +45,13 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${company.name} on ${social.label}`}
-                      className="grid size-10 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-electric-400/50 hover:text-cream"
+                      className="grid size-7 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-electric-400/50 hover:text-cream"
                     >
-                      <SocialIcon name={social.icon} />
+                      <img
+                        src={social.image}
+                        alt={social.label}
+                        className="invert"
+                      />
                     </a>
                   </li>
                 ))}
